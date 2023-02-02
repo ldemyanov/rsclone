@@ -1,0 +1,32 @@
+@import '@style/colors';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 5px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.logo__img {
+  width: 120px;
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+.logo__text {
+  font-family: 'Carter One', cursive;
+  font-size: 2em;
+  line-height: 116%;
+  color: var(--accent_orange);
+  text-shadow: var(--border_text);
+  width: 160px;
+}
+
+.sound__img {
+  width: 50px;
+}

@@ -1,0 +1,52 @@
+@import '@style/colors';
+
+.wrapper {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.year {
+  text-align: center;
+}
+
+.rs_school {
+  width: 115px;
+}
+
+.wrapper_git {
+  text-align: end;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: 0.5s;
+}
+
+.line {
+  width: 2px;
+  height: 30px;
+  background: var(--accent_orange);
+}
+
+.wrapper_git a {
+  transition: 0.5s;
+}
+
+.wrapper_git a:hover {
+  color: var(--accent_orange);
+  animation: bounce 0.5s linear;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}

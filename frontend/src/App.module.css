@@ -1,1 +1,27 @@
 @import './style/normalize';
+@import '@style/colors';
+
+body {
+  position: relative;
+  color: var(--primary_dark);
+  background: linear-gradient(225deg, var(--bg_gradient_first) 0%, var(--bg_gradient_second) 100%);
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+}
+
+.scrollHidden {
+  overflow: hidden;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 1640px;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+}

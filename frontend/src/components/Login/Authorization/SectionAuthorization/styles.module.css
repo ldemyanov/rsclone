@@ -4,8 +4,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 40px;
-  padding-top: 80px;
+  flex-grow: 1;
 }
 
 .wrapper_icon {

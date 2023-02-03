@@ -8,7 +8,9 @@ export const Header: FC = () => {
     <header className={styles.header}>
       <div className={styles.logo}>
         <img className={styles.logo__img} src={logo} alt="Logo" />
-        <h1 className={styles.logo__text}>Raccoon Phone</h1>
+        <h1 className={styles.logo__text}>
+          Raccoon<br></br>Phone
+        </h1>
       </div>
       <SoundOn />
     </header>

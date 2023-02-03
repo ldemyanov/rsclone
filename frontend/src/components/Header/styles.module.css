@@ -4,17 +4,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 5px;
+  height: 100px;
 }
 
 .logo {
   display: flex;
   align-items: center;
   gap: 0.5em;
+  height: 100%;
 }
 
 .logo__img {
-  width: 120px;
+  height: 100%;
+  width: auto;
   transform: matrix(-1, 0, 0, 1, 0, 0);
 }
 
@@ -24,7 +26,6 @@
   line-height: 116%;
   color: var(--accent_orange);
   text-shadow: var(--border_text);
-  width: 160px;
 }
 
 .sound__img {

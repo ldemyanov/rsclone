@@ -1,8 +1,11 @@
 @import '@style/colors';
 
 .wrapper_rules {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   flex: 1;
-  margin-top: 340px;
+  gap: 10px;
 }
 
 .name_rules {
@@ -17,4 +20,5 @@
   font-size: 1.2em;
   color: var(--primary_light);
   text-align: center;
+  max-width: 20em;
 }

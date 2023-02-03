@@ -1,5 +1,6 @@
 import { FC } from 'react';
+// import styles from './style.module.css';
 
 export const LobbyPage: FC = () => {
-  return <main>LobbyPage</main>;
+  return <>LobbyPage</>;
 };

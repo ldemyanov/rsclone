@@ -1,0 +1,22 @@
+@import '@style/colors';
+
+.button {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0.1em 1.5em;
+  gap: 40px;
+  background-color: var(--primary_light);
+  border: 5px solid var(--primary_dark_opacity);
+  border-radius: 15px;
+  font-family: 'Carter One';
+  font-size: 1.7em;
+  color: var(--accent_orange);
+  text-shadow: var(--border_text);
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.button:hover {
+  background-color: var(--primary_dark_opacity);
+}

@@ -1,10 +1,10 @@
-import { Route } from './types';
+import { IRoute } from './types';
 import { LoginPage } from './pages/LoginPage';
 import { LobbyPage } from './pages/LobbyPage';
 import { GamePage } from './pages/GamePage';
 import { ResultsPage } from './pages/ResultsPage';
 
-export const routes: Route[] = [
+export const routes: IRoute[] = [
   {
     id: 1,
     name: 'Login',

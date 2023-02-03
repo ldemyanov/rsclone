@@ -1,0 +1,13 @@
+@import '@style/colors';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 10px;
+  background: var(--primary_dark_opacity);
+  border: 2px solid var(--primary_dark);
+  border-radius: 15px;
+  width: 45vw;
+  height: 65vh;
+}

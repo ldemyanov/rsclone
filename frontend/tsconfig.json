@@ -18,7 +18,9 @@
     "jsx": "react-jsx",
     "paths": {
       "@components/*": ["./src/components/*"],
-      "@src/*": ["./src/*"]
+      "@src/*": ["./src/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@style/*": ["./src/style/*"]
     }
   },
   "include": ["src"]

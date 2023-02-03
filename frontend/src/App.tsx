@@ -4,13 +4,13 @@ import { MainLayout } from './layouts/mainLayout';
 import { routes } from './routes';
 import './App.module.css';
 import styles from './App.module.css';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const App: FC = () => {
   return (
     <BrowserRouter>
       <div className={styles.wrapper}>
-        {/* <nav>
+        <nav>
           <ul style={{ display: 'flex', gap: '30px' }}>
             {routes.map((route) => (
               <li key={route.id}>
@@ -20,7 +20,7 @@ const App: FC = () => {
               </li>
             ))}
           </ul>
-        </nav> */}
+        </nav>
         <MainLayout>
           <main className={styles.main}>
             <Routes>

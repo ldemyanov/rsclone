@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import logo from '@assets/images/logo.png';
-import soundOn from '@assets/images/sound_on.svg';
 import styles from './styles.module.css';
+import { SoundOn } from '@components/SVG/SoundOn';
 
 export const Header: FC = () => {
   return (
@@ -10,7 +10,7 @@ export const Header: FC = () => {
         <img className={styles.logo__img} src={logo} alt="Logo" />
         <h1 className={styles.logo__text}>Raccoon Phone</h1>
       </div>
-      <img className={styles.sound__img} src={soundOn} alt="Sound On" />
+      <SoundOn />
     </header>
   );
 };

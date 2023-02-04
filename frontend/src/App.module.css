@@ -16,6 +16,7 @@ body {
 .wrapper {
   display: flex;
   flex-direction: column;
+  gap: 0.5em;
   margin: 0 auto;
   padding: 0 20px;
   max-width: 1640px;
@@ -23,5 +24,8 @@ body {
 }
 
 .main {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1 450px;
 }

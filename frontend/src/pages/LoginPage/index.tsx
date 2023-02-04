@@ -5,25 +5,28 @@ import { FooterRules } from '@components/Login/Rules/FooterRules';
 import { HeaderRules } from '@components/Login/Rules/HeaderRules';
 import { SectionRules } from '@components/Login/Rules/SectionRules';
 import { Container } from '@components/UI/Container';
+import { ContentBorder } from '@components/UI/ContentBorder';
 import { FC, useState } from 'react';
 import styles from './style.module.css';
 
 export const LoginPage: FC = () => {
   const [activeButtonRules, setActiveButtonRules] = useState(1);
   return (
-    <section className={styles.border}>
-      <Container>
-        <HeaderAuthorization />
-        <SectionAuthorization />
-        <FooterAuthorization />
-      </Container>
-      <Container>
-        <div className={styles.wrapper_rules}>
-          <HeaderRules />
-          <SectionRules activeButtonRules={activeButtonRules} />
-          <FooterRules activeButtonRules={activeButtonRules} setActiveButtonRules={setActiveButtonRules} />
-        </div>
-      </Container>
-    </section>
+    <ContentBorder>
+      <div className={styles.layout}>
+        <Container>
+          <HeaderAuthorization />
+          <SectionAuthorization />
+          <FooterAuthorization />
+        </Container>
+        <Container>
+          <div className={styles.wrapper_rules}>
+            <HeaderRules />
+            <SectionRules activeButtonRules={activeButtonRules} />
+            <FooterRules activeButtonRules={activeButtonRules} setActiveButtonRules={setActiveButtonRules} />
+          </div>
+        </Container>
+      </div>
+    </ContentBorder>
   );
 };

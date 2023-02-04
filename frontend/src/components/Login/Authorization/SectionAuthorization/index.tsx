@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Input, InputPlaceholders } from '@components/UI/Input';
 import PlayerIconLeo from '@assets/images/player_icon_leo.png';
 import reload from '@assets/images/reload.svg';
 import styles from './styles.module.css';
@@ -12,7 +13,7 @@ export const SectionAuthorization: FC = () => {
           <img src={reload} alt="reload" />
         </button>
       </div>
-      <input className={styles.input_name_player} type="text" placeholder="Your Name" />
+      <Input placeholder={InputPlaceholders.name} />
     </section>
   );
 };

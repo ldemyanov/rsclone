@@ -1,0 +1,10 @@
+.gameProgress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: 'Carter One';
+  font-size: 1.7em;
+  white-space: nowrap;
+  color: var(--accent_orange);
+  text-shadow: var(--border_text);
+}

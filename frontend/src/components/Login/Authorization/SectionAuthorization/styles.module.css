@@ -25,24 +25,3 @@
   border: none;
   padding: 10px;
 }
-
-.input_name_player {
-  border: 5px solid var(--primary_light);
-  border-radius: 15px;
-  color: var(--primary_dark);
-  font-size: 1.6em;
-  padding: 15px;
-  background-color: transparent;
-  text-align: center;
-  transition: 0.5s;
-}
-
-.input_name_player:focus {
-  outline: 0;
-  border: 5px solid var(--accent_orange);
-}
-
-.input_name_player::placeholder {
-  color: var(--primary_dark);
-  text-align: center;
-}

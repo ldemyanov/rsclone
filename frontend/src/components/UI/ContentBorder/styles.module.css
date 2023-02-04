@@ -1,0 +1,7 @@
+.border {
+  flex-grow: 1;
+  max-height: 900px;
+  padding: 40px;
+  border: 5px solid var(--primary_dark_opacity);
+  border-radius: 15px;
+}

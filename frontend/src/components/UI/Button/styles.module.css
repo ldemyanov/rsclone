@@ -12,6 +12,7 @@
   font-family: 'Carter One';
   font-size: 1.7em;
   color: var(--accent_orange);
+  text-transform: uppercase;
   text-shadow: var(--border_text);
   cursor: pointer;
   transition: 0.5s;

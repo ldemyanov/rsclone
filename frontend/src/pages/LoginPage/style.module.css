@@ -1,15 +1,9 @@
 @import '@style/colors';
 
-.border {
+.layout {
   display: flex;
-  flex-direction: row;
-  align-items: stretch;
   gap: 40px;
-  flex-grow: 1;
-  max-height: 900px;
-  padding: 40px;
-  border: 5px solid var(--primary_dark_opacity);
-  border-radius: 15px;
+  height: 100%;
 }
 
 .wrapper_rules {

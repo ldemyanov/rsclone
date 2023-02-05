@@ -8,9 +8,9 @@ export const Square: FC = () => {
       <path
         d="M8 13.5C8 10.4624 10.4065 8 13.375 8H45.625C48.5936 8 51 10.4624 51 13.5V46.5C51 49.5377 48.5936 52 45.625 52H13.375C10.4065 52 8 49.5377 8 46.5V13.5Z"
         stroke="#FCFFFD"
-        stroke-width="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

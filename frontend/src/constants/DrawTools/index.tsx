@@ -8,3 +8,4 @@ import { Undo } from '@components/SVG/Undo';
 import { Redo } from '@components/SVG/Redo';
 
 export const drawToolsArray = [Pencil, Eraser, Square, Circle, Line, Pipette, Undo, Redo];
+export const triknesses = [4, 8, 12, 16, 20];

@@ -7,7 +7,7 @@ export const Pallete: FC = () => {
   return (
     <div className={styles.wrapper}>
       {palleteColors.map((palleteColor) => {
-        return <button className={styles.colorButton} style={{ background: palleteColor }} />;
+        return <button className={styles.colorButton} style={{ background: palleteColor }} key={palleteColor} />;
       })}
       <label className={styles.colorLabel}>
         <input className={styles.colorInput} type="color" name="palleteColor" id="palleteColorInput" />

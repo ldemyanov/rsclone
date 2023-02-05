@@ -7,9 +7,9 @@ import styles from './styles.module.css';
 export const DrawTools: FC = () => {
   return (
     <div className={styles.wrapper}>
-      {drawToolsArray.map((DrowTool) => {
+      {drawToolsArray.map((DrowTool, index) => {
         return (
-          <DrawToolButton>
+          <DrawToolButton key={index}>
             <DrowTool />
           </DrawToolButton>
         );

@@ -1,3 +1,5 @@
+@import '@style/colors';
+
 .border {
   flex-grow: 1;
   max-height: 900px;

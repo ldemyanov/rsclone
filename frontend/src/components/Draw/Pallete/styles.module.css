@@ -30,7 +30,6 @@
   appearance: none;
   cursor: pointer;
   background: none;
-  box-sizing: content-box;
   overflow: hidden;
 }
 

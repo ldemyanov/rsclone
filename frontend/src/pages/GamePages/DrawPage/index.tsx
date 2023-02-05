@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { ContentBorder } from '@components/UI/ContentBorder';
 import { GameProgress } from '@components/UI/GameProgress';
 import { Pallete } from '@components/Draw/Pallete';
+import { Tablet } from '@components/Draw/Tablet';
 import { DrawTools } from '@components/Draw/DrawTools';
 import { BottomPanel } from '@components/Draw/BottomPanel';
 
@@ -14,6 +15,7 @@ export const DrawPage: FC = () => {
         <GameProgress currentStage={1} totalStages={3} />
         <div className={styles.row}>
           <Pallete />
+          <Tablet />
           <DrawTools />
         </div>
         <div className={styles.row}>

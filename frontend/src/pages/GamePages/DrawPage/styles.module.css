@@ -1,20 +1,17 @@
 .container {
   position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 1em;
   height: 100%;
 }
 
-.row {
+.column {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  width: 100%;
-}
-
-.row:first-of-type {
   flex-grow: 1;
+  height: 100%;
 }

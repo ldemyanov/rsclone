@@ -1,0 +1,16 @@
+@import '@style/colors';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}

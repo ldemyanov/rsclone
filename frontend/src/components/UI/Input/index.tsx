@@ -9,6 +9,7 @@ interface InputProps {
 export enum InputPlaceholders {
   name = 'Your name',
   sentence = 'Write a sentence',
+  guess = "What's in the picture?",
 }
 
 export const Input: FC<InputProps> = ({ placeholder }) => {

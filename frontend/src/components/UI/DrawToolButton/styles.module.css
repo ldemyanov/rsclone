@@ -1,0 +1,19 @@
+@import '@style/colors';
+
+.drawToolButton {
+  width: 3.5em;
+  padding: 0.5em;
+  border: 1px solid var(--primary_light);
+  border-radius: 0.3em;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.drawToolButton:hover {
+  background-color: var(--primary_light_opacity);
+}
+
+.drawToolButton:active {
+  background-color: var(--accent_orange);
+}

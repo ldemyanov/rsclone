@@ -11,7 +11,11 @@ export const SectionPlayers: FC = () => {
     <section className={styles.wrapper}>
       {players.map((elem, index) => {
         return (
-          <div key={index} className={styles.wrapper_player}>
+          <div
+            key={index}
+            className={`${styles.wrapper_player} ${elem.status === 'active' && styles.active_player} ${
+              elem.status === 'empty' && styles.empty_player
+            }`}>
             <div className={styles.circle}>
               <img src={elem.icon} alt={elem.icon} className={styles.icon} />
             </div>

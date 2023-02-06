@@ -3,7 +3,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   width: 100%;
 }
 
@@ -38,4 +38,13 @@
   font-size: 1.4em;
   color: var(--accent_orange);
   text-shadow: var(--border_text);
+}
+
+.active_player {
+  background: var(--bg_gradient_container);
+  border: 1px solid var(--primary_light_opacity);
+}
+
+.empty_player {
+  mix-blend-mode: multiply;
 }

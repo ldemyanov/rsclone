@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 
 interface InputProps {
   placeholder: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export enum InputPlaceholders {

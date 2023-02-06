@@ -1,8 +1,13 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+// import { PayloadAction } from '@reduxjs/toolkit';
 
-export interface GameState {}
+export interface GameState {
+  game: [];
+}
 
-const initialState: GameState = {};
+const initialState: GameState = {
+  game: [],
+};
 
 export const gameSlice = createSlice({
   name: 'game',

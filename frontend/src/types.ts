@@ -24,3 +24,5 @@ export interface IPlayer {
   main: boolean;
   status: string;
 }
+
+export type TCanvasElement = HTMLCanvasElement | null;

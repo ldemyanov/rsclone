@@ -1,7 +1,12 @@
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
+import { TCanvasElement } from '@src/types';
+import { useDispatch } from 'react-redux';
+import { setCanvas } from '@src/redux/reducers/canvasReducer';
+import { setTool } from '@src/redux/reducers/toolReducer';
+import TabletRings from '@assets/images/tabletRings.png';
 
 import styles from './styles.module.css';
-import TabletRings from '@assets/images/tabletRings.png';
+import Pencil from '@src/tools/Pencil';
 
 export enum TabletTitles {
   draw = 'Create yout drawing!',
@@ -13,6 +18,14 @@ interface TabletProps {
 }
 
 export const Tablet: FC<TabletProps> = ({ title }) => {
+  const dispatch = useDispatch();
+  const canvasRef = useRef<TCanvasElement>(null);
+
+  useEffect(() => {
+    dispatch(setCanvas(canvasRef.current));
+    dispatch(setTool(new Pencil(canvasRef.current)));
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <header className={styles.tabletHeader}>
@@ -20,7 +33,7 @@ export const Tablet: FC<TabletProps> = ({ title }) => {
         <h2 className={styles.tabletTitle}>{title}</h2>
       </header>
       <div className={styles.drawingContainer}>
-        <canvas className={styles.canvas} />
+        <canvas className={styles.canvas} ref={canvasRef} />
       </div>
     </div>
   );

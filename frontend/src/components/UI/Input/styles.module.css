@@ -1,3 +1,5 @@
+@import '@style/colors';
+
 .input {
   width: 100%;
   border: 5px solid var(--primary_light);

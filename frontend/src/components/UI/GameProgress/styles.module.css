@@ -1,3 +1,5 @@
+@import '@style/colors';
+
 .gameProgress {
   position: absolute;
   top: 0;

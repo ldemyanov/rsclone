@@ -1,0 +1,69 @@
+@import '@style/colors';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.circle {
+  background: var(--primary_dark);
+  box-shadow: 0px 10px 10px var(--box-shadow), 0px 4px 4px var(--box-shadow);
+  border-radius: 50%;
+  padding: 15px 10px;
+}
+
+.icon {
+  width: 55px;
+}
+
+.name {
+  font-family: 'Carter One', cursive;
+  font-size: 1.4em;
+  color: var(--accent_orange);
+  text-shadow: var(--border_text);
+}
+
+.wrapper_player {
+  display: grid;
+  align-items: center;
+}
+
+.wrapper_player.left {
+  grid-template-areas:
+    'i n'
+    '. d';
+  justify-content: start;
+  gap: 10px;
+}
+
+.wrapper_player.rigth {
+  grid-template-areas:
+    'n i'
+    'd i';
+  justify-content: end;
+  gap: 10px;
+}
+
+.wrapper_icon {
+  grid-area: i;
+}
+
+.name {
+  grid-area: n;
+}
+
+.description {
+  display: flex;
+  justify-content: center;
+  grid-area: d;
+  background: var(--primary_light);
+  border-radius: 15px;
+  padding: 10px;
+  text-align: center;
+}
+
+.description_img {
+  width: 30%;
+}

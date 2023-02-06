@@ -11,7 +11,7 @@ export const SectionGameMode: FC = () => {
           <ContainerGameMode key={index}>
             <img src={elem.image} alt={elem.image} />
             <h3>{elem.name}</h3>
-            <p>{elem.description}</p>
+            <p className={styles.description}>{elem.description}</p>
           </ContainerGameMode>
         );
       })}

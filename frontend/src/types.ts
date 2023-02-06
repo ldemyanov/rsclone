@@ -17,3 +17,10 @@ export interface IGameMode {
   name: string;
   description: string;
 }
+
+export interface IPlayer {
+  icon: string;
+  name: string;
+  main: boolean;
+  status: string;
+}

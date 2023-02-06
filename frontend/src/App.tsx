@@ -5,8 +5,11 @@ import { routes } from './routes';
 import './App.module.css';
 import styles from './App.module.css';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux/es/exports';
 
 const App: FC = () => {
+  const store = useSelector((store) => store);
+  console.log(store);
   return (
     <BrowserRouter>
       <div className={styles.wrapper}>

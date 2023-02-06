@@ -11,3 +11,9 @@ export interface IGitHub {
   path: string;
   name: string;
 }
+
+export interface IGameMode {
+  image: string;
+  name: string;
+  description: string;
+}

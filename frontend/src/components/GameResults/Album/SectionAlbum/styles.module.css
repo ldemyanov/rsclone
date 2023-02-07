@@ -32,32 +32,32 @@
 
 .wrapper_player.left {
   grid-template-areas:
-    'i n'
-    '. d';
+    'icon name'
+    '. description';
   justify-content: start;
   gap: 10px;
 }
 
 .wrapper_player.rigth {
   grid-template-areas:
-    'n i'
-    'd i';
+    'name icon'
+    'description icon';
   justify-content: end;
   gap: 10px;
 }
 
 .wrapper_icon {
-  grid-area: i;
+  grid-area: icon;
 }
 
 .name {
-  grid-area: n;
+  grid-area: name;
 }
 
 .description {
   display: flex;
   justify-content: center;
-  grid-area: d;
+  grid-area: description;
   background: var(--primary_light);
   border-radius: 15px;
   padding: 10px;

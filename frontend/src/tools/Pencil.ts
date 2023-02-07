@@ -30,7 +30,7 @@ export default class Pencil extends Tool implements IPencil {
 
     this.isMouseDown = true;
     this.ctx.beginPath();
-    this.ctx.moveTo(event.pageX, event.pageY);
+    // this.ctx.moveTo(event.pageX - event.offsetX, event.pageY - event.offsetY);
   }
 
   public onMouseUpHandler(event: MouseEvent) {
@@ -39,11 +39,12 @@ export default class Pencil extends Tool implements IPencil {
 
   public onMouseMoveHandler(event: MouseEvent) {
     if (this.isMouseDown) {
-      this.draw(event.pageX, event.pageY);
+      this.draw(event.offsetX, event.offsetY);
     }
   }
 
   public draw(xCoordinate: number, yCoordinate: number) {
+    console.log(xCoordinate, yCoordinate);
     this.ctx.lineTo(xCoordinate, yCoordinate);
     this.ctx.stroke();
     console.log('draw');

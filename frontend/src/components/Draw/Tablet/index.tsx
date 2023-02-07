@@ -24,6 +24,10 @@ export const Tablet: FC<TabletProps> = ({ title }) => {
   useEffect(() => {
     dispatch(setCanvas(canvasRef.current));
     dispatch(setTool(new Pencil(canvasRef.current)));
+    const canvas = canvasRef.current;
+    const context = canvas!.getContext('2d');
+    // context!.fillStyle = 'red';
+    // context!.fillRect(0, 0, 100, 100);
   }, []);
 
   return (
@@ -33,7 +37,7 @@ export const Tablet: FC<TabletProps> = ({ title }) => {
         <h2 className={styles.tabletTitle}>{title}</h2>
       </header>
       <div className={styles.drawingContainer}>
-        <canvas className={styles.canvas} ref={canvasRef} />
+        <canvas className={styles.canvas} ref={canvasRef} width={1500} height={600} />
       </div>
     </div>
   );

@@ -1,0 +1,8 @@
+@import '@style/colors';
+
+.name_container {
+  font-family: 'Carter One', cursive;
+  font-size: 1.7em;
+  color: var(--accent_orange);
+  text-shadow: var(--border_text);
+}

@@ -1,0 +1,10 @@
+.wrapper {
+  display: flex;
+  gap: 20px;
+  flex: 1 1;
+}
+
+.description {
+  width: 80%;
+  text-align: center;
+}

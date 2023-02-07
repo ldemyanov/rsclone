@@ -1,0 +1,7 @@
+@import '@style/colors';
+
+.layout {
+  display: flex;
+  gap: 40px;
+  height: 100%;
+}

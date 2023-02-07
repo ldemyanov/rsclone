@@ -1,10 +1,10 @@
 import { NameContainer } from '@components/UI/NameContainer';
 import { FC } from 'react';
 
-export const HeaderRules: FC = () => {
+export const HeaderAlbum: FC = () => {
   return (
     <header>
-      <NameContainer text="HOW TO PLAY" />
+      <NameContainer text="ALBUM" />
     </header>
   );
 };

@@ -10,9 +10,9 @@ export default function useSocket() {
   const dispatch = useDispatch();
 
   return {
-    connect: (roomId: string) => {
+    connect: (roomId: string, selfId: string) => {
       socket = io(API_URL, {
-        query: { roomId }
+        query: { roomId, userId: selfId }
       });
 
       socket.on("ROOM:JOIN", (user) => {

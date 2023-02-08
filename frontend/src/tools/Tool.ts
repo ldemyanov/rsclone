@@ -17,8 +17,11 @@ export default class Tool implements ITool {
   }
 
   removeEvents() {
-    this.canvas!.onmousedown = null;
-    this.canvas!.onmouseup = null;
-    this.canvas!.onmousemove = null;
+    if (this.canvas) {
+      this.canvas.onmousedown = null;
+      this.canvas.onmouseup = null;
+      this.canvas.onmousemove = null;
+      this.canvas.onmouseleave = null;
+    }
   }
 }

@@ -3,15 +3,16 @@ import Tool from './Tool';
 import getCanvasMousePosition from '@src/helpers/getCanvasMousePosition';
 import { ICanvasMousePosition } from '@src/helpers/getCanvasMousePosition';
 
-interface IPencil {
+interface IEraser {
   isMouseDown: boolean;
   listen: () => void;
   onMouseDownHandler: (event: MouseEvent) => void;
   onMouseUpHandler: (event: MouseEvent) => void;
   onMouseMoveHandler: (event: MouseEvent) => void;
+  onMouseLeaveHandler: (event: MouseEvent) => void;
 }
 
-export default class Pencil extends Tool implements IPencil {
+export default class Eraser extends Tool implements IEraser {
   public isMouseDown: boolean;
 
   constructor(canvas: TCanvasElement) {
@@ -29,13 +30,13 @@ export default class Pencil extends Tool implements IPencil {
     }
   }
 
-  public onMouseDownHandler() {
+  public onMouseDownHandler(event: MouseEvent) {
     this.isMouseDown = true;
     this.ctx.beginPath();
     this.ctx.lineWidth = 4;
     this.ctx.lineCap = 'round';
     this.ctx.lineJoin = 'round';
-    this.ctx.strokeStyle = 'black';
+    this.ctx.strokeStyle = '#FCFFFD';
   }
 
   public onMouseUpHandler() {
@@ -50,8 +51,10 @@ export default class Pencil extends Tool implements IPencil {
   }
 
   public onMouseLeaveHandler() {
-    this.isMouseDown = false;
-    this.ctx.closePath();
+    if (this.isMouseDown) {
+      console.log('leave');
+      this.ctx.closePath();
+    }
   }
 
   public draw({ xCoordinate, yCoordinate }: ICanvasMousePosition) {

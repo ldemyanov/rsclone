@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import styles from './styles.module.css';
 
-export const Redo: FC = () => {
+export const RedoSVG: FC = () => {
   return (
     <svg className={styles.redoSvg} viewBox="0 0 59 60" fill="#FCFFFD" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_159_1064)">

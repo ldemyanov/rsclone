@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { triknesses } from '@src/constants/DrawTools';
+import { triknesses } from '@src/constants/Draw';
 
 import styles from './styles.module.css';
 

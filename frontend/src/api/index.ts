@@ -1,14 +1,22 @@
-const BASE_URL = 'https://librebay.com';
+import { IPlayer } from "@src/types";
 
-export const getRoom = async (name: string, imgId: number, roomId: number) => {
+export const API_URL = process.env.REACT_APP_API_URL ?? "http://localhost:5000";
 
-  const setRoomId = () => (roomId > 0 ? `&roomId=${roomId}` : '');
+interface IRoom {
+  roomId: string,
+  typeGame: string,
+  users: IPlayer[],
+}
+
+type GetRoom = (name: string, icon: string, roomId: string) => Promise<IRoom>
+
+export const getRoom: GetRoom = async (name, icon, roomId) => {
+
+  const setRoomId = () => (roomId ? `&roomId=${roomId}` : '');
 
   const response = await fetch(
-    `${BASE_URL}/room?name=${name}&imgId=${imgId}${setRoomId()}`,
+    `${API_URL}/room?name=${name}&icon=${icon}${setRoomId()}`,
   );
 
-  return {
-    obj: await response.json(),
-  };
+  return await response.json();
 };

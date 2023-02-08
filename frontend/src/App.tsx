@@ -21,7 +21,7 @@ const App: FC = () => {
                     {route.name}
                   </Link>
                 </li>
-              ))}
+              ))} 
             </ul>
           </nav>
           <MainLayout>

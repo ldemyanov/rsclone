@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import PlayerIconLeo from '@assets/images/player_icon_leo.png';
 
 export interface AuthorizationState {
     name: string,
-    imgId: number,
+    icon: string,
 }
 
 const initialState: AuthorizationState = {
     name: "",
-    imgId: 1,
+    icon: PlayerIconLeo,
 };
 
 export const authorizationSlice = createSlice({
@@ -17,8 +18,8 @@ export const authorizationSlice = createSlice({
     setName: (state, action: PayloadAction<string>) => {
         state.name = action.payload;
     },
-    setImg: (state, action: PayloadAction<number>) => {
-        state.imgId = action.payload;
+    setImg: (state, action: PayloadAction<string>) => {
+        state.icon = action.payload;
     }
   },
 });

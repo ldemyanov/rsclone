@@ -12,7 +12,6 @@ export const SectionAuthorization: FC = () => {
   const dispatch = useDispatch();
 
   const changeName = (e: React.FormEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget.value);
     dispatch(setName(e.currentTarget.value));
   }
 

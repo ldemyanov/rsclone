@@ -1,23 +1,28 @@
-import { createSlice } from '@reduxjs/toolkit';
-// import { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface GameState {
-  game: [];
+  searchGuess: string;
+  searchWrite: string;
 }
 
 const initialState: GameState = {
-  game: [],
+  searchGuess: '',
+  searchWrite: '',
 };
 
 export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    // set: (state, action: PayloadAction<>) => {
-    // }
+    setSearchGuess: (state, action: PayloadAction<string>) => {
+      state.searchGuess = action.payload;
+    },
+    setSearchWrite: (state, action: PayloadAction<string>) => {
+      state.searchWrite = action.payload;
+    },
   },
 });
 
-// export const {} = gameSlice.actions;
+export const { setSearchGuess, setSearchWrite } = gameSlice.actions;
 
 export default gameSlice.reducer;

@@ -11,6 +11,7 @@ export enum ButtonText {
   ready = 'ready',
   begin = 'begin',
   invite = 'invite',
+  change = 'change',
 }
 
 export const Button: FC<Button> = ({ text, onClick }) => {

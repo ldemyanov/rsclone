@@ -4,7 +4,9 @@ import styles from './styles.module.css';
 
 interface InputProps {
   placeholder: string;
-  onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
+  value: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export enum InputPlaceholders {
@@ -13,13 +15,15 @@ export enum InputPlaceholders {
   guess = "What's in the picture?",
 }
 
-export const Input: FC<InputProps> = ({ placeholder, onChange }) => {
+export const Input: FC<InputProps> = ({ placeholder, disabled, value, onChange }) => {
   return (
-    <input 
-      className={styles.input} 
-      type="text" 
-      placeholder={placeholder} 
+    <input
+      className={styles.input}
+      type="text"
+      placeholder={placeholder}
+      disabled={disabled}
+      value={value}
       onChange={onChange}
     />
   );
-}
+};

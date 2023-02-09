@@ -10,6 +10,7 @@ import Pencil from '@src/tools/Pencil';
 import Eraser from '@src/tools/Eraser';
 import Rect from '@src/tools/Rect';
 import Circle from '@src/tools/Circle';
+import Line from '@src/tools/Line';
 
 export const CANVAS_WIDTH = 1920;
 export const CANVAS_HEIGHT = 1080;
@@ -19,7 +20,7 @@ export const drawToolsArray = [
   { toolImg: EraserSVG, tool: Eraser },
   { toolImg: SquareSVG, tool: Rect },
   { toolImg: CircleSVG, tool: Circle },
-  { toolImg: LineSVG, tool: Pencil },
+  { toolImg: LineSVG, tool: Line },
   { toolImg: PipetteSVG, tool: Pencil },
   { toolImg: UndoSVG, tool: Pencil },
   { toolImg: RedoSVG, tool: Pencil },

@@ -37,11 +37,14 @@ export default class Eraser extends Tool implements IEraser {
     this.ctx.lineCap = 'round';
     this.ctx.lineJoin = 'round';
     this.ctx.strokeStyle = '#FCFFFD';
+
+    if (this.canvas) {
+      this.draw(getCanvasMousePosition(event, this.canvas));
+    }
   }
 
   public onMouseUpHandler() {
     this.isMouseDown = false;
-    this.ctx.closePath();
   }
 
   public onMouseMoveHandler(event: MouseEvent) {
@@ -51,10 +54,8 @@ export default class Eraser extends Tool implements IEraser {
   }
 
   public onMouseLeaveHandler() {
-    if (this.isMouseDown) {
-      console.log('leave');
-      this.ctx.closePath();
-    }
+    this.ctx.closePath();
+    this.isMouseDown = false;
   }
 
   public draw({ xCoordinate, yCoordinate }: ICanvasMousePosition) {

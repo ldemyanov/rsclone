@@ -8,6 +8,8 @@ import { UndoSVG } from '@components/SVG/Undo';
 import { RedoSVG } from '@components/SVG/Redo';
 import Pencil from '@src/tools/Pencil';
 import Eraser from '@src/tools/Eraser';
+import Rect from '@src/tools/Rect';
+import Circle from '@src/tools/Circle';
 
 export const CANVAS_WIDTH = 1920;
 export const CANVAS_HEIGHT = 1080;
@@ -15,8 +17,8 @@ export const CANVAS_HEIGHT = 1080;
 export const drawToolsArray = [
   { toolImg: PencilSVG, tool: Pencil },
   { toolImg: EraserSVG, tool: Eraser },
-  { toolImg: SquareSVG, tool: Pencil },
-  { toolImg: CircleSVG, tool: Pencil },
+  { toolImg: SquareSVG, tool: Rect },
+  { toolImg: CircleSVG, tool: Circle },
   { toolImg: LineSVG, tool: Pencil },
   { toolImg: PipetteSVG, tool: Pencil },
   { toolImg: UndoSVG, tool: Pencil },

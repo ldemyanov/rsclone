@@ -3,16 +3,15 @@ import Tool from './Tool';
 import getCanvasMousePosition from '@src/helpers/getCanvasMousePosition';
 import { ICanvasMousePosition } from '@src/helpers/getCanvasMousePosition';
 
-interface IEraser {
+interface IPipette {
   isMouseDown: boolean;
   listen: () => void;
   onMouseDownHandler: (event: MouseEvent) => void;
   onMouseUpHandler: (event: MouseEvent) => void;
   onMouseMoveHandler: (event: MouseEvent) => void;
-  onMouseLeaveHandler: (event: MouseEvent) => void;
 }
 
-export default class Eraser extends Tool implements IEraser {
+export default class Pipette extends Tool implements IPipette {
   public isMouseDown;
 
   constructor(canvas: TCanvasElement) {
@@ -31,12 +30,9 @@ export default class Eraser extends Tool implements IEraser {
   }
 
   public onMouseDownHandler(event: MouseEvent) {
-    this.isMouseDown = true;
-    this.ctx.beginPath();
-    this.ctx.strokeStyle = '#FCFFFD';
-
     if (this.canvas) {
-      this.draw(getCanvasMousePosition(event, this.canvas));
+      this.isMouseDown = true;
+      this.getColor(getCanvasMousePosition(event, this.canvas));
     }
   }
 
@@ -46,18 +42,16 @@ export default class Eraser extends Tool implements IEraser {
 
   public onMouseMoveHandler(event: MouseEvent) {
     if (this.isMouseDown && this.canvas) {
-      this.draw(getCanvasMousePosition(event, this.canvas));
+      this.getColor(getCanvasMousePosition(event, this.canvas));
     }
   }
 
   public onMouseLeaveHandler() {
-    this.ctx.closePath();
     this.isMouseDown = false;
   }
 
-  public draw({ xCoordinate, yCoordinate }: ICanvasMousePosition) {
-    this.ctx.lineTo(xCoordinate, yCoordinate);
-    this.ctx.stroke();
-    console.log('draw');
+  public getColor({ xCoordinate, yCoordinate }: ICanvasMousePosition) {
+    const imageData = this.ctx.getImageData(xCoordinate, yCoordinate, 1, 1).data;
+    console.log(imageData[0], imageData[1], imageData[2], imageData[3]);
   }
 }

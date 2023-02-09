@@ -11,6 +11,7 @@ import Eraser from '@src/tools/Eraser';
 import Rect from '@src/tools/Rect';
 import Circle from '@src/tools/Circle';
 import Line from '@src/tools/Line';
+import Pipette from '@src/tools/Pipette';
 
 export const CANVAS_WIDTH = 1920;
 export const CANVAS_HEIGHT = 1080;
@@ -21,11 +22,11 @@ export const drawToolsArray = [
   { toolImg: SquareSVG, tool: Rect },
   { toolImg: CircleSVG, tool: Circle },
   { toolImg: LineSVG, tool: Line },
-  { toolImg: PipetteSVG, tool: Pencil },
+  { toolImg: PipetteSVG, tool: Pipette },
   { toolImg: UndoSVG, tool: Pencil },
   { toolImg: RedoSVG, tool: Pencil },
 ];
 
 export type TTools = Pencil | Eraser;
 
-export const triknesses = [4, 8, 12, 16, 20];
+export const triknessesValues = [4, 8, 12, 16, 20];

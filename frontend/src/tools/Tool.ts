@@ -13,7 +13,17 @@ export default class Tool implements ITool {
   constructor(canvas: TCanvasElement) {
     this.canvas = canvas;
     this.ctx = canvas!.getContext('2d')!;
+    this.ctx.lineCap = 'round';
+    this.ctx.lineJoin = 'round';
     this.removeEvents();
+  }
+
+  set strokeStyle(color: string) {
+    this.ctx.strokeStyle = color;
+  }
+
+  set lineWidth(width: number) {
+    this.ctx.lineWidth = width;
   }
 
   removeEvents() {

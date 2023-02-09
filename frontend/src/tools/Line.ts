@@ -7,7 +7,7 @@ interface ILine {
   isMouseDown: boolean;
   startX: number;
   startY: number;
-  saved: string | null;
+  saved: string;
   listen: () => void;
   onMouseDownHandler: (event: MouseEvent) => void;
   onMouseUpHandler: (event: MouseEvent) => void;
@@ -15,10 +15,10 @@ interface ILine {
 }
 
 export default class Line extends Tool implements ILine {
-  public isMouseDown: boolean;
-  public startX: number;
-  public startY: number;
-  public saved: string | null;
+  public isMouseDown;
+  public startX;
+  public startY;
+  public saved;
 
   constructor(canvas: TCanvasElement) {
     super(canvas);
@@ -26,7 +26,7 @@ export default class Line extends Tool implements ILine {
     this.isMouseDown = false;
     this.startX = 0;
     this.startY = 0;
-    this.saved = null;
+    this.saved = '';
   }
 
   public listen() {
@@ -44,9 +44,6 @@ export default class Line extends Tool implements ILine {
       this.startX = getCanvasMousePosition(event, this.canvas).xCoordinate;
       this.startY = getCanvasMousePosition(event, this.canvas).yCoordinate;
       this.ctx.beginPath();
-      this.ctx.lineWidth = 4;
-      this.ctx.lineCap = 'round';
-      this.ctx.lineJoin = 'round';
       this.ctx.strokeStyle = 'black';
       this.saved = this.canvas.toDataURL();
 

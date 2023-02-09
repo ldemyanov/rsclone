@@ -12,7 +12,7 @@ interface IPencil {
 }
 
 export default class Pencil extends Tool implements IPencil {
-  public isMouseDown: boolean;
+  public isMouseDown;
 
   constructor(canvas: TCanvasElement) {
     super(canvas);
@@ -32,10 +32,7 @@ export default class Pencil extends Tool implements IPencil {
   public onMouseDownHandler(event: MouseEvent) {
     this.isMouseDown = true;
     this.ctx.beginPath();
-    this.ctx.lineWidth = 4;
-    this.ctx.lineCap = 'round';
-    this.ctx.lineJoin = 'round';
-    this.ctx.strokeStyle = 'black';
+    this.ctx.strokeStyle = 'red';
 
     if (this.canvas) {
       this.draw(getCanvasMousePosition(event, this.canvas));

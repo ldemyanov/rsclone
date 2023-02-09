@@ -1,7 +1,16 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import { triknessesValues, TTools } from '@src/constants/Draw';
 
-const initialState = {
+interface IToolsState {
+  tool: TTools | null;
+  triknesses: number[];
+  currentTrikness: number;
+}
+
+const initialState: IToolsState = {
   tool: null,
+  triknesses: triknessesValues,
+  currentTrikness: triknessesValues[2],
 };
 
 export const toolSlice = createSlice({
@@ -9,11 +18,20 @@ export const toolSlice = createSlice({
   initialState,
   reducers: {
     setTool: (state, action) => {
-      return { ...state, tool: action.payload };
+      state.tool = action.payload;
+    },
+    setStrokeStyle: (state, action) => {
+      if (state.tool) state.tool.strokeStyle = action.payload;
+    },
+    setLineWidth: (state, action) => {
+      if (state.tool) {
+        state.tool.lineWidth = action.payload;
+        state.currentTrikness = Number(action.payload);
+      }
     },
   },
 });
 
-export const { setTool } = toolSlice.actions;
+export const { setTool, setStrokeStyle, setLineWidth } = toolSlice.actions;
 
 export default toolSlice.reducer;

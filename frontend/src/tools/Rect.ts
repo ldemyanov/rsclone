@@ -43,9 +43,6 @@ export default class Rect extends Tool implements IRect {
       this.startX = getCanvasMousePosition(event, this.canvas).xCoordinate;
       this.startY = getCanvasMousePosition(event, this.canvas).yCoordinate;
       this.ctx.beginPath();
-      this.ctx.lineWidth = 4;
-      this.ctx.lineCap = 'round';
-      this.ctx.lineJoin = 'round';
       this.ctx.strokeStyle = 'black';
       this.saved = this.canvas.toDataURL();
 

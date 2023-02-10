@@ -18,9 +18,9 @@ export const SoundOff: FC = () => {
       <path
         d="M3 3.07678L53.8461 53.9229"
         stroke="#F9C22E"
-        stroke-width="5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

@@ -28,6 +28,16 @@
 .wrapper_player {
   display: grid;
   align-items: center;
+  animation: 3s show ease;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .wrapper_player.left {

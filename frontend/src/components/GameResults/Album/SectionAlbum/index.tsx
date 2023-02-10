@@ -1,12 +1,29 @@
-import { GameResults } from '@src/utils/GameResults';
-import { FC } from 'react';
+import { GameResults, IGameResults } from '@src/utils/GameResults';
+import { FC, useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
 export const SectionAlbum: FC = () => {
+  const [results, setResults] = useState<IGameResults[]>([]);
+
+  useEffect(() => {
+    let currentCount = 0;
+    const timer = setInterval(() => {
+      if (GameResults[currentCount]) {
+        setResults((prev) => [...prev, GameResults[currentCount++]]);
+      } else {
+        clearInterval(timer);
+      }
+    }, 2000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
   return (
     <section className={styles.wrapper}>
-      {GameResults.map((elem, index) => {
+      {results.map((elem, index) => {
         return (
           <div
             key={index}

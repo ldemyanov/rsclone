@@ -3,7 +3,7 @@ import PlayerIconFox from '@assets/images/player_icon_fox.png';
 import PlayerIconTiger from '@assets/images/player_icon_tiger.png';
 import Banan from '@assets/images/banan.png';
 
-interface IGameResults {
+export interface IGameResults {
   icon: string;
   name: string;
   description: string;

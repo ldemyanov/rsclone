@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@src/redux/store';
 import { setLineWidth } from '@src/redux/reducers/toolReducer';

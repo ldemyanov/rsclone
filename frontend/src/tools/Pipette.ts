@@ -8,7 +8,6 @@ interface IPipette {
   listen: () => void;
   onMouseDownHandler: (event: MouseEvent) => void;
   onMouseUpHandler: (event: MouseEvent) => void;
-  onMouseMoveHandler: (event: MouseEvent) => void;
 }
 
 export default class Pipette extends Tool implements IPipette {
@@ -24,7 +23,6 @@ export default class Pipette extends Tool implements IPipette {
     if (this.canvas) {
       this.canvas.onmousedown = this.onMouseDownHandler.bind(this);
       this.canvas.onmouseup = this.onMouseUpHandler.bind(this);
-      this.canvas.onmousemove = this.onMouseMoveHandler.bind(this);
       this.canvas.onmouseleave = this.onMouseLeaveHandler.bind(this);
     }
   }
@@ -38,12 +36,6 @@ export default class Pipette extends Tool implements IPipette {
 
   public onMouseUpHandler() {
     this.isMouseDown = false;
-  }
-
-  public onMouseMoveHandler(event: MouseEvent) {
-    if (this.isMouseDown && this.canvas) {
-      this.getColor(getCanvasMousePosition(event, this.canvas));
-    }
   }
 
   public onMouseLeaveHandler() {

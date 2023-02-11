@@ -44,7 +44,6 @@ export default class Line extends Tool implements ILine {
       this.startX = getCanvasMousePosition(event, this.canvas).xCoordinate;
       this.startY = getCanvasMousePosition(event, this.canvas).yCoordinate;
       this.ctx.beginPath();
-      this.ctx.strokeStyle = 'black';
       this.saved = this.canvas.toDataURL();
 
       this.draw({ xCoordinate: this.startX, yCoordinate: this.startY });

@@ -1,16 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { triknessesValues, TTools } from '@src/constants/Draw';
+import { palleteColors } from '@src/constants/Pallete';
 
 interface IToolsState {
   tool: TTools | null;
   triknesses: number[];
   currentTrikness: number;
+  colors: string[];
+  currentColor: string;
 }
 
 const initialState: IToolsState = {
   tool: null,
   triknesses: triknessesValues,
   currentTrikness: triknessesValues[2],
+  colors: palleteColors,
+  currentColor: '#000000',
 };
 
 export const toolSlice = createSlice({
@@ -19,9 +24,13 @@ export const toolSlice = createSlice({
   reducers: {
     setTool: (state, action) => {
       state.tool = action.payload;
+      state.tool!.strokeStyle = state.currentColor;
     },
     setStrokeStyle: (state, action) => {
-      if (state.tool) state.tool.strokeStyle = action.payload;
+      if (state.tool) {
+        state.tool.strokeStyle = action.payload;
+        state.currentColor = action.payload;
+      }
     },
     setLineWidth: (state, action) => {
       if (state.tool) {

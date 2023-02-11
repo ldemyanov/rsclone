@@ -8,7 +8,7 @@ export const palleteColors: string[] = [
   '#017420',
   '#990000',
   '#964112',
-  '#11B03C69',
+  '#11B03C',
   '#FF0013',
   '#FF7829',
   '#B0701C',

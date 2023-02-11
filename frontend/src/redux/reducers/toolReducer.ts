@@ -8,6 +8,7 @@ interface IToolsState {
   currentTrikness: number;
   colors: string[];
   currentColor: string;
+  opacity: string;
 }
 
 const initialState: IToolsState = {
@@ -16,6 +17,7 @@ const initialState: IToolsState = {
   currentTrikness: triknessesValues[2],
   colors: palleteColors,
   currentColor: '#000000',
+  opacity: 'ff',
 };
 
 export const toolSlice = createSlice({
@@ -24,11 +26,11 @@ export const toolSlice = createSlice({
   reducers: {
     setTool: (state, action) => {
       state.tool = action.payload;
-      state.tool!.strokeStyle = state.currentColor;
+      state.tool!.strokeStyle = state.currentColor + state.opacity;
     },
     setStrokeStyle: (state, action) => {
       if (state.tool) {
-        state.tool.strokeStyle = action.payload;
+        state.tool.strokeStyle = action.payload + state.opacity;
         state.currentColor = action.payload;
       }
     },
@@ -38,9 +40,16 @@ export const toolSlice = createSlice({
         state.currentTrikness = Number(action.payload);
       }
     },
+    setOpacity: (state, action) => {
+      console.log('opacity');
+      if (state.tool) {
+        state.tool.strokeStyle = state.currentColor + action.payload;
+        state.opacity = action.payload;
+      }
+    },
   },
 });
 
-export const { setTool, setStrokeStyle, setLineWidth } = toolSlice.actions;
+export const { setTool, setStrokeStyle, setLineWidth, setOpacity } = toolSlice.actions;
 
 export default toolSlice.reducer;

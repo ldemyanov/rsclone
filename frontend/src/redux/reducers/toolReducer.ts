@@ -41,7 +41,6 @@ export const toolSlice = createSlice({
       }
     },
     setOpacity: (state, action) => {
-      console.log('opacity');
       if (state.tool) {
         state.tool.strokeStyle = state.currentColor + action.payload;
         state.opacity = action.payload;

@@ -12,7 +12,9 @@ export default class Tool implements ITool {
 
   constructor(canvas: TCanvasElement) {
     this.canvas = canvas;
-    this.ctx = canvas!.getContext('2d')!;
+    this.ctx = canvas!.getContext('2d', {
+      willReadFrequently: true,
+    })!;
     this.ctx.lineCap = 'round';
     this.ctx.lineJoin = 'round';
     this.removeEvents();

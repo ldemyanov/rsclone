@@ -18,7 +18,6 @@ export const Pallete: FC = () => {
     <div className={styles.wrapper}>
       {colors.map((color, index) => {
         const colorChangeHandler = () => {
-          console.log(color);
           dispatch(setStrokeStyle(color));
         };
 

@@ -2,13 +2,14 @@ import { FC, useEffect, useRef } from 'react';
 import { TCanvasElement } from '@src/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCanvas } from '@src/redux/reducers/canvasReducer';
-import { setLineWidth, setTool } from '@src/redux/reducers/toolReducer';
+import { setLineWidth, setOpacity, setStrokeStyle, setTool } from '@src/redux/reducers/toolReducer';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '@src/constants/Draw';
 import TabletRings from '@assets/images/tabletRings.png';
 
 import styles from './styles.module.css';
 import Pencil from '@src/tools/Pencil';
 import { RootState } from '@src/redux/store';
+import Pipette from '@src/tools/Pipette';
 
 export enum TabletTitles {
   draw = 'Create yout drawing!',
@@ -22,8 +23,14 @@ interface TabletProps {
 export const Tablet: FC<TabletProps> = ({ title }) => {
   const dispatch = useDispatch();
   const canvasRef = useRef<TCanvasElement>(null);
-  const { currentTrikness } = useSelector((state: RootState) => state.tool);
-  console.log(canvasRef.current);
+  const { tool, currentTrikness } = useSelector((state: RootState) => state.tool);
+  const isPipetteTool = tool instanceof Pipette;
+  const canvasClickHandler = isPipetteTool
+    ? () => {
+        dispatch(setStrokeStyle(tool.color));
+        dispatch(setOpacity(tool.opacity));
+      }
+    : () => null;
 
   useEffect(() => {
     dispatch(setCanvas(canvasRef.current));
@@ -38,7 +45,13 @@ export const Tablet: FC<TabletProps> = ({ title }) => {
         <h2 className={styles.tabletTitle}>{title}</h2>
       </header>
       <div className={styles.drawingContainer}>
-        <canvas className={styles.canvas} ref={canvasRef} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} />
+        <canvas
+          className={styles.canvas}
+          ref={canvasRef}
+          width={CANVAS_WIDTH}
+          height={CANVAS_HEIGHT}
+          onClick={canvasClickHandler}
+        />
       </div>
     </div>
   );

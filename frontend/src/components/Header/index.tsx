@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import logo from '@assets/images/logo.png';
 import styles from './styles.module.css';
-import { SoundOn } from '@components/SVG/SoundOn';
+import { Sound } from '@components/Sound/undex';
 
 export const Header: FC = () => {
   return (
@@ -12,7 +12,7 @@ export const Header: FC = () => {
           Raccoon<br></br>Phone
         </h1>
       </div>
-      <SoundOn />
+      <Sound />
     </header>
   );
 };

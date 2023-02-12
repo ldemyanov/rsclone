@@ -38,7 +38,6 @@ export default class Eraser extends Tool implements IEraser {
     this.ctx.beginPath();
     this.currentColor = this.ctx.strokeStyle as string;
     this.ctx.strokeStyle = '#FCFFFD';
-    console.log(this.currentColor, this.ctx.strokeStyle);
 
     if (this.canvas) {
       this.draw(getCanvasMousePosition(event, this.canvas));
@@ -48,7 +47,6 @@ export default class Eraser extends Tool implements IEraser {
   public onMouseUpHandler() {
     this.isMouseDown = false;
     this.ctx.strokeStyle = this.currentColor;
-    console.log(this.ctx.strokeStyle);
   }
 
   public onMouseMoveHandler(event: MouseEvent) {

@@ -4,8 +4,6 @@ import { SquareSVG } from '@components/SVG/Square';
 import { CircleSVG } from '@components/SVG/Circle';
 import { LineSVG } from '@components/SVG/Line';
 import { PipetteSVG } from '@components/SVG/Pipette';
-import { UndoSVG } from '@components/SVG/Undo';
-import { RedoSVG } from '@components/SVG/Redo';
 import Pencil from '@src/tools/Pencil';
 import Eraser from '@src/tools/Eraser';
 import Rect from '@src/tools/Rect';
@@ -23,10 +21,8 @@ export const drawToolsArray = [
   { toolImg: CircleSVG, tool: Circle },
   { toolImg: LineSVG, tool: Line },
   { toolImg: PipetteSVG, tool: Pipette },
-  { toolImg: UndoSVG, tool: Pencil },
-  { toolImg: RedoSVG, tool: Pencil },
 ];
 
-export type TTools = Pencil | Eraser;
+export type TTools = Pencil | Eraser | Rect | Circle | Line | Pipette;
 
 export const triknessesValues = [4, 8, 12, 16, 20];

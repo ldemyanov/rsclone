@@ -1,16 +1,44 @@
+import { RootState } from '@src/redux/store';
 import { FC } from 'react';
-import { palleteColors } from '@src/constants/Pallete';
+import { useDispatch, useSelector } from 'react-redux';
+import { setStrokeStyle } from '@src/redux/reducers/toolReducer';
 
 import styles from './styles.module.css';
 
 export const Pallete: FC = () => {
+  const dispatch = useDispatch();
+  const { colors, currentColor } = useSelector((state: RootState) => state.tool);
+
+  const inputColorChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
+    dispatch(setStrokeStyle(event.target.value));
+  };
+
   return (
     <div className={styles.wrapper}>
-      {palleteColors.map((palleteColor) => {
-        return <button className={styles.colorButton} style={{ background: palleteColor }} key={palleteColor} />;
+      {colors.map((color, index) => {
+        const colorChangeHandler = () => {
+          dispatch(setStrokeStyle(color));
+        };
+
+        return (
+          <button
+            className={styles.colorButton}
+            style={{ background: color }}
+            key={index}
+            onClick={colorChangeHandler}
+          />
+        );
       })}
       <label className={styles.colorLabel}>
-        <input className={styles.colorInput} type="color" name="palleteColor" id="palleteColorInput" />
+        <input
+          className={styles.colorInput}
+          type="color"
+          value={currentColor}
+          onChange={inputColorChangeHandler}
+          name="palleteColor"
+          id="palleteColorInput"
+        />
       </label>
     </div>
   );

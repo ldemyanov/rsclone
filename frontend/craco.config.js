@@ -6,6 +6,8 @@ module.exports = {
       '@src': path.resolve(__dirname, 'src'),
       '@assets': path.resolve(__dirname, 'src/assets'),
       '@style': path.resolve(__dirname, 'src/style'),
+      '@tools': path.resolve(__dirname, 'src/tools'),
+      '@helpers': path.resolve(__dirname, 'src/helpers'),
     },
   },
 };

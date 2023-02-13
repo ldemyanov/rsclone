@@ -31,18 +31,9 @@ export const SectionPlayers: FC = () => {
             )}
             <button
               onClick={() => {
-                console.log("leave click");
-                excludeUser(elem.userId);
-              }}
-            >
-              Leave
-            </button>
-            <button
-              onClick={() => {
-                console.log("ready click");
-                setStatus("active");
-              }}
-            >
+                console.log('ready click');
+                setStatus('active');
+              }}>
               Ready
             </button>
           </div>

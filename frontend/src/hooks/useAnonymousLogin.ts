@@ -1,6 +1,6 @@
 import { getRoom } from '@src/api';
 import useSocket from '@src/hooks/useSocket';
-import { setPlayers, setRoomID } from '@src/redux/reducers/lobbyReducer';
+import { setPlayers, setRoomID, setSelfID } from '@src/redux/reducers/lobbyReducer';
 import { RootState } from '@src/redux/store';
 import { useAppSelector, useAppDispatch } from '@src/redux/store';
 import { useSearchParams } from 'react-router-dom';
@@ -22,7 +22,9 @@ export const useAnonymousLogin = () => {
       dispatch(setRoomID(res.roomId));
 
       const selfId = res.users.find((user) => user.name === name)?.userId;
+
       if (selfId) {
+        dispatch(setSelfID(selfId));
         connect(res.roomId, selfId);
       } else {
         // Are Maybe to throw error?

@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IPlayer } from '@src/types';
-// import { Players } from '@src/utils/Players';
 
 export interface LobbyState {
   players: IPlayer[];
+  roomID: string;
 }
 
 const initialState: LobbyState = {
   players: [],
+  roomID: '',
 };
 
 export const lobbySlice = createSlice({
@@ -19,10 +20,13 @@ export const lobbySlice = createSlice({
     },
     setPlayers: (state, action: PayloadAction<IPlayer[]>) => {
       state.players = action.payload;
-    }
+    },
+    setRoomID: (state, action: PayloadAction<string>) => {
+      state.roomID = action.payload;
+    },
   },
 });
 
-export const { setPlayer, setPlayers } = lobbySlice.actions;
+export const { setPlayer, setPlayers, setRoomID } = lobbySlice.actions;
 
 export default lobbySlice.reducer;

@@ -25,7 +25,7 @@ export const Input: FC<InputProps> = ({ placeholder, disabled, value, onChange, 
       disabled={disabled}
       value={value}
       onChange={onChange}
-      maxLength={auth ? 12 : 100}
+      maxLength={auth ? 12 : 30}
     />
   );
 };

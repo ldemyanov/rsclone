@@ -19,10 +19,13 @@ export const lobbySlice = createSlice({
     },
     setPlayers: (state, action: PayloadAction<IPlayer[]>) => {
       state.players = action.payload;
+    },
+    removePlayer: (state, action: PayloadAction<string>) => {
+      state.players = state.players.filter((player) => player.userId !== action.payload);
     }
   },
 });
 
-export const { setPlayer, setPlayers } = lobbySlice.actions;
+export const { setPlayer, setPlayers, removePlayer } = lobbySlice.actions;
 
 export default lobbySlice.reducer;

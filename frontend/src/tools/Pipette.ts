@@ -53,6 +53,7 @@ export default class Pipette extends Tool implements IPipette {
   public getColor({ xCoordinate, yCoordinate }: ICanvasMousePosition) {
     const [red, green, blue, opacity] = Array.from(this.ctx.getImageData(xCoordinate, yCoordinate, 1, 1).data);
     this.color = `#${getHexFromDecimal(red) + getHexFromDecimal(green) + getHexFromDecimal(blue)}`;
+    if (this.color === '#000000' && opacity === 0) this.color = '#ffffff';
     this.opacity = getHexFromDecimal(opacity || 255);
   }
 }

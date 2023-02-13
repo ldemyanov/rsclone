@@ -1,15 +1,14 @@
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Input, InputPlaceholders } from '@components/UI/Input';
 import { setImg, setName } from '@src/redux/reducers/authorizationReducer';
 import reload from '@assets/images/reload.svg';
-import styles from './styles.module.css';
-import { RootState } from '@src/redux/store';
+import { useAppSelector, useAppDispatch } from '@src/redux/store';
 import { icons } from '@src/utils/icon';
+import styles from './styles.module.css';
 
 export const SectionAuthorization: FC = () => {
-  const dispatch = useDispatch();
-  const { name, icon } = useSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
+  const { name, icon } = useAppSelector((state) => state.auth);
 
   const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setName(e.target.value));
@@ -27,7 +26,7 @@ export const SectionAuthorization: FC = () => {
           <img src={reload} alt="reload" />
         </button>
       </div>
-      <Input placeholder={InputPlaceholders.name} onChange={(e) => changeName(e)} value={name} auth />
+      <Input placeholder={InputPlaceholders.name} onChange={changeName} value={name} />
     </section>
   );
 };

@@ -1,27 +1,33 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input, InputPlaceholders } from '@components/UI/Input';
-import { setName } from '@src/redux/reducers/authorizationReducer';
-import PlayerIconLeo from '@assets/images/player_icon_leo.png';
+import { setImg, setName } from '@src/redux/reducers/authorizationReducer';
 import reload from '@assets/images/reload.svg';
 import styles from './styles.module.css';
+import { RootState } from '@src/redux/store';
+import { icons } from '@src/utils/icon';
 
 export const SectionAuthorization: FC = () => {
   const dispatch = useDispatch();
+  const { name, icon } = useSelector((state: RootState) => state.auth);
 
   const changeName = (e: React.FormEvent<HTMLInputElement>) => {
     dispatch(setName(e.currentTarget.value));
   };
 
+  const changeIcon = () => {
+    dispatch(setImg(Math.floor(Math.random() * icons.length)));
+  };
+
   return (
     <section className={styles.section_authorization}>
       <div className={styles.wrapper_icon}>
-        <img src={PlayerIconLeo} alt="Player Icon Leo" />
-        <button className={styles.button_reload}>
+        <img src={icon} alt="Player Icon" />
+        <button className={styles.button_reload} onClick={changeIcon}>
           <img src={reload} alt="reload" />
         </button>
       </div>
-      <Input placeholder={InputPlaceholders.name} onChange={() => null} value="" />
+      <Input placeholder={InputPlaceholders.name} onChange={changeName} value={name} auth />
     </section>
   );
 };

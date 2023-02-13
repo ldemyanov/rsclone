@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import PlayerIconLeo from '@assets/images/player_icon_leo.png';
+import { icons } from '@src/utils/icon';
 
 export interface AuthorizationState {
-    name: string,
-    icon: string,
+  name: string;
+  icon: string;
 }
 
 const initialState: AuthorizationState = {
-    name: "",
-    icon: PlayerIconLeo,
+  name: '',
+  icon: icons[Math.floor(Math.random() * icons.length)],
 };
 
 export const authorizationSlice = createSlice({
@@ -16,11 +16,11 @@ export const authorizationSlice = createSlice({
   initialState,
   reducers: {
     setName: (state, action: PayloadAction<string>) => {
-        state.name = action.payload;
+      state.name = action.payload;
     },
-    setImg: (state, action: PayloadAction<string>) => {
-        state.icon = action.payload;
-    }
+    setImg: (state, action: PayloadAction<number>) => {
+      state.icon = icons[action.payload];
+    },
   },
 });
 

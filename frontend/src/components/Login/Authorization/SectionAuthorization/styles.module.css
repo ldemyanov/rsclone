@@ -17,6 +17,7 @@
 }
 
 .button_reload {
+  display: flex;
   position: absolute;
   left: 150px;
   top: 160px;
@@ -24,4 +25,10 @@
   border-radius: 50%;
   border: none;
   padding: 10px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.button_reload:hover {
+  background-color: var(--accent_orange);
 }

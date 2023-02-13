@@ -12,10 +12,6 @@ export const useAnonymousLogin = () => {
   const dispatch = useAppDispatch();
 
   const login = async () => {
-    const roomId = searchParams.get('roomId') ?? '';
-    const res = await getRoom(name, icon, roomId);
-    dispatch(setPlayers(res.users));
-    dispatch(setRoomID(res.roomId));
     if (name) {
       // Need to do validation name
 
@@ -23,6 +19,7 @@ export const useAnonymousLogin = () => {
       const res = await getRoom(name, icon, roomId);
 
       dispatch(setPlayers(res.users));
+      dispatch(setRoomID(res.roomId));
 
       const selfId = res.users.find((user) => user.name === name)?.userId;
       if (selfId) {

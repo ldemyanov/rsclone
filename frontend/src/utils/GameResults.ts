@@ -1,6 +1,6 @@
-import PlayerIconLeo from '@assets/images/player_icon_leo.png';
-import PlayerIconFox from '@assets/images/player_icon_fox.png';
-import PlayerIconTiger from '@assets/images/player_icon_tiger.png';
+import PlayerIconLeo from '@assets/images/icon/lion.png';
+import PlayerIconFox from '@assets/images/icon/fox.png';
+import PlayerIconTiger from '@assets/images/icon/tiger.png';
 import Banan from '@assets/images/banan.png';
 
 export interface IGameResults {

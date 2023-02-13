@@ -1,15 +1,21 @@
 import { FC } from 'react';
 import { Button, ButtonText } from '@components/UI/Button';
-import styles from './styles.module.css';
 import { useAnonymousLogin } from '@src/hooks/useAnonymousLogin';
+import { Link } from 'react-router-dom';
+import { IRoute } from '@src/types';
+import { routes } from '@src/routes';
+import styles from './styles.module.css';
 
 export const FooterAuthorization: FC = () => {
+  const [, LobbyPage]: IRoute[] = routes;
 
   const login = useAnonymousLogin();
 
   return (
     <footer className={styles.wrapper}>
-      <Button text={ButtonText.start} onClick={login} />
+      <Link className={styles.logo} to={LobbyPage.path}>
+        <Button text={ButtonText.start} onClick={login} />
+      </Link>
     </footer>
   );
 };

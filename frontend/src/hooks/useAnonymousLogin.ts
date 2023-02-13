@@ -1,12 +1,11 @@
-import { getRoom } from "@src/api";
-import useSocket from "@src/hooks/useSocket";
-import { setPlayers } from "@src/redux/reducers/lobbyReducer";
-import { RootState } from "@src/redux/store";
+import { getRoom } from '@src/api';
+import useSocket from '@src/hooks/useSocket';
+import { setPlayers, setRoomID } from '@src/redux/reducers/lobbyReducer';
+import { RootState } from '@src/redux/store';
 import { useAppSelector, useAppDispatch } from '@src/redux/store';
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from 'react-router-dom';
 
 export const useAnonymousLogin = () => {
-
   const [searchParams] = useSearchParams();
   const { connect } = useSocket();
   const { name, icon } = useAppSelector((state: RootState) => state.auth);
@@ -16,10 +15,11 @@ export const useAnonymousLogin = () => {
     if (name) {
       // Need to do validation name
 
-      const roomId = searchParams.get("roomId") ?? '';
+      const roomId = searchParams.get('roomId') ?? '';
       const res = await getRoom(name, icon, roomId);
 
       dispatch(setPlayers(res.users));
+      dispatch(setRoomID(res.roomId));
 
       const selfId = res.users.find((user) => user.name === name)?.userId;
       if (selfId) {
@@ -28,8 +28,7 @@ export const useAnonymousLogin = () => {
         // Are Maybe to throw error?
       }
     }
-
-  }
+  };
 
   return login;
-}
+};

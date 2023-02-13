@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import styles from './styles.module.css';
 
-export const Square: FC = () => {
+export const SquareSVG: FC = () => {
   return (
     <svg className={styles.squareSvg} viewBox="0 0 59 60" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path

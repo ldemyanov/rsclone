@@ -1,6 +1,4 @@
-type PalleteColor = string;
-
-export const palleteColors: PalleteColor[] = [
+export const palleteColors: string[] = [
   '#000000',
   '#666666',
   '#0050CD',

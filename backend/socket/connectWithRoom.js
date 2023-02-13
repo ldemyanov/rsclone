@@ -30,8 +30,9 @@ async function connectWithRoom(socket) {
 
   socket.on('USER:EXCLUDE', async (excUserId) => {
     room = await db.room.findOne({ roomId: roomId }).exec();
-    room.users.pull({ excUserId });
-    room.save();
+    let excUser = await room.users.find((user) => user.userId === excUserId);
+    await excUser.remove();
+    await room.save();
 
     socket.emit("ROOM:LEFT", excUserId)
     socket.to(roomId).emit("ROOM:LEFT", excUserId);

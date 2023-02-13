@@ -10,6 +10,7 @@ import { RootState } from '@src/redux/store';
 import Pipette from '@src/tools/Pipette';
 
 import styles from './styles.module.css';
+import getCursorStyle from '@src/helpers/getCursorStyle';
 
 export enum TabletTitles {
   draw = 'Create yout drawing!',
@@ -24,6 +25,8 @@ export const Tablet: FC<TabletProps> = ({ title }) => {
   const dispatch = useDispatch();
   const canvasRef = useRef<TCanvasElement>(null);
   const { tool, currentTrikness } = useSelector((state: RootState) => state.tool);
+  const cursorStyle = getCursorStyle(styles, currentTrikness, tool);
+  const canvasStyles = [styles.canvas, cursorStyle].join(' ');
 
   const canvasMouseDownHandler = () => {
     if (tool instanceof Pipette) {
@@ -48,7 +51,7 @@ export const Tablet: FC<TabletProps> = ({ title }) => {
       </header>
       <div className={styles.drawingContainer}>
         <canvas
-          className={styles.canvas}
+          className={canvasStyles}
           ref={canvasRef}
           width={CANVAS_WIDTH}
           height={CANVAS_HEIGHT}

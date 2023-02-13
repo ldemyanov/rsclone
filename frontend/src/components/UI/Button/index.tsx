@@ -3,6 +3,7 @@ import styles from './styles.module.css';
 
 interface Button {
   text: string;
+  disabled?: boolean;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -15,9 +16,9 @@ export enum ButtonText {
   copy = 'copied!',
 }
 
-export const Button: FC<Button> = ({ text, onClick }) => {
+export const Button: FC<Button> = ({ text, disabled, onClick }) => {
   return (
-    <button className={styles.button} onClick={onClick}>
+    <button className={`${styles.button} ${disabled && styles.disabled}`} disabled={disabled} onClick={onClick}>
       {text}
     </button>
   );

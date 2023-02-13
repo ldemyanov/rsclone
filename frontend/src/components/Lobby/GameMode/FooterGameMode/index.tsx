@@ -9,6 +9,7 @@ import { RootState } from '@src/redux/store';
 export const FooterGameMode: FC = () => {
   const [LoginPage]: IRoute[] = routes;
   const { roomID } = useSelector((state: RootState) => state.lobby);
+  const { players } = useSelector((state: RootState) => state.lobby);
 
   console.log(`${LoginPage.path}?roomId=${roomID}`);
 

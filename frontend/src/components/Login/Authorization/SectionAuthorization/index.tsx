@@ -11,8 +11,8 @@ export const SectionAuthorization: FC = () => {
   const dispatch = useDispatch();
   const { name, icon } = useSelector((state: RootState) => state.auth);
 
-  const changeName = (e: React.FormEvent<HTMLInputElement>) => {
-    dispatch(setName(e.currentTarget.value));
+  const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setName(e.target.value));
   };
 
   const changeIcon = () => {
@@ -27,7 +27,7 @@ export const SectionAuthorization: FC = () => {
           <img src={reload} alt="reload" />
         </button>
       </div>
-      <Input placeholder={InputPlaceholders.name} onChange={changeName} value={name} auth />
+      <Input placeholder={InputPlaceholders.name} onChange={(e) => changeName(e)} value={name} auth />
     </section>
   );
 };

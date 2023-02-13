@@ -24,9 +24,12 @@ export const lobbySlice = createSlice({
     setRoomID: (state, action: PayloadAction<string>) => {
       state.roomID = action.payload;
     },
+    removePlayer: (state, action: PayloadAction<string>) => {
+      state.players = state.players.filter((player) => player.userId !== action.payload);
+    },
   },
 });
 
-export const { setPlayer, setPlayers, setRoomID } = lobbySlice.actions;
+export const { setPlayer, setPlayers, setRoomID, removePlayer } = lobbySlice.actions;
 
 export default lobbySlice.reducer;

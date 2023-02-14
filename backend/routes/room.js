@@ -32,7 +32,7 @@ router.get("/", async (req, res) => {
           userId: `${name}-${(Math.random() * 100000).toFixed(0)}`,
           name,
           icon,
-          status: "empty",
+          status: "active",
           main: true,
         }
       ]

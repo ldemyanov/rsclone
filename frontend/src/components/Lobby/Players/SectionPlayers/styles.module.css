@@ -12,6 +12,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  padding: 0 1em 0 0;
   background: var(--primary_dark_opacity);
   border: 1px solid var(--primary_dark_inactive);
   box-shadow: 0px 10px 10px var(--box-shadow), 0px 4px 4px var(--box-shadow);
@@ -31,7 +32,7 @@
 
 .indents {
   padding: 10px;
-  margin-left: 85px;
+  margin-left: auto;
 }
 
 .name {

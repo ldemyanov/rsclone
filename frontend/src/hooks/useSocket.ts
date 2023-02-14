@@ -8,19 +8,19 @@ let socket: null | Socket = null;
 
 // TODO remove or rename and move to types
 interface IWord {
-  word: string,
-  writerId: string
+  word: string;
+  writerId: string;
 }
 
 interface IWord2 extends IWord {
-  painterId: string,
+  painterId: string;
 }
 
 // TODO remove or rename and move to types
 interface IGame {
-  roomId: string,
-  isGameStarted: boolean,
-  gameStage: string,
+  roomId: string;
+  isGameStarted: boolean;
+  gameStage: string;
 }
 
 interface IGame1 extends IGame {
@@ -54,13 +54,13 @@ export default function useSocket() {
         dispatch(setStatusPlayer(obj));
       });
 
-      socket.on("ROOM:START_GAME", (gameObj: IGame1) => {
-        console.log("IGame1: ", gameObj);
-      })
+      socket.on('ROOM:START_GAME', (gameObj: IGame1) => {
+        console.log('IGame1: ', gameObj);
+      });
 
-      socket.on("ROOM:SEND_WORDS", (gameObj: IGame2) => {
-        console.log("IGame2: ", gameObj);
-      })
+      socket.on('ROOM:SEND_WORDS', (gameObj: IGame2) => {
+        console.log('IGame2: ', gameObj);
+      });
     },
 
     excludeUser: (userId: string) => {
@@ -74,24 +74,17 @@ export default function useSocket() {
         socket.emit('USER:SET_STATUS', status);
       }
     },
-<<<<<<< HEAD
-  };
-=======
 
     startGame: (req: { isGameStarted: boolean }) => {
       if (socket) {
-        socket.emit("USER:START_GAME", req);
+        socket.emit('USER:START_GAME', req);
       }
     },
 
     sendWord: (wordObj: IWord) => {
       if (socket) {
-        socket.emit("USER:SEND_WORD", wordObj)
+        socket.emit('USER:SEND_WORD', wordObj);
       }
-    }
-  }
->>>>>>> origin/dev
+    },
+  };
 }
-
-
-

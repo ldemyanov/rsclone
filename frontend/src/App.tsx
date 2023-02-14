@@ -1,26 +1,16 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Provider, useSelector } from 'react-redux';
 import { MainLayout } from './layouts/mainLayout';
 import { routes } from './routes';
 import { Link } from 'react-router-dom';
 import { RootState, store } from './redux/store';
-import useSocket from './hooks/useSocket';
 
 import styles from './App.module.css';
 
 const App: FC = () => {
   const state = useSelector((state: RootState) => state);
-  const { selfID } = useSelector((state: RootState) => state.lobby);
-  const { excludeUser } = useSocket();
   console.log(state);
-  console.log(selfID);
-
-  useEffect(() => {
-    return () => {
-      excludeUser(selfID);
-    };
-  }, [selfID]);
 
   return (
     <BrowserRouter>

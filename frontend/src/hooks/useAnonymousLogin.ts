@@ -1,8 +1,9 @@
 import { getRoom } from '@src/api';
 import useSocket from '@src/hooks/useSocket';
-import { setPlayers, setRoomID, setSelfID } from '@src/redux/reducers/lobbyReducer';
+import { setPlayers, setRoomID, setSelfData } from '@src/redux/reducers/lobbyReducer';
 import { RootState } from '@src/redux/store';
 import { useAppSelector, useAppDispatch } from '@src/redux/store';
+import { IPlayer } from '@src/types';
 import { useSearchParams } from 'react-router-dom';
 
 export const useAnonymousLogin = () => {
@@ -21,11 +22,11 @@ export const useAnonymousLogin = () => {
       dispatch(setPlayers(res.users));
       dispatch(setRoomID(res.roomId));
 
-      const selfId = res.users.find((user) => user.name === name)?.userId;
+      const { userId, main } = res.users.find((user) => user.name === name) as IPlayer;
 
-      if (selfId) {
-        dispatch(setSelfID(selfId));
-        connect(res.roomId, selfId);
+      if (userId) {
+        dispatch(setSelfData({ userId, main }));
+        connect(res.roomId, userId);
       } else {
         // Are Maybe to throw error?
       }

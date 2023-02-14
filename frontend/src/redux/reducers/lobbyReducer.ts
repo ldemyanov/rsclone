@@ -4,15 +4,13 @@ import { IPlayer } from '@src/types';
 export interface LobbyState {
   players: IPlayer[];
   roomID: string;
-  selfID: string;
-  isMain: boolean;
+  self: IPlayer;
 }
 
 const initialState: LobbyState = {
   players: [],
   roomID: '',
-  selfID: '',
-  isMain: false,
+  self: { icon: '', name: '', main: false, status: '', userId: '' },
 };
 
 export const lobbySlice = createSlice({
@@ -28,16 +26,20 @@ export const lobbySlice = createSlice({
     setRoomID: (state, action: PayloadAction<string>) => {
       state.roomID = action.payload;
     },
-    setSelfData: (state, action: PayloadAction<{ userId: string; main: boolean }>) => {
-      state.selfID = action.payload.userId;
-      state.isMain = action.payload.main;
+    setSelfData: (state, action: PayloadAction<IPlayer>) => {
+      state.self = action.payload;
     },
     removePlayer: (state, action: PayloadAction<string>) => {
       state.players = state.players.filter((player) => player.userId !== action.payload);
     },
+    setStatusPlayer: (state, action: PayloadAction<{ userId: string; status: string }>) => {
+      const indexPlayer = state.players.findIndex((elem) => elem.userId === action.payload.userId);
+      state.players[indexPlayer].status = action.payload.status;
+      state.self.status = action.payload.status;
+    },
   },
 });
 
-export const { setPlayer, setPlayers, setRoomID, setSelfData, removePlayer } = lobbySlice.actions;
+export const { setPlayer, setPlayers, setRoomID, setSelfData, removePlayer, setStatusPlayer } = lobbySlice.actions;
 
 export default lobbySlice.reducer;

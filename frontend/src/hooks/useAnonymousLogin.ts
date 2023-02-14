@@ -22,11 +22,11 @@ export const useAnonymousLogin = () => {
       dispatch(setPlayers(res.users));
       dispatch(setRoomID(res.roomId));
 
-      const { userId, main } = res.users.find((user) => user.name === name) as IPlayer;
+      const self = res.users.find((user) => user.name === name) as IPlayer;
 
-      if (userId) {
-        dispatch(setSelfData({ userId, main }));
-        connect(res.roomId, userId);
+      if (self) {
+        dispatch(setSelfData(self));
+        connect(res.roomId, self.userId);
       } else {
         // Are Maybe to throw error?
       }

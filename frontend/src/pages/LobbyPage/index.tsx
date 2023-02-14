@@ -13,11 +13,10 @@ import styles from './style.module.css';
 
 export const LobbyPage: FC = () => {
   const { self, players } = useAppSelector((state) => state.lobby);
+  const isKicked = players.findIndex((player) => player.userId === self.userId) === -1;
   const navigate = useNavigate();
 
   useEffect(() => {
-    const isKicked = players.findIndex((player) => player.userId === self.userId) === -1;
-    console.log(isKicked);
     if (isKicked) {
       const [LoginPage] = routes;
       navigate(LoginPage.path);

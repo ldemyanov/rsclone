@@ -6,6 +6,31 @@ import { IPlayer } from '@src/types';
 
 let socket: null | Socket = null;
 
+// TODO remove or rename and move to types
+interface IWord {
+  word: string,
+  writerId: string
+}
+
+interface IWord2 extends IWord {
+  painterId: string,
+}
+
+// TODO remove or rename and move to types
+interface IGame {
+  roomId: string,
+  isGameStarted: boolean,
+  gameStage: string,
+}
+
+interface IGame1 extends IGame {
+  words: IWord[];
+}
+
+interface IGame2 extends IGame {
+  words: IWord2[];
+}
+
 export default function useSocket() {
 
   const dispatch = useAppDispatch();
@@ -28,6 +53,14 @@ export default function useSocket() {
       socket.on("ROOM:STATUS", (obj) => {
         console.log(obj)
       })
+
+      socket.on("ROOM:START_GAME", (gameObj: IGame1) => {
+        console.log("IGame1: ", gameObj);
+      })
+
+      socket.on("ROOM:SEND_WORDS", (gameObj: IGame2) => {
+        console.log("IGame2: ", gameObj);
+      })
     },
 
     excludeUser: (userId: string) => {
@@ -40,7 +73,21 @@ export default function useSocket() {
       if (socket) {
         socket.emit("USER:SET_STATUS", status);
       }
+    },
+
+    startGame: (req: { isGameStarted: boolean }) => {
+      if (socket) {
+        socket.emit("USER:START_GAME", req);
+      }
+    },
+
+    sendWord: (word: string) => {
+      if (socket) {
+        socket.emit("USER:SEND_WORD", word)
+      }
     }
   }
-
 }
+
+
+

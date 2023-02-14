@@ -96,14 +96,14 @@ async function connectWithRoom(socket) {
     }
   })
 
-  socket.on('USER:SEND_WORD', async (word) => {
+  socket.on('USER:SEND_WORD', async (wordObj) => {
 
-    console.log(word);
+    const { word, writerId } = wordObj;
 
     const game = await db.game.findOne({ roomId: roomId }).exec();
 
     for (let i = 0; i < game.words.length; i++) {
-      if (game.words[i].writerId === userId) {
+      if (game.words[i].writerId === writerId) {
         game.words[i].word = word;
         // TODO game.words[i].painterId = RANDOM ALGORITM
         game.words[i].painterId = game.words.at(i-1).writerId;

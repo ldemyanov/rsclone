@@ -81,9 +81,9 @@ export default function useSocket() {
       }
     },
 
-    sendWord: (word: string) => {
+    sendWord: (wordObj: IWord) => {
       if (socket) {
-        socket.emit("USER:SEND_WORD", word)
+        socket.emit("USER:SEND_WORD", wordObj)
       }
     }
   }

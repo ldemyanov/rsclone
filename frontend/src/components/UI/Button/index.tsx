@@ -10,6 +10,7 @@ interface Button {
 export enum ButtonText {
   start = 'start',
   ready = 'ready',
+  unready = 'unready',
   begin = 'begin',
   invite = 'invite',
   change = 'change',

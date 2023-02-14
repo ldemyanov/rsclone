@@ -1,38 +1,36 @@
 import io, { Socket } from 'socket.io-client';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@src/redux/store';
 import { setPlayer, removePlayer, setStatusPlayer } from '@src/redux/reducers/lobbyReducer';
+import { setIsGameStarted, setGameStage, setWords } from '@src/redux/reducers/gameReducer';
 import { API_URL } from '../api';
 import { IPlayer } from '@src/types';
+import { routes } from '@src/routes';
 
 let socket: null | Socket = null;
 
 // TODO remove or rename and move to types
-interface IWord {
+export interface IWord {
   word: string;
   writerId: string;
-}
-
-interface IWord2 extends IWord {
-  painterId: string;
+  img?: string;
+  painterId?: string;
+  response?: string;
+  responserId?: string;
 }
 
 // TODO remove or rename and move to types
-interface IGame {
+export interface IGame {
   roomId: string;
   isGameStarted: boolean;
   gameStage: string;
-}
-
-interface IGame1 extends IGame {
   words: IWord[];
-}
-
-interface IGame2 extends IGame {
-  words: IWord2[];
 }
 
 export default function useSocket() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [, , WritePage, DrawPage, GuessPage] = routes;
 
   return {
     connect: (roomId: string, selfId: string) => {
@@ -54,12 +52,18 @@ export default function useSocket() {
         dispatch(setStatusPlayer(obj));
       });
 
-      socket.on('ROOM:START_GAME', (gameObj: IGame1) => {
-        console.log('IGame1: ', gameObj);
+      socket.on('ROOM:START_GAME', (gameObj: IGame) => {
+        console.log('START_GAME: ', gameObj);
+        dispatch(setIsGameStarted(gameObj.isGameStarted));
+        dispatch(setGameStage(gameObj.gameStage));
+        dispatch(setWords(gameObj.words));
+        navigate(WritePage.path);
       });
 
-      socket.on('ROOM:SEND_WORDS', (gameObj: IGame2) => {
-        console.log('IGame2: ', gameObj);
+      socket.on('ROOM:SEND_WORDS', (gameObj: IGame) => {
+        console.log('SEND_WORDS: ', gameObj);
+        dispatch(setGameStage(gameObj.gameStage));
+        dispatch(setWords(gameObj.words));
       });
     },
 

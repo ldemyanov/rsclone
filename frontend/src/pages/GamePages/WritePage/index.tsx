@@ -1,27 +1,29 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { ContentBorder } from '@components/UI/ContentBorder';
 import { GameProgress } from '@components/UI/GameProgress';
 import { Phone } from '@components/SVG/Phone';
 import { Input, InputPlaceholders } from '@components/UI/Input';
 import { Button, ButtonText } from '@components/UI/Button';
-
-import styles from './styles.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@src/redux/store';
-import { setSearchWrite } from '@src/redux/reducers/gameReducer';
+import { setSearchWrite, setIsReady } from '@src/redux/reducers/gameReducer';
+
+import styles from './styles.module.css';
+import useSocket from '@src/hooks/useSocket';
 
 export const WritePage: FC = () => {
-  const { searchWrite } = useSelector((state: RootState) => state.game);
+  const { searchWrite, isReady } = useSelector((state: RootState) => state.game);
+  const { self } = useSelector((state: RootState) => state.lobby);
   const dispatch = useDispatch();
-
-  const [textButton, setTextButton] = useState(ButtonText.ready);
+  const { sendWord } = useSocket();
 
   const changeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearchWrite(event.target.value));
   };
 
-  const clickButton = () => {
-    textButton === ButtonText.ready ? setTextButton(ButtonText.change) : setTextButton(ButtonText.ready);
+  const onClickHandler = () => {
+    dispatch(setIsReady(!isReady));
+    if (isReady) sendWord({ word: searchWrite, writerId: self.userId });
   };
 
   return (
@@ -29,15 +31,19 @@ export const WritePage: FC = () => {
       <section className={styles.container}>
         <GameProgress currentStage={1} totalStages={3} />
         <Phone />
-        <h3 className={styles.title}>Write a sentence</h3>
+        <h3 className={styles.title}>{isReady ? 'Waiting for other players' : 'Write a sentence'}</h3>
         <div className={styles.row}>
           <Input
             placeholder={InputPlaceholders.sentence}
-            disabled={textButton === ButtonText.change}
+            disabled={isReady}
             value={searchWrite}
-            onChange={(event) => changeSearch(event)}
+            onChange={changeSearch}
           />
-          <Button text={textButton} onClick={clickButton} />
+          <Button
+            text={isReady ? ButtonText.change : ButtonText.ready}
+            onClick={onClickHandler}
+            disabled={!searchWrite}
+          />
         </div>
       </section>
     </ContentBorder>

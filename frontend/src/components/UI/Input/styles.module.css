@@ -21,3 +21,9 @@
   color: var(--primary_dark);
   text-align: center;
 }
+
+.input:disabled {
+  cursor: not-allowed;
+  color: var(--primary_light_opacity);
+  background-color: var(--primary_light_opacity);
+}

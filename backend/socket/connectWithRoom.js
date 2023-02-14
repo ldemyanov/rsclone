@@ -92,7 +92,7 @@ async function connectWithRoom(socket) {
       newGame.save();
 
       socket.emit("ROOM:START_GAME", newGame);
-      socket.to(gameId).emit("ROOM:START_GAME", newGame);
+      socket.to(roomId).emit("ROOM:START_GAME", newGame);
     }
   })
 

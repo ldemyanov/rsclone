@@ -20,5 +20,7 @@ const db = {};
 db.mongoose = mongoose;
 db.room = require("./models/Room")(mongoose);
 db.user = require("./models/User")(mongoose);
+db.game = require("./models/Game")(mongoose);
+db.gameWord = require("./models/GameWord")(mongoose);
 
 module.exports = db;

@@ -5,10 +5,10 @@ import { setTool } from '@src/redux/reducers/toolReducer';
 import { drawToolsArray } from '@src/constants/Draw';
 import { DrawToolButton } from '@components/UI/DrawToolButton';
 import { undo, redo } from '@src/redux/reducers/canvasReducer';
-
-import styles from './styles.module.css';
 import { UndoSVG } from '@components/SVG/Undo';
 import { RedoSVG } from '@components/SVG/Redo';
+
+import styles from './styles.module.css';
 
 export const DrawTools: FC = () => {
   const dispatch = useDispatch();

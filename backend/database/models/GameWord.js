@@ -10,6 +10,6 @@ module.exports = mongoose => {
     }
   );
   
-  const GameWord = mongoose.model('rooms', gameWordSchema);
+  const GameWord = mongoose.model('words', gameWordSchema);
   return GameWord;
 };

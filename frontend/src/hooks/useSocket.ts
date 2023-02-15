@@ -13,11 +13,13 @@ let socket: null | Socket = null;
 export interface IWord {
   word: string;
   writerId: string;
+  isWriterReady?: boolean;
   img?: string;
   painterId?: string;
+  isPainterReady?: boolean;
   response?: string;
   responserId?: string;
-  isWriterReady: boolean;
+  isResponserReady?: boolean;
 }
 
 // TODO remove or rename and move to types
@@ -70,6 +72,22 @@ export default function useSocket() {
       socket.on('ROOM:SEND_ONE_WORD', (wordObj: IWord) => {
         console.log('SEND_ONE_WORD', wordObj)
       });
+
+      socket.on('ROOM:SEND_ONE_PICTURE', (wordObj: IWord) => {
+        console.log('SEND_ONE_PICTURE', wordObj)
+      });
+
+      socket.on('ROOM:SEND_PICTURES', (wordObj: IGame) => {
+        console.log('SEND_PICTURES', wordObj)
+      });
+
+      socket.on('ROOM:SEND_ONE_RESULT', (wordObj: IWord) => {
+        console.log('SEND_ONE_RESULT', wordObj)
+      });
+
+      socket.on('ROOM:SEND_RESULTS', (wordObj: IGame) => {
+        console.log('SEND_RESULTS', wordObj)
+      });
     },
 
     excludeUser: (userId: string) => {
@@ -95,5 +113,17 @@ export default function useSocket() {
         socket.emit('USER:SEND_WORD', wordObj);
       }
     },
+
+    sendImage: (wordObj: IWord) => {
+      if (socket) {
+        socket.emit('USER:SEND_PICTURE', wordObj);
+      }
+    },
+
+    sendResult: (wordObj: IWord) => {
+      if (socket) {
+        socket.emit('USER:SEND_RESPONSE', wordObj);
+      }
+    }
   };
 }

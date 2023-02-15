@@ -97,12 +97,11 @@ async function connectWithRoom(socket) {
     }
   })
 
-  socket.on('USER:SEND_WORD', async (wordObj) => {
+  socket.on('USER:SEND_WORD', async (payload) => {
 
-    const { word, writerId, isWriterReady } = wordObj;
-
+    const { word, writerId, isWriterReady } = payload;
     const game = await db.game.findOne({ roomId: roomId }).exec();
-    let currentWord;
+    let current;
 
     for (let i = 0; i < game.words.length; i++) {
       if (game.words[i].writerId === writerId) {
@@ -110,13 +109,14 @@ async function connectWithRoom(socket) {
         game.words[i].word = word;
         // TODO game.words[i].painterId = RANDOM ALGORITM
         game.words[i].painterId = game.words.at(i-1).writerId;
-        currentWord = game.words[i];
+        current = game.words[i];
+        break;
       }
     }
 
     await game.save();
 
-    let isFull = game.words.every((el) => el.isWriterReady);
+    const isFull = game.words.every((el) => el.isWriterReady);
 
     if (isFull) {
       game.gameStage = 'draw';
@@ -124,10 +124,77 @@ async function connectWithRoom(socket) {
       socket.emit("ROOM:SEND_WORDS", game);
       socket.to(gameId).emit("ROOM:SEND_WORDS", game);
     } else {
-      socket.emit("ROOM:SEND_ONE_WORD", currentWord)
-      socket.to(gameId).emit("ROOM:SEND_ONE_WORD", currentWord);
+      socket.emit("ROOM:SEND_ONE_WORD", current)
+      socket.to(gameId).emit("ROOM:SEND_ONE_WORD", current);
     }
   });
+
+  socket.on('USER:SEND_PICTURE', async (payload) => {
+
+    const { img, word, isPainterReady, painterId } = payload;
+    const game = await db.game.findOne({ roomId: roomId }).exec();
+    let current;
+
+    // Сохранение в общуюю базу;
+    db.gameWord.create({word, img});
+
+    for (let i = 0; i < game.words.length; i++) {
+      if (game.words[i].painterId === painterId) {
+        game.words[i].img = img;
+        // TODO REMOVE OLD IMAGE
+        game.words[i].isPainterReady = isPainterReady;
+        // TODO game.words[i].responserId = RANDOM ALGORITM
+        game.words[i].responserId = game.words.at(i-1).writerId;
+        current = game.words[i];
+        break;
+      }
+    }
+
+    await game.save();
+
+    const isFull = game.words.every((el) => el.isPainterReady);
+
+    if (isFull) {
+      game.gameStage = 'guess';
+      await game.save();
+      socket.emit("ROOM:SEND_PICTURES", game);
+      socket.to(gameId).emit("ROOM:SEND_PICTURES", game);
+    } else {
+      socket.emit("ROOM:SEND_ONE_PICTURE", current)
+      socket.to(gameId).emit("ROOM:SEND_ONE_PICTURE", current);
+    }
+
+  });
+
+  socket.on('USER:SEND_RESPONSE', async (payload) => {
+
+    const { response, responserId, isResponserReady } = payload;
+    const game = await db.game.findOne({ roomId: roomId }).exec();
+    let current;
+
+    for (let i = 0; i < game.words.length; i++) {
+      if (game.words[i].responserId === responserId) {
+        game.words[i].response = response;
+        game.words[i].isResponserReady = isResponserReady;
+        current = game.words[i];
+        break;
+      }
+    }
+
+    await game.save();
+
+    const isFull = game.words.every((el) => el.isResponserReady);
+
+    if (isFull) {
+      game.gameStage = 'guess';
+      await game.save();
+      socket.emit("ROOM:SEND_RESULTS", game);
+      socket.to(gameId).emit("ROOM:SEND_RESULTS", game);
+    } else {
+      socket.emit("ROOM:SEND_ONE_RESULT", current)
+      socket.to(gameId).emit("ROOM:SEND_ONE_RESULT", current);
+    }
+  })
 }
 
 module.exports = connectWithRoom;

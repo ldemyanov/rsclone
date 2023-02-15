@@ -8,11 +8,13 @@ module.exports = mongoose => {
         {
           word: String,
           writerId: String,
+          isWriterReady: Boolean,
           img: String,
           painterId: String,
-          isWriterReady: Boolean,
+          isPainterReady: Boolean,
           response: String,
           responserId: String,
+          isResponserReady: Boolean,
         }
       ]
     }

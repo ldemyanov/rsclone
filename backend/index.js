@@ -38,7 +38,7 @@ const io = new Server(server, {
 // Connect with bd
 db.mongoose.connect(MONGODB_URI, { dbName: "raccon-phone" });
 
-// Connect with socket 
+// Connect with socket
 io.on('connection', (socket) => connectWithRoom(socket));
 
 // Listen to port

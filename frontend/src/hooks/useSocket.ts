@@ -65,6 +65,10 @@ export default function useSocket() {
         dispatch(setGameStage(gameObj.gameStage));
         dispatch(setWords(gameObj.words));
       });
+
+      socket.on('ROOM:SEND_ONE_WORD', (wordObj: IWord) => {
+        console.log('SEND_ONE_WORD', wordObj)
+      });
     },
 
     excludeUser: (userId: string) => {

@@ -35,7 +35,7 @@ export const lobbySlice = createSlice({
     setStatusPlayer: (state, action: PayloadAction<{ userId: string; status: string }>) => {
       const indexPlayer = state.players.findIndex((elem) => elem.userId === action.payload.userId);
       state.players[indexPlayer].status = action.payload.status;
-      state.self.status = action.payload.status;
+      if (state.self.userId === action.payload.userId) state.self.status = action.payload.status;
     },
   },
 });

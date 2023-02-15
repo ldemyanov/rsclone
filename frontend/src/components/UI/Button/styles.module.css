@@ -23,6 +23,7 @@
 }
 
 .button:disabled {
-  cursor: default;
-  color: var(--primary_light);
+  cursor: not-allowed;
+  color: var(--primary_light_opacity);
+  background-color: var(--primary_light_opacity);
 }

@@ -9,11 +9,13 @@ import useSocket from '@src/hooks/useSocket';
 
 export const FooterGameMode: FC = () => {
   const [LoginPage]: IRoute[] = routes;
-  const { roomID } = useSelector((state: RootState) => state.lobby);
-  const { self } = useSelector((state: RootState) => state.lobby);
+  const { roomID, self } = useSelector((state: RootState) => state.lobby);
 
-  const { setStatus } = useSocket();
-  const onClickHandler = () => {
+  const { setStatus, startGame } = useSocket();
+  const startGameOnClickHandler = () => {
+    startGame({ isGameStarted: true });
+  };
+  const readyOnClickHandler = () => {
     setStatus(self.status === 'active' ? 'empty' : 'active');
   };
 
@@ -32,9 +34,9 @@ export const FooterGameMode: FC = () => {
     <footer className={styles.wrapper}>
       <Button text={copy ? ButtonText.copy : ButtonText.invite} onClick={copyLink} />
       {self.main ? (
-        <Button text={ButtonText.begin} onClick={() => null} />
+        <Button text={ButtonText.begin} onClick={startGameOnClickHandler} />
       ) : (
-        <Button text={self.status === 'active' ? ButtonText.unready : ButtonText.ready} onClick={onClickHandler} />
+        <Button text={self.status === 'active' ? ButtonText.unready : ButtonText.ready} onClick={readyOnClickHandler} />
       )}
     </footer>
   );

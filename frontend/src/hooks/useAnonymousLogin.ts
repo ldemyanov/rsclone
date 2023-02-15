@@ -4,13 +4,16 @@ import { setPlayers, setRoomID, setSelfData } from '@src/redux/reducers/lobbyRed
 import { RootState } from '@src/redux/store';
 import { useAppSelector, useAppDispatch } from '@src/redux/store';
 import { IPlayer } from '@src/types';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import { routes } from '@src/routes';
 
 export const useAnonymousLogin = () => {
   const [searchParams] = useSearchParams();
   const { connect } = useSocket();
   const { name, icon } = useAppSelector((state: RootState) => state.auth);
   const dispatch = useAppDispatch();
+  const [, LobbyPage] = routes;
+  const navigate = useNavigate();
 
   const login = async () => {
     if (name) {
@@ -27,6 +30,7 @@ export const useAnonymousLogin = () => {
       if (self) {
         dispatch(setSelfData(self));
         connect(res.roomId, self.userId);
+        navigate(LobbyPage.path);
       } else {
         // Are Maybe to throw error?
       }

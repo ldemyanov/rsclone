@@ -9,6 +9,9 @@ async function connectWithRoom(socket) {
 
   let room = await db.room.findOne({ roomId: roomId }).exec();
   let user = room.users.find((user) => user.userId === userId);
+  if (user.status === "active") {
+    socket.join(gameId);
+  }
 
   socket.to(roomId).emit('ROOM:JOIN', user);
 
@@ -96,13 +99,14 @@ async function connectWithRoom(socket) {
 
   socket.on('USER:SEND_WORD', async (wordObj) => {
 
-    const { word, writerId } = wordObj;
+    const { word, writerId, isWriterReady } = wordObj;
 
     const game = await db.game.findOne({ roomId: roomId }).exec();
     let currentWord;
 
     for (let i = 0; i < game.words.length; i++) {
       if (game.words[i].writerId === writerId) {
+        game.words[i].isWriterReady = isWriterReady;
         game.words[i].word = word;
         // TODO game.words[i].painterId = RANDOM ALGORITM
         game.words[i].painterId = game.words.at(i-1).writerId;
@@ -112,7 +116,7 @@ async function connectWithRoom(socket) {
 
     await game.save();
 
-    let isFull = game.words.every((el) => el.word && el.painterId);
+    let isFull = game.words.every((el) => el.isWriterReady);
 
     if (isFull) {
       game.gameStage = 'draw';

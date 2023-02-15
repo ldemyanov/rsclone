@@ -17,6 +17,7 @@ export interface IWord {
   painterId?: string;
   response?: string;
   responserId?: string;
+  isWriterReady: boolean;
 }
 
 // TODO remove or rename and move to types

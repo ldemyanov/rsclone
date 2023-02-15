@@ -12,11 +12,10 @@
   width: 50%;
   border: 2px solid var(--primary_light);
   transition: 0.5s;
-  cursor: pointer;
 }
 
-.container:hover {
-  border: 2px solid var(--primary_dark);
+.container:not([disabled]) {
+  color: var(--primary_dark);
 }
 
 .container.active {

@@ -18,6 +18,12 @@
   transition: 0.5s;
 }
 
-.button:hover {
+.button:not([disabled]):hover {
   background-color: var(--primary_dark_opacity);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  color: var(--primary_light_opacity);
+  background-color: var(--primary_light_opacity);
 }

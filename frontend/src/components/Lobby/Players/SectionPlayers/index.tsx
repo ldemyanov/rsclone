@@ -3,13 +3,10 @@ import { RootState } from '@src/redux/store';
 import { useSelector } from 'react-redux';
 import Crown from '@assets/images/crown.png';
 import { KickButton } from '@components/UI/KickButton';
-// import useSocket from '@src/hooks/useSocket';
 import styles from './styles.module.css';
 
 export const SectionPlayers: FC = () => {
-  const { players, selfID, isMain } = useSelector((state: RootState) => state.lobby);
-
-  // const { setStatus } = useSocket();
+  const { players, self } = useSelector((state: RootState) => state.lobby);
 
   return (
     <section className={styles.wrapper}>
@@ -31,14 +28,7 @@ export const SectionPlayers: FC = () => {
                 <img src={Crown} alt="crown" />
               </div>
             )}
-            {isMain && selfID !== elem.userId && <KickButton userId={elem.userId} />}
-            {/* <button
-              onClick={() => {
-                console.log('ready click');
-                setStatus('active');
-              }}>
-              Ready
-            </button> */}
+            {self.main && self.userId !== elem.userId && <KickButton userId={elem.userId} />}
           </div>
         );
       })}

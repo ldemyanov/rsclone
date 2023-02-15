@@ -1,13 +1,14 @@
 import { FC, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@src/redux/store';
 import { ContentBorder } from '@components/UI/ContentBorder';
 import { Tablet, TabletTitles } from '@components/Draw/Tablet';
 import { Input, InputPlaceholders } from '@components/UI/Input';
 import { Button, ButtonText } from '@components/UI/Button';
+import { setSearchGuess } from '@src/redux/reducers/gameReducer';
+import { GameProgress } from '@components/UI/GameInfo';
 
 import styles from './styles.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@src/redux/store';
-import { setSearchGuess } from '@src/redux/reducers/gameReducer';
 
 export const GuessPage: FC = () => {
   const { searchGuess } = useSelector((state: RootState) => state.game);
@@ -25,6 +26,7 @@ export const GuessPage: FC = () => {
 
   return (
     <ContentBorder>
+      <GameProgress currentStage={1} totalStages={3} readyPlayers={2} totalPlayers={3} />
       <div className={styles.container}>
         <Tablet title={TabletTitles.guess} />
         <div className={styles.row}>

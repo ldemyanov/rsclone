@@ -1,6 +1,7 @@
 @import '@style/colors';
 
 .border {
+  position: relative;
   flex-grow: 1;
   max-height: 900px;
   padding: 40px;

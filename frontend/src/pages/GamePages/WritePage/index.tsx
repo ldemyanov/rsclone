@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { ContentBorder } from '@components/UI/ContentBorder';
-import { GameProgress } from '@components/UI/GameProgress';
+import { GameProgress } from '@components/UI/GameInfo';
 import { Phone } from '@components/SVG/Phone';
 import { Input, InputPlaceholders } from '@components/UI/Input';
 import { Button, ButtonText } from '@components/UI/Button';
@@ -29,7 +29,7 @@ export const WritePage: FC = () => {
   return (
     <ContentBorder>
       <section className={styles.container}>
-        <GameProgress currentStage={1} totalStages={3} />
+        <GameProgress currentStage={1} totalStages={3} readyPlayers={0} totalPlayers={3} />
         <Phone />
         <h3 className={styles.title}>{isReady ? 'Waiting for other players' : 'Write a sentence'}</h3>
         <div className={styles.row}>

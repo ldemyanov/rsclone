@@ -17,6 +17,7 @@ export interface IWord {
   painterId?: string;
   response?: string;
   responserId?: string;
+  isWriterReady: boolean;
 }
 
 // TODO remove or rename and move to types
@@ -64,6 +65,10 @@ export default function useSocket() {
         console.log('SEND_WORDS: ', gameObj);
         dispatch(setGameStage(gameObj.gameStage));
         dispatch(setWords(gameObj.words));
+      });
+
+      socket.on('ROOM:SEND_ONE_WORD', (wordObj: IWord) => {
+        console.log('SEND_ONE_WORD', wordObj)
       });
     },
 

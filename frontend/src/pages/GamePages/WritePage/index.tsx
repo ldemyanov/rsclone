@@ -22,8 +22,9 @@ export const WritePage: FC = () => {
   };
 
   const onClickHandler = () => {
-    dispatch(setIsReady(!isReady));
-    if (isReady) sendWord({ word: searchWrite, writerId: self.userId });
+    // dispatch(setIsReady(!isReady));
+    // if (isReady) sendWord({ word: searchWrite, writerId: self.userId });
+    sendWord({ word: searchWrite, writerId: self.userId, isWriterReady: false });
   };
 
   return (

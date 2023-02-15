@@ -20,3 +20,18 @@ export const getRoom: GetRoom = async (name, icon, roomId) => {
 
   return await response.json();
 };
+
+type PostCanvas = (canvas: HTMLCanvasElement) => Promise<{ url: string }>
+export const postCanvas: PostCanvas = async (canvas) => {
+
+  const blob = await new Promise(resolve => canvas.toBlob(resolve));
+  const formData = new FormData();
+  formData.append("image", blob as Blob);
+
+  const response = await fetch(`${API_URL}/upload`, {
+    method: "POST",
+    body: formData,
+  })
+
+  return await response.json();
+};

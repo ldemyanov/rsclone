@@ -1,13 +1,12 @@
-import { RootState } from '@src/redux/store';
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@src/redux/store';
 import { setStrokeStyle } from '@src/redux/reducers/toolReducer';
 
 import styles from './styles.module.css';
 
 export const Pallete: FC = () => {
-  const dispatch = useDispatch();
-  const { colors, currentColor } = useSelector((state: RootState) => state.tool);
+  const dispatch = useAppDispatch();
+  const { colors, currentColor } = useAppSelector((state) => state.tool);
 
   const inputColorChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value);

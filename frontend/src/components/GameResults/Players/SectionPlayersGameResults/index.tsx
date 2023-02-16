@@ -1,11 +1,10 @@
 import { FC } from 'react';
-import { RootState } from '@src/redux/store';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '@src/redux/store';
 import Crown from '@assets/images/crown.png';
 import styles from './styles.module.css';
 
 export const SectionPlayersGameResults: FC = () => {
-  const { players } = useSelector((state: RootState) => state.lobby);
+  const { players } = useAppSelector((state) => state.lobby);
 
   return (
     <section className={styles.wrapper}>

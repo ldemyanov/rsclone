@@ -1,12 +1,11 @@
 import { FC, useEffect, useRef } from 'react';
 import { TCanvasElement } from '@src/types';
-import { useDispatch, useSelector } from 'react-redux';
 import { pushToUndo, setCanvas } from '@src/redux/reducers/canvasReducer';
 import { setLineWidth, setOpacity, setStrokeStyle, setTool } from '@src/redux/reducers/toolReducer';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '@src/constants/Draw';
 import TabletRings from '@assets/images/tabletRings.png';
 import Pencil from '@src/tools/Pencil';
-import { RootState } from '@src/redux/store';
+import { useAppDispatch, useAppSelector } from '@src/redux/store';
 import Pipette from '@src/tools/Pipette';
 
 import styles from './styles.module.css';
@@ -22,9 +21,9 @@ interface TabletProps {
 }
 
 export const Tablet: FC<TabletProps> = ({ title }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const canvasRef = useRef<TCanvasElement>(null);
-  const { tool, currentTrikness } = useSelector((state: RootState) => state.tool);
+  const { tool, currentTrikness } = useAppSelector((state) => state.tool);
   const cursorStyle = getCursorStyle(styles, currentTrikness, tool);
   const canvasStyles = [styles.canvas, cursorStyle].join(' ');
 

@@ -1,5 +1,4 @@
 import { FC, useState, useEffect } from 'react';
-// import { useAppSelector } from '@src/redux/store';
 import ready from '@assets/images/ready.png';
 import styles from './styles.module.css';
 

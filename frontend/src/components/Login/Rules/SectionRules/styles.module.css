@@ -8,6 +8,13 @@
   gap: 10px;
 }
 
+.image_rules {
+  max-height: 260px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .name_rules {
   color: var(--primary_light);
   font-weight: 700;

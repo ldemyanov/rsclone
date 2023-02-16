@@ -1,6 +1,5 @@
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@src/redux/store';
+import { useAppDispatch, useAppSelector } from '@src/redux/store';
 import { setTool } from '@src/redux/reducers/toolReducer';
 import { drawToolsArray } from '@src/constants/Draw';
 import { DrawToolButton } from '@components/UI/DrawToolButton';
@@ -11,8 +10,8 @@ import { RedoSVG } from '@components/SVG/Redo';
 import styles from './styles.module.css';
 
 export const DrawTools: FC = () => {
-  const dispatch = useDispatch();
-  const { canvas, undoArr, redoArr } = useSelector((state: RootState) => state.canvas);
+  const dispatch = useAppDispatch();
+  const { canvas, undoArr, redoArr } = useAppSelector((state) => state.canvas);
 
   const undoClickHandler = () => {
     if (canvas && undoArr.length) {

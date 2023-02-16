@@ -1,10 +1,9 @@
-import { RootState } from '@src/redux/store';
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '@src/redux/store';
 import styles from './styles.module.css';
 
 export const HeaderPlayers: FC = () => {
-  const { players } = useSelector((state: RootState) => state.lobby);
+  const { players } = useAppSelector((state) => state.lobby);
 
   return (
     <header>

@@ -1,6 +1,6 @@
+import { FC } from 'react';
 import { GameModes } from '@src/constants/GameMode';
 import { useAppSelector } from '@src/redux/store';
-import { FC } from 'react';
 import { ContainerGameMode } from '../ContainerGameMode';
 import styles from './styles.module.css';
 

@@ -1,6 +1,5 @@
-import { imagesRules, namesRules, textsRules } from '@src/constants/Rules';
-
 import { FC } from 'react';
+import { imagesRules, namesRules, textsRules } from '@src/constants/Rules';
 
 import styles from './styles.module.css';
 

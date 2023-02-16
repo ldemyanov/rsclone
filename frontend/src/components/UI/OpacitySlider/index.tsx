@@ -1,6 +1,5 @@
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@src/redux/store';
+import { useAppDispatch, useAppSelector } from '@src/redux/store';
 import { setOpacity } from '@src/redux/reducers/toolReducer';
 import getDecimalFromHex from '@src/helpers/getDecimalFromHex';
 import getHexFromDecimal from '@src/helpers/getHexFromDecimal';
@@ -8,8 +7,8 @@ import getHexFromDecimal from '@src/helpers/getHexFromDecimal';
 import styles from './styles.module.css';
 
 export const OpacitySlider: FC = () => {
-  const dispatch = useDispatch();
-  const { opacity } = useSelector((state: RootState) => state.tool);
+  const dispatch = useAppDispatch();
+  const { opacity } = useAppSelector((state) => state.tool);
   const opacityChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setOpacity(getHexFromDecimal(Number(event.target.value))));
   };

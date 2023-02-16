@@ -41,10 +41,14 @@ export const gameSlice = createSlice({
     setWords: (state, action: PayloadAction<IWord[]>) => {
       state.game.words = action.payload;
     },
+    setGameWord: (state, action: PayloadAction<IWord>) => {
+      const index = state.game.words.findIndex((elem) => elem.writerId === action.payload.writerId);
+      state.game.words[index] = action.payload;
+    },
   },
 });
 
-export const { setSearchGuess, setSearchWrite, setIsReady, setIsGameStarted, setGameStage, setWords } =
+export const { setSearchGuess, setSearchWrite, setIsReady, setIsGameStarted, setGameStage, setWords, setGameWord } =
   gameSlice.actions;
 
 export default gameSlice.reducer;

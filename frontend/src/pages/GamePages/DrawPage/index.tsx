@@ -7,12 +7,20 @@ import { DrawTools } from '@components/Draw/DrawTools';
 import { BottomPanel } from '@components/Draw/BottomPanel';
 
 import styles from './styles.module.css';
+import { useAppSelector } from '@src/redux/store';
 
 export const DrawPage: FC = () => {
+  const { game } = useAppSelector((state) => state.game);
+
   return (
     <ContentBorder>
       <section className={styles.container}>
-        <GameProgress currentStage={1} totalStages={3} readyPlayers={1} totalPlayers={3} />
+        <GameProgress
+          currentStage={1}
+          totalStages={3}
+          readyPlayers={game.words.filter((el) => el.isPainterReady === true).length}
+          totalPlayers={game.words.length}
+        />
         <Pallete />
         <div className={styles.column}>
           <Tablet title={TabletTitles.draw} />

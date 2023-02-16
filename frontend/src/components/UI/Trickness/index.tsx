@@ -1,13 +1,12 @@
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@src/redux/store';
+import { useAppDispatch, useAppSelector } from '@src/redux/store';
 import { setLineWidth } from '@src/redux/reducers/toolReducer';
 
 import styles from './styles.module.css';
 
 export const Trikness: FC = () => {
-  const dispatch = useDispatch();
-  const { triknesses, currentTrikness } = useSelector((state: RootState) => state.tool);
+  const dispatch = useAppDispatch();
+  const { triknesses, currentTrikness } = useAppSelector((state) => state.tool);
 
   return (
     <div className={styles.wrapper}>

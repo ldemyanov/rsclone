@@ -2,7 +2,7 @@ import io, { Socket } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@src/redux/store';
 import { setPlayer, removePlayer, setStatusPlayer } from '@src/redux/reducers/lobbyReducer';
-import { setIsGameStarted, setGameStage, setWords } from '@src/redux/reducers/gameReducer';
+import { setIsGameStarted, setGameStage, setWords, setGameWord } from '@src/redux/reducers/gameReducer';
 import { API_URL } from '../api';
 import { IPlayer } from '@src/types';
 import { routes } from '@src/routes';
@@ -67,26 +67,29 @@ export default function useSocket() {
         console.log('SEND_WORDS: ', gameObj);
         dispatch(setGameStage(gameObj.gameStage));
         dispatch(setWords(gameObj.words));
+        setTimeout(() => navigate(DrawPage.path), 500);
       });
 
       socket.on('ROOM:SEND_ONE_WORD', (wordObj: IWord) => {
-        console.log('SEND_ONE_WORD', wordObj)
+        console.log('SEND_ONE_WORD', wordObj);
+        dispatch(setGameWord(wordObj));
       });
 
       socket.on('ROOM:SEND_ONE_PICTURE', (wordObj: IWord) => {
-        console.log('SEND_ONE_PICTURE', wordObj)
+        console.log('SEND_ONE_PICTURE', wordObj);
       });
 
       socket.on('ROOM:SEND_PICTURES', (wordObj: IGame) => {
-        console.log('SEND_PICTURES', wordObj)
+        console.log('SEND_PICTURES', wordObj);
+        setTimeout(() => navigate(GuessPage.path), 500);
       });
 
       socket.on('ROOM:SEND_ONE_RESULT', (wordObj: IWord) => {
-        console.log('SEND_ONE_RESULT', wordObj)
+        console.log('SEND_ONE_RESULT', wordObj);
       });
 
       socket.on('ROOM:SEND_RESULTS', (wordObj: IGame) => {
-        console.log('SEND_RESULTS', wordObj)
+        console.log('SEND_RESULTS', wordObj);
       });
     },
 
@@ -124,6 +127,6 @@ export default function useSocket() {
       if (socket) {
         socket.emit('USER:SEND_RESPONSE', wordObj);
       }
-    }
+    },
   };
 }

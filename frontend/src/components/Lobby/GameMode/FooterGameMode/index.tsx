@@ -3,13 +3,12 @@ import { Button, ButtonText } from '@components/UI/Button';
 import styles from './styles.module.css';
 import { IRoute } from '@src/types';
 import { routes } from '@src/routes';
-import { useSelector } from 'react-redux';
-import { RootState } from '@src/redux/store';
+import { useAppSelector } from '@src/redux/store';
 import useSocket from '@src/hooks/useSocket';
 
 export const FooterGameMode: FC = () => {
   const [LoginPage]: IRoute[] = routes;
-  const { roomID, self } = useSelector((state: RootState) => state.lobby);
+  const { players, roomID, self } = useAppSelector((state) => state.lobby);
 
   const { setStatus, startGame } = useSocket();
   const startGameOnClickHandler = () => {
@@ -34,7 +33,11 @@ export const FooterGameMode: FC = () => {
     <footer className={styles.wrapper}>
       <Button text={copy ? ButtonText.copy : ButtonText.invite} onClick={copyLink} />
       {self.main ? (
-        <Button text={ButtonText.begin} onClick={startGameOnClickHandler} />
+        <Button
+          text={ButtonText.begin}
+          disabled={players.length === 1 ? false : !players.every((player) => player.status === 'active')}
+          onClick={startGameOnClickHandler}
+        />
       ) : (
         <Button text={self.status === 'active' ? ButtonText.unready : ButtonText.ready} onClick={readyOnClickHandler} />
       )}

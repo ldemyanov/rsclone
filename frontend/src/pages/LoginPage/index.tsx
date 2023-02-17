@@ -6,11 +6,26 @@ import { HeaderRules } from '@components/Login/Rules/HeaderRules';
 import { SectionRules } from '@components/Login/Rules/SectionRules';
 import { Container } from '@components/UI/Container';
 import { ContentBorder } from '@components/UI/ContentBorder';
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import styles from './style.module.css';
 
 export const LoginPage: FC = () => {
   const [activeButtonRules, setActiveButtonRules] = useState(1);
+
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      if (activeButtonRules === 5) {
+        setActiveButtonRules(1);
+      } else {
+        setActiveButtonRules(activeButtonRules + 1);
+      }
+    }, 4000);
+
+    return () => {
+      clearTimeout(delay);
+    };
+  }, [activeButtonRules]);
+
   return (
     <ContentBorder>
       <div className={styles.layout}>

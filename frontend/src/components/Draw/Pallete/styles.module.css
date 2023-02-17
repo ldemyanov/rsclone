@@ -15,6 +15,20 @@
   border: 1px solid var(--primary_light);
   border-radius: 0.3em;
   cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+.colorButton:hover {
+  border: 1px solid var(--accent_orange);
+}
+
+.colorButton:active {
+  border: 1px solid var(--primary_dark);
+}
+
+.colorButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
 .colorLabel {
@@ -31,6 +45,12 @@
   cursor: pointer;
   background: none;
   overflow: hidden;
+  transition: all 300ms ease-in-out;
+}
+
+.colorInput:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
 .colorInput::-webkit-color-swatch-wrapper {

@@ -13,17 +13,17 @@ export const BottomPanel: FC = () => {
   const { sendImage } = useSocket();
   const dispatch = useAppDispatch();
   const { canvas } = useAppSelector((state) => state.canvas);
-  const { isReady } = useAppSelector((state) => state.game);
+  const { isReady, game } = useAppSelector((state) => state.game);
+  const { self } = useAppSelector((state) => state.lobby);
 
   const onClickHandler = async () => {
-    if (canvas) {
-      // console.log(canvas.toDataURL());
-      // const data = JSON.stringify(canvas)
-      console.log(await postCanvas(canvas));
-    }
-    // sendImage({ img: '', isPainterReady: isReady });
+    const png = await postCanvas(canvas!);
+    // const url = `${window.location.hostname}:${location.port}/img/${png.url}`;
+    const words = game.words.filter((el) => el.painterId === self.userId);
+    sendImage({ word: words[0].word, painterId: self.userId, img: png.url, isPainterReady: isReady });
     dispatch(setIsReady(!isReady));
   };
+
   return (
     <div className={styles.wrapper}>
       <Trikness />

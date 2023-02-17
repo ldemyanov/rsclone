@@ -90,10 +90,13 @@ export default function useSocket() {
 
       socket.on('ROOM:SEND_ONE_PICTURE', (wordObj: IWord) => {
         console.log('SEND_ONE_PICTURE', wordObj);
+        dispatch(setGameWord(wordObj));
       });
 
       socket.on('ROOM:SEND_PICTURES', (wordObj: IGame) => {
         console.log('SEND_PICTURES', wordObj);
+        dispatch(setGameStage(wordObj.gameStage));
+        dispatch(setWords(wordObj.words));
         setTimeout(() => navigate(GuessPage.path), 500);
       });
 

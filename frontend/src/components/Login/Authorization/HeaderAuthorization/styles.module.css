@@ -1,21 +1,5 @@
 @import '@style/colors';
 
-.listAuthorizations {
-  display: flex;
-  justify-content: space-around;
-  gap: 2em;
-  font-family: 'Carter One', cursive;
-  font-size: 1.7em;
-  color: var(--primary_dark_inactive);
-  text-shadow: var(--border_text);
-}
-
-li {
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-.active,
-li:hover {
-  color: var(--accent_orange);
+.header {
+  text-transform: uppercase;
 }

@@ -4,11 +4,10 @@ import { setPlayers, setRoomID, setSelfData } from '@src/redux/reducers/lobbyRed
 import { RootState } from '@src/redux/store';
 import { useAppSelector, useAppDispatch } from '@src/redux/store';
 import { IPlayer } from '@src/types';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { routes } from '@src/routes';
 
-export const useAnonymousLogin = () => {
-  const [searchParams] = useSearchParams();
+export const useAnonymousLogin = (roomId: string) => {
   const { connect } = useSocket();
   const { name, icon } = useAppSelector((state: RootState) => state.auth);
   const dispatch = useAppDispatch();
@@ -19,7 +18,6 @@ export const useAnonymousLogin = () => {
     if (name) {
       // Need to do validation name
 
-      const roomId = searchParams.get('roomId') ?? '';
       const res = await getRoom(name, icon, roomId);
 
       dispatch(setPlayers(res.users));

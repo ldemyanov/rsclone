@@ -35,6 +35,13 @@ export interface IResult {
   isResponserReady: boolean;
 }
 
+export interface ISoloGame {
+  images: Array<{
+    url: string;
+    word: string;
+  }>
+}
+
 // TODO remove or rename and move to types
 export interface IGame {
   roomId: string;
@@ -66,6 +73,10 @@ export default function useSocket() {
       socket.on('ROOM:STATUS', (obj) => {
         console.log(obj);
         dispatch(setStatusPlayer(obj));
+      });
+
+      socket.on('ROOM:START_SOLO_GAME', (gameObj: ISoloGame) => {
+        console.log('ROOM:START_SOLO_GAME: ', gameObj);
       });
 
       socket.on('ROOM:START_GAME', (gameObj: IGame) => {

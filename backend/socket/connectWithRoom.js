@@ -84,6 +84,12 @@ async function connectWithRoom(socket) {
         writerId: user.userId,
       }));
 
+      if (words.length < 2) {
+        let images = await db.gameWord.find();
+        socket.emit("ROOM:START_SOLO_GAME", images.slice(0, 5));
+        return;
+      }
+
       const newGame = new db.game({
         roomId: roomId,
         isGameStarted: true,

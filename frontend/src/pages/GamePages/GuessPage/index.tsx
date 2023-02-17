@@ -25,7 +25,7 @@ export const GuessPage: FC = () => {
 
   return (
     <ContentBorder>
-      <GameProgress currentStage={1} totalStages={3} readyPlayers={0} totalPlayers={3} />
+      <GameProgress currentStage={3} totalStages={3} readyPlayers={0} totalPlayers={3} />
       <div className={styles.container}>
         <Tablet title={TabletTitles.guess} />
         <div className={styles.row}>

@@ -22,6 +22,19 @@ export interface IWord {
   isResponserReady?: boolean;
 }
 
+export interface IPicture {
+  img: string;
+  word: string;
+  painterId: string;
+  isPainterReady: boolean;
+}
+
+export interface IResult {
+  response: string;
+  responserId: string;
+  isResponserReady: boolean;
+}
+
 // TODO remove or rename and move to types
 export interface IGame {
   roomId: string;
@@ -77,10 +90,13 @@ export default function useSocket() {
 
       socket.on('ROOM:SEND_ONE_PICTURE', (wordObj: IWord) => {
         console.log('SEND_ONE_PICTURE', wordObj);
+        dispatch(setGameWord(wordObj));
       });
 
       socket.on('ROOM:SEND_PICTURES', (wordObj: IGame) => {
         console.log('SEND_PICTURES', wordObj);
+        dispatch(setGameStage(wordObj.gameStage));
+        dispatch(setWords(wordObj.words));
         setTimeout(() => navigate(GuessPage.path), 500);
       });
 
@@ -117,13 +133,13 @@ export default function useSocket() {
       }
     },
 
-    sendImage: (wordObj: IWord) => {
+    sendImage: (wordObj: IPicture) => {
       if (socket) {
         socket.emit('USER:SEND_PICTURE', wordObj);
       }
     },
 
-    sendResult: (wordObj: IWord) => {
+    sendResult: (wordObj: IResult) => {
       if (socket) {
         socket.emit('USER:SEND_RESPONSE', wordObj);
       }

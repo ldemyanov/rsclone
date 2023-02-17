@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { ContentBorder } from '@components/UI/ContentBorder';
 import { GameProgress } from '@components/UI/GameInfo';
 import { Pallete } from '@components/Draw/Pallete';
-import { Tablet, TabletTitles } from '@components/Draw/Tablet';
+import { Tablet, TabletTitles } from '@components/Tablet';
 import { DrawTools } from '@components/Draw/DrawTools';
 import { BottomPanel } from '@components/Draw/BottomPanel';
 
@@ -23,7 +23,7 @@ export const DrawPage: FC = () => {
         />
         <Pallete />
         <div className={styles.column}>
-          <Tablet title={TabletTitles.draw} />
+          <Tablet title={TabletTitles.draw} isCanvas={true} />
           <BottomPanel />
         </div>
         <DrawTools />

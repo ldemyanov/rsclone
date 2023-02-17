@@ -16,7 +16,7 @@ export const DrawPage: FC = () => {
     <ContentBorder>
       <section className={styles.container}>
         <GameProgress
-          currentStage={1}
+          currentStage={2}
           totalStages={3}
           readyPlayers={game.words.filter((el) => el.isPainterReady === true).length}
           totalPlayers={game.words.length}

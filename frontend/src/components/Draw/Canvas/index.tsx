@@ -9,7 +9,6 @@ import Pipette from '@src/tools/Pipette';
 import styles from './styles.module.css';
 import getCursorStyle from '@src/helpers/getCursorStyle';
 
-
 export const Canvas: FC = () => {
   const dispatch = useAppDispatch();
   const canvasRef = useRef<TCanvasElement>(null);

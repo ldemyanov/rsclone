@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 export const DrawTools: FC = () => {
   const dispatch = useAppDispatch();
   const { canvas, undoArr, redoArr } = useAppSelector((state) => state.canvas);
+  const { isReady } = useAppSelector((state) => state.game);
 
   const undoClickHandler = () => {
     if (canvas && undoArr.length) {
@@ -45,15 +46,15 @@ export const DrawTools: FC = () => {
       {drawToolsArray.map((DrowTool, index) => {
         const handler = () => dispatch(setTool(new DrowTool.tool(canvas)));
         return (
-          <DrawToolButton key={index} isDisabled={false} handler={handler}>
+          <DrawToolButton key={index} isDisabled={isReady} handler={handler}>
             <DrowTool.toolImg />
           </DrawToolButton>
         );
       })}
-      <DrawToolButton isDisabled={undoArr.length === 0} handler={undoClickHandler}>
+      <DrawToolButton isDisabled={isReady || undoArr.length === 0} handler={undoClickHandler}>
         <UndoSVG />
       </DrawToolButton>
-      <DrawToolButton isDisabled={redoArr.length === 0} handler={redoClickHandler}>
+      <DrawToolButton isDisabled={isReady || redoArr.length === 0} handler={redoClickHandler}>
         <RedoSVG />
       </DrawToolButton>
     </div>

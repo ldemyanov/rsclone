@@ -6,14 +6,21 @@ import getHexFromDecimal from '@src/helpers/getHexFromDecimal';
 
 import styles from './styles.module.css';
 
-export const OpacitySlider: FC = () => {
+interface OpacitySliderProps {
+  isDisabled: boolean;
+}
+
+export const OpacitySlider: FC<OpacitySliderProps> = ({ isDisabled }) => {
   const dispatch = useAppDispatch();
   const { opacity } = useAppSelector((state) => state.tool);
+  const labelStyle = [styles.label];
+  if (isDisabled) labelStyle.push(styles.disabled);
   const opacityChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setOpacity(getHexFromDecimal(Number(event.target.value))));
   };
+
   return (
-    <label className={styles.label}>
+    <label className={labelStyle.join(' ')}>
       <span className={styles.circle}></span>
       <input
         className={styles.slider}
@@ -24,6 +31,7 @@ export const OpacitySlider: FC = () => {
         max="255"
         value={getDecimalFromHex(opacity)}
         onChange={opacityChangeHandler}
+        disabled={isDisabled}
       />
       <span className={styles.circle_fill}></span>
     </label>

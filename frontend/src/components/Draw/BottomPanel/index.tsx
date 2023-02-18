@@ -20,15 +20,15 @@ export const BottomPanel: FC = () => {
     const png = await postCanvas(canvas!);
     // const url = `${window.location.hostname}:${location.port}/img/${png.url}`;
     const words = game.words.filter((el) => el.painterId === self.userId);
-    sendImage({ word: words[0].word, painterId: self.userId, img: png.url, isPainterReady: isReady });
+    sendImage({ word: words[0].word, painterId: self.userId, img: png.url, isPainterReady: !isReady });
     dispatch(setIsReady(!isReady));
   };
 
   return (
     <div className={styles.wrapper}>
-      <Trikness />
-      <OpacitySlider />
-      <Button text={!isReady ? ButtonText.change : ButtonText.ready} onClick={onClickHandler} />
+      <Trikness isDisabled={isReady} />
+      <OpacitySlider isDisabled={isReady} />
+      <Button text={isReady ? ButtonText.change : ButtonText.ready} onClick={onClickHandler} />
     </div>
   );
 };

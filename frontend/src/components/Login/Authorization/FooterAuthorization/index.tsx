@@ -4,10 +4,13 @@ import { useAnonymousLogin } from '@src/hooks/useAnonymousLogin';
 import styles from './styles.module.css';
 import { useAppSelector } from '@src/redux/store';
 
-export const FooterAuthorization: FC = () => {
-  const { name } = useAppSelector((state) => state.auth);
+interface FooterAuthorizationProps {
+  roomId: string;
+}
 
-  const login = useAnonymousLogin();
+export const FooterAuthorization: FC<FooterAuthorizationProps> = ({ roomId }) => {
+  const { name } = useAppSelector((state) => state.auth);
+  const login = useAnonymousLogin(roomId);
 
   return (
     <footer className={styles.wrapper}>

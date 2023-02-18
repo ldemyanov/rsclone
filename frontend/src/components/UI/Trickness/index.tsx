@@ -4,12 +4,19 @@ import { setLineWidth } from '@src/redux/reducers/toolReducer';
 
 import styles from './styles.module.css';
 
-export const Trikness: FC = () => {
+interface TriknessProps {
+  isDisabled: boolean;
+}
+
+export const Trikness: FC<TriknessProps> = ({ isDisabled }) => {
   const dispatch = useAppDispatch();
   const { triknesses, currentTrikness } = useAppSelector((state) => state.tool);
 
+  const wrapperStyles = [styles.wrapper];
+  if (isDisabled) wrapperStyles.push(styles.disabled);
+
   return (
-    <div className={styles.wrapper}>
+    <div className={wrapperStyles.join(' ')}>
       {triknesses.map((trikness) => {
         const triknessChangeHadler = (event: React.ChangeEvent<HTMLInputElement>) => {
           dispatch(setLineWidth(event.target.value));
@@ -24,6 +31,7 @@ export const Trikness: FC = () => {
               value={trikness}
               checked={trikness === currentTrikness}
               onChange={triknessChangeHadler}
+              disabled={isDisabled}
             />
             <span className={styles.filler} style={{ width: trikness, height: trikness }} />
           </label>

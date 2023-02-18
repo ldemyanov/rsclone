@@ -10,6 +10,7 @@
   border: 2px solid var(--primary_light);
   background-color: var(--primary_dark_opacity);
   border-radius: 0.8em;
+  transition: all 0.3s ease;
 }
 
 .label {
@@ -40,4 +41,17 @@
   border-radius: 50%;
   background-color: var(--primary_light);
   transition: all 0.3s ease;
+}
+
+.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.disabled .label {
+  cursor: not-allowed;
+}
+
+.disabled .label:hover {
+  border-color: var(--primary_light);
 }

@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 export const Pallete: FC = () => {
   const dispatch = useAppDispatch();
   const { colors, currentColor } = useAppSelector((state) => state.tool);
+  const { isReady } = useAppSelector((state) => state.game);
 
   const inputColorChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value);
@@ -26,6 +27,7 @@ export const Pallete: FC = () => {
             style={{ background: color }}
             key={index}
             onClick={colorChangeHandler}
+            disabled={isReady}
           />
         );
       })}
@@ -37,6 +39,7 @@ export const Pallete: FC = () => {
           onChange={inputColorChangeHandler}
           name="palleteColor"
           id="palleteColorInput"
+          disabled={isReady}
         />
       </label>
     </div>

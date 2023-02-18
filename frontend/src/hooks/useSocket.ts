@@ -2,7 +2,7 @@ import io, { Socket } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@src/redux/store';
 import { setPlayer, removePlayer, setStatusPlayer } from '@src/redux/reducers/lobbyReducer';
-import { setIsGameStarted, setGameStage, setWords, setGameWord } from '@src/redux/reducers/gameReducer';
+import { setIsGameStarted, setGameStage, setWords, setGameWord, setIsReady } from '@src/redux/reducers/gameReducer';
 import { API_URL } from '../api';
 import { IPlayer } from '@src/types';
 import { routes } from '@src/routes';
@@ -91,7 +91,10 @@ export default function useSocket() {
         console.log('SEND_WORDS: ', gameObj);
         dispatch(setGameStage(gameObj.gameStage));
         dispatch(setWords(gameObj.words));
-        setTimeout(() => navigate(DrawPage.path), 500);
+        setTimeout(() => {
+          dispatch(setIsReady(false));
+          navigate(DrawPage.path);
+        }, 500);
       });
 
       socket.on('ROOM:SEND_ONE_WORD', (wordObj: IWord) => {
@@ -108,7 +111,10 @@ export default function useSocket() {
         console.log('SEND_PICTURES', wordObj);
         dispatch(setGameStage(wordObj.gameStage));
         dispatch(setWords(wordObj.words));
-        setTimeout(() => navigate(GuessPage.path), 500);
+        setTimeout(() => {
+          dispatch(setIsReady(false));
+          navigate(GuessPage.path);
+        }, 500);
       });
 
       socket.on('ROOM:SEND_ONE_RESULT', (wordObj: IWord) => {

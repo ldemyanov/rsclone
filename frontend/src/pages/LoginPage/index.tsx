@@ -7,10 +7,13 @@ import { SectionRules } from '@components/Login/Rules/SectionRules';
 import { Container } from '@components/UI/Container';
 import { ContentBorder } from '@components/UI/ContentBorder';
 import { FC, useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import styles from './style.module.css';
 
 export const LoginPage: FC = () => {
   const [activeButtonRules, setActiveButtonRules] = useState(1);
+  const [searchParams] = useSearchParams();
+  const roomId = searchParams.get('roomId') ?? '';
 
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -30,9 +33,9 @@ export const LoginPage: FC = () => {
     <ContentBorder>
       <div className={styles.layout}>
         <Container>
-          <HeaderAuthorization />
+          <HeaderAuthorization roomId={roomId} />
           <SectionAuthorization />
-          <FooterAuthorization />
+          <FooterAuthorization roomId={roomId} />
         </Container>
         <Container>
           <div className={styles.wrapper_rules}>

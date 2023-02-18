@@ -1,13 +1,17 @@
 import { FC } from 'react';
+import { NameContainer } from '@components/UI/NameContainer';
 import styles from './styles.module.css';
 
-export const HeaderAuthorization: FC = () => {
+interface HeaderAuthorizationProps {
+  roomId: string;
+}
+
+export const HeaderAuthorization: FC<HeaderAuthorizationProps> = ({ roomId }) => {
+  const headerText = roomId ? `${roomId.split('-')[1]} invite you in game!` : 'Create a game!';
+
   return (
-    <header>
-      <ul className={styles.listAuthorizations}>
-        <li className={styles.active}>ANONYMOUSLY</li>
-        <li>AUTHORIZATION</li>
-      </ul>
+    <header className={styles.header}>
+      <NameContainer text={headerText} />
     </header>
   );
 };

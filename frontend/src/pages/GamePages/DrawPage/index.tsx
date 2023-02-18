@@ -23,7 +23,7 @@ export const DrawPage: FC = () => {
         />
         <Pallete />
         <div className={styles.column}>
-          <Tablet title={TabletTitles.draw} isCanvas={true} />
+          <Tablet title={TabletTitles.draw} />
           <BottomPanel />
         </div>
         <DrawTools />

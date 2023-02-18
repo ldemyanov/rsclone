@@ -1,7 +1,7 @@
 import io, { Socket } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@src/redux/store';
-import { setPlayer, removePlayer, setStatusPlayer } from '@src/redux/reducers/lobbyReducer';
+import { setPlayer, removePlayer, setStatusPlayer, setSoloGame } from '@src/redux/reducers/lobbyReducer';
 import { setIsGameStarted, setGameStage, setWords, setGameWord, setIsReady } from '@src/redux/reducers/gameReducer';
 import { API_URL } from '../api';
 import { IPlayer } from '@src/types';
@@ -33,13 +33,6 @@ export interface IResult {
   response: string;
   responserId: string;
   isResponserReady: boolean;
-}
-
-export interface ISoloGame {
-  images: Array<{
-    url: string;
-    word: string;
-  }>
 }
 
 // TODO remove or rename and move to types
@@ -75,8 +68,11 @@ export default function useSocket() {
         dispatch(setStatusPlayer(obj));
       });
 
-      socket.on('ROOM:START_SOLO_GAME', (gameObj: ISoloGame) => {
-        console.log('ROOM:START_SOLO_GAME: ', gameObj);
+      socket.on('ROOM:START_SOLO_GAME', (words: IWord[]) => {
+        console.log('ROOM:START_SOLO_GAME: ', words);
+        dispatch(setSoloGame(true));
+        dispatch(setWords(words));
+        navigate(GuessPage.path);
       });
 
       socket.on('ROOM:START_GAME', (gameObj: IGame) => {

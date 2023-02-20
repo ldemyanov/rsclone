@@ -27,3 +27,16 @@
   border: 1px solid var(--primary_dark);
   border-radius: 50%;
 }
+
+@media (max-width: 1000px) {
+  .wrapper {
+    gap: 10px;
+  }
+
+  .button_rules {
+    width: 35px;
+    height: 35px;
+    padding: 2px;
+    font-size: 1.2em;
+  }
+}

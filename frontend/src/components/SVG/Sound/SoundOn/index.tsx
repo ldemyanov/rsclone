@@ -3,13 +3,7 @@ import styles from './styles.module.css';
 
 export const SoundOn: FC = () => {
   return (
-    <svg
-      className={styles.sound_on}
-      width="50"
-      height="45"
-      viewBox="0 0 69 62"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg">
+    <svg className={styles.sound_on} viewBox="0 0 69 62" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M26.5564 16.2541H11.5788C7.94542 16.2541 5 19.1995 5 22.8329V37.8105C5 41.4439 7.94542 44.3893 11.5788 44.3893H26.5564C30.1898 44.3893 33.1352 41.4439 33.1352 37.8105V22.8329C33.1352 19.1995 30.1898 16.2541 26.5564 16.2541Z"
         fill="#351D5D"

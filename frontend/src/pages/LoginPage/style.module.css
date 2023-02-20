@@ -13,3 +13,9 @@
   flex: 1;
   gap: 10px;
 }
+
+@media (max-width: 1000px) {
+  .layout {
+    gap: 15px;
+  }
+}

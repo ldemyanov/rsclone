@@ -27,3 +27,10 @@
   color: var(--primary_light_opacity);
   background-color: var(--primary_light_opacity);
 }
+
+@media (max-width: 1000px) {
+  .button {
+    padding: 0.1em 1.2em;
+    font-size: 1.2em;
+  }
+}

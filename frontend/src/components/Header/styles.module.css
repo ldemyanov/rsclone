@@ -31,3 +31,17 @@
 .sound__img {
   width: 50px;
 }
+
+@media (max-width: 1000px) {
+  .header {
+    height: 50px;
+  }
+
+  .logo__text {
+    font-size: 1em;
+  }
+
+  .sound__img {
+    width: 30px;
+  }
+}

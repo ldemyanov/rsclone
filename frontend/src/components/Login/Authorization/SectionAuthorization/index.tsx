@@ -26,7 +26,7 @@ export const SectionAuthorization: FC = () => {
           <img src={reload} alt="reload" />
         </button>
       </div>
-      <Input placeholder={InputPlaceholders.name} onChange={changeName} value={name} />
+      <Input placeholder={InputPlaceholders.name} onChange={changeName} value={name} auth={true} />
     </section>
   );
 };

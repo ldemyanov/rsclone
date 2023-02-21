@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: stretch;
   gap: 20px;
+  min-width: min-content;
   padding: 20px;
   background: var(--primary_dark_opacity);
   border: 2px solid var(--primary_dark);

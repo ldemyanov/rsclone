@@ -5,3 +5,9 @@
   gap: 40px;
   height: 100%;
 }
+
+@media (max-width: 1200px) {
+  .layout {
+    gap: 15px;
+  }
+}

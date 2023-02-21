@@ -3,7 +3,7 @@
   height: 50px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .sound {
     width: 30px;
     height: 30px;

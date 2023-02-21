@@ -5,10 +5,12 @@ export interface LobbyState {
   players: IPlayer[];
   roomID: string;
   self: IPlayer;
+  isSolo: boolean;
 }
 
 const initialState: LobbyState = {
   players: [],
+  isSolo: false,
   roomID: '',
   self: { icon: '', name: '', main: false, status: '', userId: '' },
 };
@@ -37,9 +39,12 @@ export const lobbySlice = createSlice({
       state.players[indexPlayer].status = action.payload.status;
       if (state.self.userId === action.payload.userId) state.self.status = action.payload.status;
     },
+    setSoloGame: (state, action: PayloadAction<boolean>) => {
+      state.isSolo = action.payload;
+    },
   },
 });
 
-export const { setPlayer, setPlayers, setRoomID, setSelfData, removePlayer, setStatusPlayer } = lobbySlice.actions;
+export const { setPlayer, setPlayers, setRoomID, setSelfData, removePlayer, setStatusPlayer, setSoloGame } = lobbySlice.actions;
 
 export default lobbySlice.reducer;

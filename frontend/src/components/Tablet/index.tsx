@@ -31,11 +31,9 @@ export const Tablet: FC<TabletProps> = ({ title, isCanvas }) => {
     <div className={styles.wrapper}>
       <header className={styles.tabletHeader}>
         <img className={styles.tablerRings} src={TabletRings} alt="Tablet rings" />
-        <h2 className={styles.tabletTitle}>{title === 'Draw a' ? `${title} ${word}` : title}</h2>
+        <h2 className={styles.tabletTitle}>{title === TabletTitles.draw ? `${title} ${word}` : title}</h2>
       </header>
-      <div className={styles.drawingContainer}>
-        {isCanvas ? <Canvas /> : <ResultImage /> } 
-      </div>
+      <div className={styles.drawingContainer}>{isCanvas ? <Canvas /> : <ResultImage />}</div>
     </div>
   );
 };

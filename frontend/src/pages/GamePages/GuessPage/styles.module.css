@@ -14,3 +14,9 @@
   align-items: center;
   gap: 1em;
 }
+
+@media (max-width: 1000px) {
+  .container {
+    width: 100%;
+  }
+}

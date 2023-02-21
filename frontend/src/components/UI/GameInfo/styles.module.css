@@ -2,10 +2,13 @@
 
 .gameInfo {
   position: absolute;
+  z-index: 100;
   top: 40px;
   left: 40px;
+  right: 40px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   gap: 10px;
 }
 
@@ -39,6 +42,30 @@
 
 .playersReady__text {
   color: var(--primary_dark);
+}
+
+@media (max-width: 1200px) {
+  .gameInfo {
+    gap: 0;
+    top: 30px;
+    left: 30px;
+    right: 30px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .gameProgress {
+    font-size: 1.2em;
+  }
+
+  .playersReady {
+    height: 26px;
+    font-size: 0.8em;
+  }
+
+  .playersReady__icon {
+    max-width: 24px;
+  }
 }
 
 @keyframes fade {

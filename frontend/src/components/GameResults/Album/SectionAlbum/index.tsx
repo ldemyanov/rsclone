@@ -28,24 +28,6 @@ export const SectionAlbum: FC = () => {
         }
       }
     }, 2000);
-    // console.log(GameResult, 'res');
-    // let currentCount = 0;
-    // let countPlayers = 0;
-    // const timer = setInterval(() => {
-    //   if (GameResult[countPlayers][currentCount]) {
-    //     setResults((prev) => [...prev, GameResult[countPlayers][currentCount++]]);
-    //   } else {
-    //     countPlayers = countPlayers + 1;
-    //     console.log(countPlayers);
-    //     if (countPlayers < players.length) {
-    //       currentCount = 0;
-    //       countPlayers = countPlayers + 1;
-    //       setResults((prev) => [GameResult[countPlayers][currentCount++]]);
-    //     } else {
-    //       clearInterval(timer);
-    //     }
-    //   }
-    // }, 2000);
 
     return () => {
       clearInterval(timer);

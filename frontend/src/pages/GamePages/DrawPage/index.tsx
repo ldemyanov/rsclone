@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { ContentBorder } from '@components/UI/ContentBorder';
 import { GameProgress } from '@components/UI/GameInfo';
 import { Pallete } from '@components/Draw/Pallete';
@@ -11,6 +11,15 @@ import { useAppSelector } from '@src/redux/store';
 
 export const DrawPage: FC = () => {
   const { game } = useAppSelector((state) => state.game);
+  const { self } = useAppSelector((state) => state.lobby);
+  const [word, setWord] = useState('');
+
+  useEffect(() => {
+    setWord(() => {
+      const words = game.words.filter((el) => el.painterId === self.userId);
+      return words[0].word as string;
+    });
+  }, []);
 
   return (
     <ContentBorder>
@@ -23,7 +32,7 @@ export const DrawPage: FC = () => {
         />
         <Pallete />
         <div className={styles.column}>
-          <Tablet title={TabletTitles.draw} />
+          <Tablet title={`${TabletTitles.draw} ${word}`} />
           <BottomPanel />
         </div>
         <DrawTools />

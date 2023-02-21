@@ -1,20 +1,51 @@
-import { GameResults, IGameResults } from '@src/utils/GameResults';
+import { useAppSelector } from '@src/redux/store';
+import { IGameResults, setGameResult } from '@src/utils/GameResults';
 import { FC, useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
 export const SectionAlbum: FC = () => {
+  const { game } = useAppSelector((state) => state.game);
+  const { players } = useAppSelector((state) => state.lobby);
+
+  const GameResult = setGameResult(game, players);
+
   const [results, setResults] = useState<IGameResults[]>([]);
 
   useEffect(() => {
     let currentCount = 0;
+    let playersCount = 0;
     const timer = setInterval(() => {
-      if (GameResults[currentCount]) {
-        setResults((prev) => [...prev, GameResults[currentCount++]]);
+      if (currentCount < 3) {
+        setResults((prev) => [...prev, GameResult[playersCount][currentCount++]]);
       } else {
-        clearInterval(timer);
+        if (playersCount < players.length - 1) {
+          setResults([]);
+          currentCount = 0;
+          playersCount = playersCount + 1;
+        } else {
+          clearInterval(timer);
+        }
       }
     }, 2000);
+    // console.log(GameResult, 'res');
+    // let currentCount = 0;
+    // let countPlayers = 0;
+    // const timer = setInterval(() => {
+    //   if (GameResult[countPlayers][currentCount]) {
+    //     setResults((prev) => [...prev, GameResult[countPlayers][currentCount++]]);
+    //   } else {
+    //     countPlayers = countPlayers + 1;
+    //     console.log(countPlayers);
+    //     if (countPlayers < players.length) {
+    //       currentCount = 0;
+    //       countPlayers = countPlayers + 1;
+    //       setResults((prev) => [GameResult[countPlayers][currentCount++]]);
+    //     } else {
+    //       clearInterval(timer);
+    //     }
+    //   }
+    // }, 2000);
 
     return () => {
       clearInterval(timer);

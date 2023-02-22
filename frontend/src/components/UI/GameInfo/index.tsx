@@ -10,8 +10,6 @@ interface GameInfoProps {
 }
 
 export const GameProgress: FC<GameInfoProps> = ({ currentStage, totalStages, readyPlayers, totalPlayers }) => {
-  
-  const isManyPlayers = Boolean(readyPlayers && totalPlayers);
   const [iconStyles, setIconStyles] = useState([styles.playersReady__icon]);
 
   useEffect(() => {
@@ -24,12 +22,12 @@ export const GameProgress: FC<GameInfoProps> = ({ currentStage, totalStages, rea
   return (
     <div className={styles.gameInfo}>
       <span className={styles.gameProgress}>{`${currentStage} / ${totalStages}`}</span>
-      { isManyPlayers &&
-          <span className={styles.playersReady}>
-            <img className={iconStyles.join(' ')} src={ready} alt="ready icon" />
-            <span className={styles.playersReady__text}>{`${readyPlayers}/${totalPlayers}`}</span>
-          </span>
-      }
+      {totalPlayers && (
+        <span className={styles.playersReady}>
+          <img className={iconStyles.join(' ')} src={ready} alt="ready icon" />
+          <span className={styles.playersReady__text}>{`${readyPlayers}/${totalPlayers}`}</span>
+        </span>
+      )}
     </div>
   );
 };

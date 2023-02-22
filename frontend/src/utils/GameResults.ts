@@ -1,7 +1,5 @@
-import PlayerIconLeo from '@assets/images/icon/lion.png';
-import PlayerIconFox from '@assets/images/icon/fox.png';
-import PlayerIconTiger from '@assets/images/icon/tiger.png';
-import Banan from '@assets/images/banan.png';
+import { IGame } from '@src/hooks/useSocket';
+import { IPlayer } from '@src/types';
 
 export interface IGameResults {
   icon: string;
@@ -9,20 +7,27 @@ export interface IGameResults {
   description: string;
 }
 
-export const GameResults: IGameResults[] = [
-  {
-    icon: PlayerIconFox,
-    name: 'ALEXANDRA',
-    description: 'BANANA',
-  },
-  {
-    icon: PlayerIconLeo,
-    name: 'VLADIMIR',
-    description: Banan,
-  },
-  {
-    icon: PlayerIconTiger,
-    name: 'LEONID',
-    description: 'BANANA',
-  },
-];
+export const setGameResult = (game: Omit<IGame, 'roomId'>, players: IPlayer[]) => {
+  return game.words.map((el) => {
+    const writerId = players.find((elem) => elem.userId === el.writerId);
+    const painterId = players.find((elem) => elem.userId === el.painterId);
+    const responserId = players.find((elem) => elem.userId === el.responserId);
+    return [
+      {
+        icon: writerId?.icon as string,
+        name: writerId?.name as string,
+        description: el.word as string,
+      },
+      {
+        icon: painterId?.icon as string,
+        name: painterId?.name as string,
+        description: el.img as string,
+      },
+      {
+        icon: responserId?.icon as string,
+        name: responserId?.name as string,
+        description: el.response as string,
+      },
+    ];
+  });
+};

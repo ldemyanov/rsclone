@@ -1,9 +1,8 @@
-import { FC, useMemo, useState } from 'react';
+import { FC } from 'react';
 import TabletRings from '@assets/images/tabletRings.png';
-import { useAppSelector } from '@src/redux/store';
 import styles from './styles.module.css';
 import { Canvas } from '@components/Draw/Canvas';
-import { ResultImage } from '@components/UI/ResultImage';
+import { PaintedImg } from '@components/UI/PaintedImg';
 
 export enum TabletTitles {
   draw = 'Draw a',
@@ -11,29 +10,18 @@ export enum TabletTitles {
 }
 
 interface TabletProps {
-  title: TabletTitles;
-  isCanvas: boolean;
+  title: string;
+  image?: string;
 }
 
-export const Tablet: FC<TabletProps> = ({ title, isCanvas }) => {
-  const { self } = useAppSelector((state) => state.lobby);
-  const { game } = useAppSelector((state) => state.game);
-  const [word, setWord] = useState('');
-
-  useMemo(() => {
-    setWord(() => {
-      const words = game.words.filter((el) => el.painterId === self.userId);
-      return words[0].word as string;
-    });
-  }, [game, self]);
-
+export const Tablet: FC<TabletProps> = ({ title, image }) => {
   return (
     <div className={styles.wrapper}>
       <header className={styles.tabletHeader}>
         <img className={styles.tablerRings} src={TabletRings} alt="Tablet rings" />
-        <h2 className={styles.tabletTitle}>{title === TabletTitles.draw ? `${title} ${word}` : title}</h2>
+        <h2 className={styles.tabletTitle}>{title}</h2>
       </header>
-      <div className={styles.drawingContainer}>{isCanvas ? <Canvas /> : <ResultImage />}</div>
+      <div className={styles.drawingContainer}>{image ? <PaintedImg image={image} /> : <Canvas />}</div>
     </div>
   );
 };

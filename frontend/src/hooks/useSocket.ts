@@ -1,7 +1,7 @@
 import io, { Socket } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@src/redux/store';
-import { setPlayer, removePlayer, setStatusPlayer } from '@src/redux/reducers/lobbyReducer';
+import { setPlayer, removePlayer, setStatusPlayer, setSoloGame } from '@src/redux/reducers/lobbyReducer';
 import { setIsGameStarted, setGameStage, setWords, setGameWord, setIsReady } from '@src/redux/reducers/gameReducer';
 import { API_URL } from '../api';
 import { IPlayer } from '@src/types';
@@ -46,7 +46,7 @@ export interface IGame {
 export default function useSocket() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [, , WritePage, DrawPage, GuessPage] = routes;
+  const [, , WritePage, DrawPage, GuessPage, GameResultsPage] = routes;
 
   return {
     connect: (roomId: string, selfId: string) => {
@@ -66,6 +66,13 @@ export default function useSocket() {
       socket.on('ROOM:STATUS', (obj) => {
         console.log(obj);
         dispatch(setStatusPlayer(obj));
+      });
+
+      socket.on('ROOM:START_SOLO_GAME', (words: IWord[]) => {
+        console.log('ROOM:START_SOLO_GAME: ', words);
+        dispatch(setSoloGame(true));
+        dispatch(setWords(words));
+        navigate(GuessPage.path);
       });
 
       socket.on('ROOM:START_GAME', (gameObj: IGame) => {
@@ -108,10 +115,17 @@ export default function useSocket() {
 
       socket.on('ROOM:SEND_ONE_RESULT', (wordObj: IWord) => {
         console.log('SEND_ONE_RESULT', wordObj);
+        dispatch(setGameWord(wordObj));
       });
 
       socket.on('ROOM:SEND_RESULTS', (wordObj: IGame) => {
         console.log('SEND_RESULTS', wordObj);
+        dispatch(setGameStage(wordObj.gameStage));
+        dispatch(setWords(wordObj.words));
+        setTimeout(() => {
+          dispatch(setIsReady(false));
+          navigate(GameResultsPage.path);
+        }, 500);
       });
     },
 

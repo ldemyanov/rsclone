@@ -31,3 +31,9 @@ export const postCanvas: PostCanvas = async (canvas) => {
 
   return await response.json();
 };
+
+export const getRoomPlayers = async (roomId: string) => {
+  const response = await fetch(`${API_URL}/room/players?roomId=${roomId}`);
+
+  return await response.json();
+};

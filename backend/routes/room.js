@@ -3,7 +3,6 @@ const db = require("../database");
 
 router.get("/players", async (req, res) => {
   const { roomId } = req.query;
-  console.log(roomId, "123");
   if (roomId) {
     const room = await db.room.findOne({ roomId }).exec();
     return res.json(room.users);

@@ -159,3 +159,43 @@
   background: var(--accent_orange);
   cursor: not-allowed;
 }
+
+@media (max-width: 1000px) {
+  .label {
+    gap: 0.3em;
+    padding: 0.5em;
+  }
+
+  .circle,
+  .circle_fill {
+    width: 1em;
+    height: 1em;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 1em;
+    height: 1em;
+    transform: translateY(-0.2em);
+  }
+
+  .slider::-moz-range-thumb {
+    width: 1em;
+    height: 1em;
+    transform: translateY(-0.2em);
+  }
+
+  .slider::-ms-thumb {
+    width: 1em;
+    height: 1em;
+    transform: translateY(-0.2em);
+  }
+
+  .slider::-webkit-slider-runnable-track {
+    height: 0.5em;
+  }
+
+  .slider::-moz-range-track {
+    height: 0.5em;
+  }
+}

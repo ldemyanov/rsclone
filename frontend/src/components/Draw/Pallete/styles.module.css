@@ -1,6 +1,8 @@
 @import '@style/colors';
 
 .wrapper {
+  position: relative;
+  z-index: 1000;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.5em;
@@ -55,4 +57,34 @@
 
 .colorInput::-webkit-color-swatch-wrapper {
   padding: 0;
+}
+
+@media (max-width: 1200px) {
+  .wrapper {
+    gap: 5px;
+    padding: 5px;
+  }
+
+  .colorButton {
+    width: 1.5em;
+    height: 1.5em;
+  }
+}
+
+@media (max-width: 1000px) {
+  .wrapper {
+    order: 1;
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    height: 11%;
+  }
+
+  .colorLabel {
+    grid-row: 1 / span 2;
+    grid-column: 10 / span 3;
+  }
+
+  .colorInput {
+    height: 100%;
+  }
 }

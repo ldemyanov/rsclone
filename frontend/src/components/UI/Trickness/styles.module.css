@@ -55,3 +55,20 @@
 .disabled .label:hover {
   border-color: var(--primary_light);
 }
+
+@media (max-width: 1000px) {
+  .wrapper {
+    gap: 0.3em;
+    padding: 0.5em;
+  }
+
+  .label {
+    width: 24px;
+    height: 24px;
+  }
+
+  .label span {
+    /* margin: 2px; */
+    /* transform: scale(0.7); */
+  }
+}

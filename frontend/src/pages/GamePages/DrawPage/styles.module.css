@@ -14,3 +14,25 @@
   flex-grow: 1;
   height: 100%;
 }
+
+@media (max-width: 1200px) {
+  .container {
+    gap: 0.5em;
+  }
+}
+
+@media (max-width: 1000px) {
+  .container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .container > div:first-child {
+    top: 18%;
+  }
+
+  .column {
+    order: 3;
+    height: 85%;
+  }
+}

@@ -25,6 +25,7 @@
   .container {
     flex-wrap: wrap;
     justify-content: center;
+    min-height: 600px;
   }
 
   .container > div:first-child {

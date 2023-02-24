@@ -21,7 +21,7 @@ export const OpacitySlider: FC<OpacitySliderProps> = ({ isDisabled }) => {
 
   return (
     <label className={labelStyle.join(' ')}>
-      <span className={styles.circle}></span>
+      <span className={styles.circle} />
       <input
         className={styles.slider}
         type="range"
@@ -33,7 +33,7 @@ export const OpacitySlider: FC<OpacitySliderProps> = ({ isDisabled }) => {
         onChange={opacityChangeHandler}
         disabled={isDisabled}
       />
-      <span className={styles.circle_fill}></span>
+      <span className={styles.circle_fill} />
     </label>
   );
 };

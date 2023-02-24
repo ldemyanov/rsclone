@@ -27,6 +27,15 @@ export const Canvas: FC = () => {
     }
   };
 
+  const canvasTouchStartHandler = () => {
+    if (tool instanceof Pipette) {
+      dispatch(setStrokeStyle(tool.color));
+      dispatch(setOpacity(tool.opacity));
+    } else {
+      dispatch(pushToUndo(canvasRef.current!.toDataURL()));
+    }
+  };
+
   useEffect(() => {
     dispatch(setCanvas(canvasRef.current));
     if (isReady) {
@@ -45,6 +54,7 @@ export const Canvas: FC = () => {
       width={CANVAS_WIDTH}
       height={CANVAS_HEIGHT}
       onMouseDown={canvasMouseDownHandler}
+      onTouchStart={canvasTouchStartHandler}
     />
   );
 };

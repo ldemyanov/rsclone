@@ -1,8 +1,11 @@
 @import '@style/colors';
 
 .kickButton {
-  width: 25px;
-  height: 25px;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 12px;
   margin-left: auto;
   background-color: var(--primary_dark_opacity);
   border: 2px solid var(--primary_dark);
@@ -21,4 +24,24 @@
 
 .kickButton__icon {
   width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .kickButton {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .kickButton {
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+    min-height: 25px;
+    padding: 6px;
+  }
 }

@@ -3,13 +3,7 @@ import styles from './styles.module.css';
 
 export const SoundVolume1: FC = () => {
   return (
-    <svg
-      className={styles.sound_volum1}
-      width="50"
-      height="45"
-      viewBox="0 0 52 52"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg">
+    <svg className={styles.sound_volum1} viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M21.5564 11.254H6.57878C2.94542 11.254 0 14.1994 0 17.8328V32.8105C0 36.4438 2.94542 39.3892 6.57878 39.3892H21.5564C25.1898 39.3892 28.1352 36.4438 28.1352 32.8105V17.8328C28.1352 14.1994 25.1898 11.254 21.5564 11.254Z"
         fill="#351D5D"

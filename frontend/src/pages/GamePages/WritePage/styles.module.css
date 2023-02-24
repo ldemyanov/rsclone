@@ -23,3 +23,20 @@
   gap: 1em;
   width: 60%;
 }
+
+@media (max-width: 1500px) {
+  .row {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .title {
+    font-size: 2em;
+  }
+
+  .row {
+    flex-direction: column;
+    width: 80%;
+  }
+}

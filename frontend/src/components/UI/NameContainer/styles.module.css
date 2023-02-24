@@ -6,3 +6,9 @@
   color: var(--accent_orange);
   text-shadow: var(--border_text);
 }
+
+@media (max-width: 1000px) {
+  .name_container {
+    font-size: 1.2em;
+  }
+}

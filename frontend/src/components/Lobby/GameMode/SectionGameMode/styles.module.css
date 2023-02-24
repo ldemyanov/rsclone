@@ -8,3 +8,33 @@
   width: 80%;
   text-align: center;
 }
+
+@media (max-width: 1000px) {
+  .wrapper {
+    gap: 10px;
+  }
+
+  .title {
+    font-size: 1em;
+  }
+
+  .description {
+    width: 100%;
+    font-size: 0.8em;
+  }
+}
+
+@media (max-width: 700px) {
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .icon {
+    width: 70px;
+  }
+
+  .description {
+    width: 100%;
+    font-size: 0.6em;
+  }
+}

@@ -17,7 +17,7 @@ const App: FC = () => {
       <Provider store={store}>
         <div className={styles.wrapper}>
           <nav>
-            <ul style={{ display: 'flex', gap: '30px' }}>
+            <ul style={{ display: 'none', gap: '30px' }}>
               {routes.map((route) => (
                 <li key={route.id}>
                   <Link key={route.id} to={route.path}>

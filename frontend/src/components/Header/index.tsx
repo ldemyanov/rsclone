@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import logo from '@assets/images/logo.png';
 import styles from './styles.module.css';
-import { Sound } from '@components/Sound/undex';
+import { Sound } from '@components/Sound';
 
 export const Header: FC = () => {
   return (

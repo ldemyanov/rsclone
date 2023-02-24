@@ -8,3 +8,10 @@
   border: 5px solid var(--primary_dark_opacity);
   border-radius: 15px;
 }
+
+@media (max-width: 1200px) {
+  .border {
+    max-height: 700px;
+    padding: 15px;
+  }
+}

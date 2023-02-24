@@ -23,3 +23,25 @@
   cursor: not-allowed;
   opacity: 0.3;
 }
+
+@media (max-width: 1200px) {
+  .drawToolButton {
+    width: 2.5em;
+    padding: 0.3em;
+  }
+}
+
+@media (max-width: 1000px) {
+  .drawToolButton {
+    width: 2.5em;
+    height: 1.5em;
+    padding: 0.1em;
+  }
+}
+
+@media (max-width: 700px) {
+  .drawToolButton {
+    width: 1.7em;
+    padding: 0.2em;
+  }
+}

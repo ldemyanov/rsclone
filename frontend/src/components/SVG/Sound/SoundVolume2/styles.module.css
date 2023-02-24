@@ -1,6 +1,9 @@
 @import '@style/colors';
 
 .sound_volum2 {
+  display: inline-block;
+  width: 100%;
+  height: auto;
   cursor: pointer;
 }
 

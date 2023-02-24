@@ -5,6 +5,8 @@ import { SoundVolume1 } from '@components/SVG/Sound/SoundVolume1';
 import { SoundOff } from '@components/SVG/Sound/SoundOff';
 import Audio from '@assets/audio/audio.mp3';
 
+import styles from './styles.module.css';
+
 export const Sound: FC = () => {
   const soundIcons = [<SoundOn />, <SoundVolume2 />, <SoundVolume1 />, <SoundOff />];
   const volumes = [100, 65, 35, 0];
@@ -19,7 +21,7 @@ export const Sound: FC = () => {
   };
 
   return (
-    <div onClick={(event) => changeVolume(event)}>
+    <div className={styles.sound} onClick={(event) => changeVolume(event)}>
       <audio src={Audio} loop id="audio"></audio>
       {soundIcons[indexIcon]}
     </div>

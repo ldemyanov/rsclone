@@ -9,7 +9,7 @@
   padding: 20px;
   background: var(--bg_gradient_container);
   border-radius: 15px;
-  width: 50%;
+
   border: 2px solid var(--primary_light);
   transition: 0.5s;
 }
@@ -20,4 +20,18 @@
 
 .container.active {
   border: 2px solid var(--accent_orange);
+}
+
+@media (max-width: 1000px) {
+  .container {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    flex-grow: 1;
+    gap: 5px;
+    width: 100%;
+  }
 }

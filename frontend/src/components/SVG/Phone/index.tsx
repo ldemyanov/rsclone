@@ -1,8 +1,10 @@
 import { FC } from 'react';
 
+import styles from './styles.module.css';
+
 export const Phone: FC = () => {
   return (
-    <svg width="482" height="279" viewBox="0 0 482 279" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className={styles.phone} viewBox="0 0 482 279" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_159_306)">
         <mask id="mask0_159_306" maskUnits="userSpaceOnUse" x="0" y="0" width="482" height="279">
           <path d="M481.5 0H0.5V279H481.5V0Z" fill="white" />

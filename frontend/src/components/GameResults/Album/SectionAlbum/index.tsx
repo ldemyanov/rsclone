@@ -37,10 +37,9 @@ export const SectionAlbum: FC = () => {
   return (
     <section className={styles.wrapper}>
       {results.map((elem, index) => {
+        const isLeft = index % 2 === 0 ? styles.right : styles.left;
         return (
-          <div
-            key={index}
-            className={`${styles.wrapper_player} ${index % 2 === 0 || index === 0 ? styles.rigth : styles.left}`}>
+          <div key={index} className={`${styles.wrapper_player} ${isLeft}`}>
             <div className={styles.wrapper_icon}>
               <div className={styles.circle}>
                 <img src={elem.icon} alt={elem.icon} className={styles.icon} />
@@ -50,9 +49,7 @@ export const SectionAlbum: FC = () => {
             {index % 2 === 0 ? (
               <div className={styles.description}>{elem.description}</div>
             ) : (
-              <div className={styles.description}>
-                <img className={styles.description_img} src={elem.description} alt={elem.description} />
-              </div>
+              <div className={styles.description} style={{ backgroundImage: `url(${elem.description})` }} />
             )}
           </div>
         );

@@ -86,6 +86,7 @@ export default class Pencil extends Tool implements IPencil {
   }
 
   public onTouchStartHandler(event: TouchEvent): void {
+    event.preventDefault();
     this.isTouching = true;
 
     if (this.canvas) {

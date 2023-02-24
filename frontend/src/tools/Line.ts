@@ -2,9 +2,11 @@ import { TCanvasElement } from '@src/types';
 import Tool from './Tool';
 import getCanvasMousePosition from '@src/helpers/getCanvasMousePosition';
 import { ICanvasMousePosition } from '@src/helpers/getCanvasMousePosition';
+import getCanvasTouchPosition from '@src/helpers/getCanvasTouchPosition';
 
 interface ILine {
   isMouseDown: boolean;
+  isTouching: boolean;
   startX: number;
   startY: number;
   saved: string;
@@ -16,6 +18,7 @@ interface ILine {
 
 export default class Line extends Tool implements ILine {
   public isMouseDown;
+  public isTouching;
   public startX;
   public startY;
   public saved;
@@ -24,6 +27,7 @@ export default class Line extends Tool implements ILine {
     super(canvas);
     this.listen();
     this.isMouseDown = false;
+    this.isTouching = false;
     this.startX = 0;
     this.startY = 0;
     this.saved = '';
@@ -35,6 +39,10 @@ export default class Line extends Tool implements ILine {
       this.canvas.onmouseup = this.onMouseUpHandler.bind(this);
       this.canvas.onmousemove = this.onMouseMoveHandler.bind(this);
       this.canvas.onmouseleave = this.onMouseLeaveHandler.bind(this);
+
+      this.canvas.ontouchstart = this.onTouchStartHandler.bind(this);
+      this.canvas.ontouchmove = this.onTouchMoveHandler.bind(this);
+      this.canvas.ontouchend = this.onTouchEndHandler.bind(this);
     }
   }
 
@@ -81,5 +89,28 @@ export default class Line extends Tool implements ILine {
         }
       };
     }
+  }
+
+  public onTouchStartHandler(event: TouchEvent): void {
+    if (this.canvas) {
+      this.isTouching = true;
+      this.startX = getCanvasTouchPosition(event, this.canvas).xCoordinate;
+      this.startY = getCanvasTouchPosition(event, this.canvas).yCoordinate;
+      this.ctx.beginPath();
+      this.saved = this.canvas.toDataURL();
+
+      this.draw({ xCoordinate: this.startX, yCoordinate: this.startY });
+    }
+  }
+
+  public onTouchMoveHandler(event: TouchEvent): void {
+    if (this.isTouching && this.canvas) {
+      this.draw(getCanvasTouchPosition(event, this.canvas));
+    }
+  }
+
+  public onTouchEndHandler(): void {
+    this.ctx.closePath();
+    this.isTouching = false;
   }
 }

@@ -10,6 +10,7 @@ import { useAppSelector } from '@src/redux/store';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '@src/routes';
 import styles from './style.module.css';
+import { FooterPlayers } from '@components/Lobby/Players/FooterPlayers';
 
 export const LobbyPage: FC = () => {
   const { self, players } = useAppSelector((state) => state.lobby);
@@ -29,6 +30,7 @@ export const LobbyPage: FC = () => {
         <Container size="small">
           <HeaderPlayers />
           <SectionPlayers />
+          <FooterPlayers />
         </Container>
         <Container size="big">
           <HeaderGameMode />

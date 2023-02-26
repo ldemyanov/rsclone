@@ -9,6 +9,8 @@ import useSocket from '@src/hooks/useSocket';
 export const FooterGameMode: FC = () => {
   const [LoginPage]: IRoute[] = routes;
   const { players, roomID, self } = useAppSelector((state) => state.lobby);
+  const isSomeoneNotReady = players.some((player) => player.status === 'empty');
+  const isBeginAvaliable = players.length === 1 ? false : isSomeoneNotReady || players.length < 3;
 
   const { setStatus, startGame } = useSocket();
   const startGameOnClickHandler = () => {
@@ -33,11 +35,7 @@ export const FooterGameMode: FC = () => {
     <footer className={styles.wrapper}>
       <Button text={copy ? ButtonText.copy : ButtonText.invite} onClick={copyLink} />
       {self.main ? (
-        <Button
-          text={ButtonText.begin}
-          disabled={players.length === 1 ? false : !players.every((player) => player.status === 'active')}
-          onClick={startGameOnClickHandler}
-        />
+        <Button text={ButtonText.begin} disabled={isBeginAvaliable} onClick={startGameOnClickHandler} />
       ) : (
         <Button text={self.status === 'active' ? ButtonText.unready : ButtonText.ready} onClick={readyOnClickHandler} />
       )}

@@ -127,6 +127,10 @@ export default function useSocket() {
           navigate(GameResultsPage.path);
         }, 500);
       });
+
+      socket.on('ROOM:RESET_GAME', (game: IGame) => {
+        console.log('ROOM:RESET_GAME', game);
+      })
     },
 
     excludeUser: (userId: string) => {

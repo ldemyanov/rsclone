@@ -5,6 +5,22 @@
   flex-direction: column;
   gap: 15px;
   width: 100%;
+  padding: 10px;
+  overflow: hidden auto;
+}
+
+.wrapper::-webkit-scrollbar {
+  width: 10px;
+}
+
+.wrapper::-webkit-scrollbar-track {
+  background-color: var(--primary_dark_opacity);
+  border-radius: 100px;
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background-color: var(--primary_dark);
 }
 
 .wrapper_player {

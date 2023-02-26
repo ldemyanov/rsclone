@@ -27,6 +27,7 @@
 @media (max-width: 700px) {
   .wrapper {
     flex-direction: column;
+    width: 100%;
   }
 
   .icon {

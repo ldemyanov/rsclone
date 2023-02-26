@@ -9,8 +9,8 @@ import { ContentBorder } from '@components/UI/ContentBorder';
 import { useAppSelector } from '@src/redux/store';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '@src/routes';
-import styles from './style.module.css';
 import { FooterPlayers } from '@components/Lobby/Players/FooterPlayers';
+import styles from './style.module.css';
 
 export const LobbyPage: FC = () => {
   const { self, players } = useAppSelector((state) => state.lobby);

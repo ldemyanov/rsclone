@@ -5,7 +5,7 @@ import { Phone } from '@components/SVG/Phone';
 import { Input, InputPlaceholders } from '@components/UI/Input';
 import { Button, ButtonText } from '@components/UI/Button';
 import { useAppDispatch, useAppSelector } from '@src/redux/store';
-import { setSearchWrite, setIsReady, resetGame } from '@src/redux/reducers/gameReducer';
+import { setSearchWrite, setIsReady } from '@src/redux/reducers/gameReducer';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '@src/routes';
 
@@ -36,7 +36,6 @@ export const WritePage: FC = () => {
     }
 
     if (players.length < game.words.length) {
-      // dispatch(resetGame(true));
       navigate(LobbyPage.path);
     }
   }, [game.isGameStarted, players.length]);

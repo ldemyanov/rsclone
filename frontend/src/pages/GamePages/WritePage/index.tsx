@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { ContentBorder } from '@components/UI/ContentBorder';
 import { GameProgress } from '@components/UI/GameInfo';
 import { Phone } from '@components/SVG/Phone';
@@ -6,15 +6,18 @@ import { Input, InputPlaceholders } from '@components/UI/Input';
 import { Button, ButtonText } from '@components/UI/Button';
 import { useAppDispatch, useAppSelector } from '@src/redux/store';
 import { setSearchWrite, setIsReady } from '@src/redux/reducers/gameReducer';
+import { useNavigate } from 'react-router-dom';
+import { routes } from '@src/routes';
 
 import styles from './styles.module.css';
 import useSocket from '@src/hooks/useSocket';
 
 export const WritePage: FC = () => {
   const { searchWrite, isReady, game } = useAppSelector((state) => state.game);
-  const { self } = useAppSelector((state) => state.lobby);
+  const { self, players } = useAppSelector((state) => state.lobby);
   const dispatch = useAppDispatch();
   const { sendWord } = useSocket();
+  const navigate = useNavigate();
 
   const changeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearchWrite(event.target.value));
@@ -24,6 +27,18 @@ export const WritePage: FC = () => {
     sendWord({ word: searchWrite, writerId: self.userId, isWriterReady: !isReady });
     dispatch(setIsReady(!isReady));
   };
+
+  useEffect(() => {
+    const [LoginPage, LobbyPage] = routes;
+
+    if (!game.isGameStarted) {
+      navigate(LoginPage.path);
+    }
+
+    if (players.length < game.words.length) {
+      navigate(LobbyPage.path);
+    }
+  }, [game.isGameStarted, players.length]);
 
   return (
     <ContentBorder>

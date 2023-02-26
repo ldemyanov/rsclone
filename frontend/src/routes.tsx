@@ -4,7 +4,7 @@ import { LobbyPage } from './pages/LobbyPage';
 import { WritePage } from './pages/GamePages/WritePage';
 import { DrawPage } from './pages/GamePages/DrawPage';
 import { GuessPage } from './pages/GamePages/GuessPage';
-import { ResultsPage } from './pages/ResultsPage';
+import { SoloResultsPage } from './pages/GamePages/SoloGuessPage';
 import { GameResultsPage } from './pages/GamePages/GameResultsPage';
 
 export const routes: IRoute[] = [
@@ -46,8 +46,8 @@ export const routes: IRoute[] = [
   },
   {
     id: 7,
-    name: 'TopResults',
-    path: '/results',
-    element: ResultsPage,
+    name: 'SoloResults',
+    path: '/game/solo-results',
+    element: SoloResultsPage,
   },
 ];

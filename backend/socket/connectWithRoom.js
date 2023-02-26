@@ -24,6 +24,17 @@ async function connectWithRoom(socket) {
 
     socket.to(roomId).emit("ROOM:LEFT", userId);
 
+    const game = await db.game.findOne({ roomId: roomId }).exec();
+    if (game) {
+      game.words = [];
+      game.isGameStarted = false;
+      game.gameStage = "lobby";
+
+      await game.save();
+      socket.emit("ROOM:RESET_GAME", game);
+      socket.to(roomId).emit("ROOM:RESET_GAME", game);
+    }
+
     // to remove room if all users disconected
     room = await db.room.findOne({ roomId: roomId }).exec();
     if (room.users.length === 0) {
@@ -39,6 +50,18 @@ async function connectWithRoom(socket) {
 
     socket.emit("ROOM:LEFT", excUserId);
     socket.to(roomId).emit("ROOM:LEFT", excUserId);
+
+    const game = await db.game.findOne({ roomId: roomId }).exec();
+    if (game) {
+      game.words = [];
+      game.isGameStarted = false;
+      game.gameStage = "lobby";
+
+      await game.save();
+      socket.emit("ROOM:RESET_GAME", game);
+      socket.to(roomId).emit("ROOM:RESET_GAME", game);
+    }
+
   });
 
   socket.on("USER:SET_STATUS", async (status) => {
@@ -91,16 +114,26 @@ async function connectWithRoom(socket) {
         return;
       }
 
-      const newGame = new db.game({
-        roomId: roomId,
-        isGameStarted: true,
-        gameStage: "write",
-        words: words,
-      });
-      newGame.save();
+      const game =  await db.game.findOne({ roomId: roomId }).exec();
 
-      socket.emit("ROOM:START_GAME", newGame);
-      socket.to(roomId).emit("ROOM:START_GAME", newGame);
+      if (game) {
+        game.words = words;
+        game.gameStage = "write";
+        game.isGameStarted = true;
+        await game.save();
+        socket.emit("ROOM:START_GAME", game);
+        socket.to(roomId).emit("ROOM:START_GAME", game);
+      } else {
+        const newGame = new db.game({
+          roomId: roomId,
+          isGameStarted: true,
+          gameStage: "write",
+          words: words,
+        });
+        newGame.save();
+        socket.emit("ROOM:START_GAME", newGame);
+        socket.to(roomId).emit("ROOM:START_GAME", newGame);
+      }
     }
   });
 

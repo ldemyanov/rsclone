@@ -45,14 +45,37 @@ export const gameSlice = createSlice({
       const index = state.game.words.findIndex((elem) => elem.writerId === action.payload.writerId);
       state.game.words[index] = action.payload;
     },
-    setSoloResponse: (state, action: PayloadAction<{ index: number, response: string }>) => {
+    setSoloResponse: (state, action: PayloadAction<{ index: number; response: string }>) => {
       state.game.words[action.payload.index].response = action.payload.response;
       console.log(state.game.words[action.payload.index]);
-    }
+    },
+    resetGame: (state, action: PayloadAction<boolean>) => {
+      if (action.payload) {
+        console.log('reset');
+        state.searchGuess = '';
+        state.searchWrite = '';
+        state.isReady = false;
+        (state.game = {
+          isGameStarted: false,
+          gameStage: '',
+          words: [],
+        }),
+          console.log('state', state);
+      }
+    },
   },
 });
 
-export const { setSearchGuess, setSearchWrite, setIsReady, setIsGameStarted, setGameStage, setWords, setGameWord, setSoloResponse } =
-  gameSlice.actions;
+export const {
+  setSearchGuess,
+  setSearchWrite,
+  setIsReady,
+  setIsGameStarted,
+  setGameStage,
+  setWords,
+  setGameWord,
+  setSoloResponse,
+  resetGame,
+} = gameSlice.actions;
 
 export default gameSlice.reducer;

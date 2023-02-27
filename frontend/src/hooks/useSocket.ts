@@ -2,7 +2,14 @@ import io, { Socket } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@src/redux/store';
 import { setPlayer, removePlayer, setStatusPlayer, setSoloGame } from '@src/redux/reducers/lobbyReducer';
-import { setIsGameStarted, setGameStage, setWords, setGameWord, setIsReady } from '@src/redux/reducers/gameReducer';
+import {
+  setIsGameStarted,
+  setGameStage,
+  setWords,
+  setGameWord,
+  setIsReady,
+  resetGame,
+} from '@src/redux/reducers/gameReducer';
 import { API_URL } from '../api';
 import { IPlayer } from '@src/types';
 import { routes } from '@src/routes';
@@ -46,7 +53,7 @@ export interface IGame {
 export default function useSocket() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [, , WritePage, DrawPage, GuessPage, GameResultsPage] = routes;
+  const [, LobbyPage, WritePage, DrawPage, GuessPage, GameResultsPage] = routes;
 
   return {
     connect: (roomId: string, selfId: string) => {
@@ -130,7 +137,11 @@ export default function useSocket() {
 
       socket.on('ROOM:RESET_GAME', (game: IGame) => {
         console.log('ROOM:RESET_GAME', game);
-      })
+        setTimeout(() => {
+          dispatch(resetGame(true));
+          navigate(LobbyPage.path);
+        }, 500);
+      });
     },
 
     excludeUser: (userId: string) => {
@@ -151,8 +162,16 @@ export default function useSocket() {
       }
     },
 
+    resetGame: () => {
+      if (socket) {
+        console.log('resetGame');
+        socket.emit('USER:RESET_GAME');
+      }
+    },
+
     sendWord: (wordObj: IWord) => {
       if (socket) {
+        console.log('sendWord');
         socket.emit('USER:SEND_WORD', wordObj);
       }
     },

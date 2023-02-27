@@ -8,9 +8,9 @@ import { useAppDispatch, useAppSelector } from '@src/redux/store';
 import { setSearchWrite, setIsReady } from '@src/redux/reducers/gameReducer';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '@src/routes';
+import useSocket from '@src/hooks/useSocket';
 
 import styles from './styles.module.css';
-import useSocket from '@src/hooks/useSocket';
 
 export const WritePage: FC = () => {
   const { searchWrite, isReady, game } = useAppSelector((state) => state.game);

@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '@src/redux/store';
 import { TCanvasElement } from '@src/types';
 import { pushToUndo, setCanvas } from '@src/redux/reducers/canvasReducer';
 import { setLineWidth, setOpacity, setStrokeStyle, setTool } from '@src/redux/reducers/toolReducer';
-import { CANVAS_WIDTH, CANVAS_HEIGHT } from '@src/constants/Draw';
+import { CANVAS_WIDTH, CANVAS_HEIGHT, ToolNames } from '@src/constants/Draw';
 import Pencil from '@src/tools/Pencil';
 import Pipette from '@src/tools/Pipette';
 import Tool from '@src/tools/Tool';
@@ -13,9 +13,9 @@ import getCursorStyle from '@src/helpers/getCursorStyle';
 export const Canvas: FC = () => {
   const dispatch = useAppDispatch();
   const canvasRef = useRef<TCanvasElement>(null);
-  const { tool, currentTrikness } = useAppSelector((state) => state.tool);
+  const { tool, toolName, currentTrikness } = useAppSelector((state) => state.tool);
   const { isReady } = useAppSelector((state) => state.game);
-  const cursorStyle = getCursorStyle(styles, currentTrikness, tool);
+  const cursorStyle = getCursorStyle(styles, currentTrikness, toolName);
   const canvasStyles = [styles.canvas, cursorStyle].join(' ');
 
   const canvasMouseDownHandler = () => {
@@ -39,9 +39,9 @@ export const Canvas: FC = () => {
   useEffect(() => {
     dispatch(setCanvas(canvasRef.current));
     if (isReady) {
-      dispatch(setTool(new Tool(canvasRef.current)));
+      dispatch(setTool({ tool: new Tool(canvasRef.current), toolName: ToolNames.default }));
     } else {
-      dispatch(setTool(new Pencil(canvasRef.current)));
+      dispatch(setTool({ tool: new Pencil(canvasRef.current), toolName: ToolNames.pencil }));
     }
 
     dispatch(setLineWidth(currentTrikness));

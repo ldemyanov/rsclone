@@ -14,13 +14,23 @@ import Pipette from '@src/tools/Pipette';
 export const CANVAS_WIDTH = 1920;
 export const CANVAS_HEIGHT = 1080;
 
+export enum ToolNames {
+  pencil = 'pencil',
+  eraser = 'eraser',
+  rect = 'rect',
+  circle = 'circle',
+  line = 'line',
+  pipette = 'pipette',
+  default = 'default',
+}
+
 export const drawToolsArray = [
-  { toolImg: PencilSVG, tool: Pencil },
-  { toolImg: EraserSVG, tool: Eraser },
-  { toolImg: SquareSVG, tool: Rect },
-  { toolImg: CircleSVG, tool: Circle },
-  { toolImg: LineSVG, tool: Line },
-  { toolImg: PipetteSVG, tool: Pipette },
+  { toolImg: PencilSVG, tool: Pencil, toolName: ToolNames.pencil },
+  { toolImg: EraserSVG, tool: Eraser, toolName: ToolNames.eraser },
+  { toolImg: SquareSVG, tool: Rect, toolName: ToolNames.rect },
+  { toolImg: CircleSVG, tool: Circle, toolName: ToolNames.circle },
+  { toolImg: LineSVG, tool: Line, toolName: ToolNames.line },
+  { toolImg: PipetteSVG, tool: Pipette, toolName: ToolNames.pipette },
 ];
 
 export type TTools = Pencil | Eraser | Rect | Circle | Line | Pipette;

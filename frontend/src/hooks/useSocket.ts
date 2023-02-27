@@ -1,6 +1,6 @@
 import io, { Socket } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@src/redux/store';
+import { useAppDispatch } from '@src/redux/store';
 import { setPlayer, removePlayer, setStatusPlayer, setSoloGame } from '@src/redux/reducers/lobbyReducer';
 import {
   setIsGameStarted,
@@ -51,8 +51,12 @@ export interface IGame {
   words: IWord[];
 }
 
+interface IresetGame {
+  game: IGame;
+  users: IPlayer[];
+}
+
 export default function useSocket() {
-  const { players } = useAppSelector((state) => state.lobby);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [LoginPage, LobbyPage, WritePage, DrawPage, GuessPage, GameResultsPage] = routes;
@@ -137,9 +141,11 @@ export default function useSocket() {
         }, 500);
       });
 
-      socket.on('ROOM:RESET_GAME', (game: IGame) => {
+      socket.on('ROOM:RESET_GAME', ({ game, users }: IresetGame) => {
+        console.log('ROOM:RESET_GAME', users);
         console.log('ROOM:RESET_GAME', game);
-        const isHostLeave = players.every((player) => player.main === false);
+        const isHostLeave = users.every((user) => user.main === false);
+        console.log(users);
         dispatch(resetTools(true));
         dispatch(resetGame(true));
 
@@ -177,7 +183,6 @@ export default function useSocket() {
 
     resetGame: () => {
       if (socket) {
-        console.log('resetGame');
         socket.emit('USER:RESET_GAME');
       }
     },

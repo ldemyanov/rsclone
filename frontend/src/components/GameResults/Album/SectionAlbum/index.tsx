@@ -4,7 +4,11 @@ import { FC, useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
-export const SectionAlbum: FC = () => {
+interface ISectionAlbumProps {
+  setIsButtonDisabled: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const SectionAlbum: FC<ISectionAlbumProps> = ({ setIsButtonDisabled }) => {
   const { game } = useAppSelector((state) => state.game);
   const { players } = useAppSelector((state) => state.lobby);
 
@@ -24,6 +28,7 @@ export const SectionAlbum: FC = () => {
           currentCount = 0;
           playersCount = playersCount + 1;
         } else {
+          setIsButtonDisabled(false);
           clearInterval(timer);
         }
       }

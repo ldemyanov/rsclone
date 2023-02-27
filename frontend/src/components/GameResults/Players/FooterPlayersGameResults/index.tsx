@@ -4,14 +4,18 @@ import useSocket from '@src/hooks/useSocket';
 
 import styles from './styles.module.css';
 
-export const FooterPlayers: FC = () => {
+interface FooterPlayersProps {
+  isButtonDisabled: boolean;
+}
+
+export const FooterPlayers: FC<FooterPlayersProps> = ({ isButtonDisabled }) => {
   const { resetGame } = useSocket();
 
   const onClickHandler = () => resetGame();
 
   return (
     <footer className={styles.footer}>
-      <Button text="Back to Start" onClick={onClickHandler} />
+      <Button text="Back to Start" onClick={onClickHandler} disabled={isButtonDisabled} />
     </footer>
   );
 };

@@ -6,17 +6,15 @@ import { HeaderPlayers } from '@components/Lobby/Players/HeaderPlayers';
 import { SectionPlayers } from '@components/Lobby/Players/SectionPlayers';
 import { Container } from '@components/UI/Container';
 import { ContentBorder } from '@components/UI/ContentBorder';
-import { useAppDispatch, useAppSelector } from '@src/redux/store';
+import { useAppSelector } from '@src/redux/store';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '@src/routes';
 import { FooterPlayers } from '@components/Lobby/Players/FooterPlayers';
-import { resetGame } from '@src/redux/reducers/gameReducer';
 import styles from './style.module.css';
 
 export const LobbyPage: FC = () => {
   const { self, players } = useAppSelector((state) => state.lobby);
   const isKicked = players.findIndex((player) => player.userId === self.userId) === -1;
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,7 +22,6 @@ export const LobbyPage: FC = () => {
       const [LoginPage] = routes;
       navigate(LoginPage.path);
     }
-    dispatch(resetGame(true));
   }, [players]);
 
   return (

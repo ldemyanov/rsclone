@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 
 export const WritePage: FC = () => {
   const { searchWrite, isReady, game } = useAppSelector((state) => state.game);
-  const { self, players } = useAppSelector((state) => state.lobby);
+  const { self, roomID } = useAppSelector((state) => state.lobby);
   const dispatch = useAppDispatch();
   const { sendWord } = useSocket();
   const navigate = useNavigate();
@@ -29,16 +29,10 @@ export const WritePage: FC = () => {
   };
 
   useEffect(() => {
-    const [LoginPage, LobbyPage] = routes;
+    const [LoginPage] = routes;
 
-    if (!game.isGameStarted) {
-      navigate(LoginPage.path);
-    }
-
-    if (players.length < game.words.length) {
-      navigate(LobbyPage.path);
-    }
-  }, [game.isGameStarted, players.length]);
+    if (!roomID) navigate(LoginPage.path);
+  }, []);
 
   return (
     <ContentBorder>

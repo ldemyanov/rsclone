@@ -5,13 +5,22 @@ import { HeaderPlayersGameResults } from '@components/GameResults/Players/Header
 import { SectionPlayersGameResults } from '@components/GameResults/Players/SectionPlayersGameResults';
 import { Container } from '@components/UI/Container';
 import { ContentBorder } from '@components/UI/ContentBorder';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useAppSelector } from '@src/redux/store';
+import { useNavigate } from 'react-router-dom';
+import { routes } from '@src/routes';
 
 import styles from './styles.module.css';
 
 export const GameResultsPage: FC = () => {
-  const { self } = useAppSelector((state) => state.lobby);
+  const { self, roomID } = useAppSelector((state) => state.lobby);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const [LoginPage] = routes;
+
+    if (!roomID) navigate(LoginPage.path);
+  }, []);
 
   return (
     <ContentBorder>

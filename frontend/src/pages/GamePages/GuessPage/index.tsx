@@ -12,12 +12,11 @@ import useSocket from '@src/hooks/useSocket';
 
 import styles from './styles.module.css';
 
-
 export const GuessPage: FC = () => {
   const [soloStage, setSoloStage] = useState(0);
   const [textButton, setTextButton] = useState(ButtonText.ready);
   const { searchGuess, game, isReady } = useAppSelector((state) => state.game);
-  const { self, isSolo } = useAppSelector((state) => state.lobby);
+  const { self, isSolo, roomID } = useAppSelector((state) => state.lobby);
   const { sendResult } = useSocket();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -27,6 +26,9 @@ export const GuessPage: FC = () => {
 
   useEffect(() => {
     if (!isSolo) {
+      const [LoginPage] = routes;
+
+      if (!roomID) navigate(LoginPage.path);
       setImage(() => {
         const words = game.words.filter((el) => el.responserId === self.userId);
         return words[0].img as string;

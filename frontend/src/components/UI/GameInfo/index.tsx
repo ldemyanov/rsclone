@@ -13,7 +13,6 @@ export const GameProgress: FC<GameInfoProps> = ({ currentStage, totalStages, rea
   const [iconStyles, setIconStyles] = useState([styles.playersReady__icon]);
 
   useEffect(() => {
-    console.log('render');
     iconStyles.push(styles.animate);
     setIconStyles([styles.playersReady__icon, styles.animate]);
     setTimeout(() => setIconStyles([styles.playersReady__icon]), 1000);

@@ -1,6 +1,6 @@
 import io, { Socket } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '@src/redux/store';
+import { useAppDispatch, useAppSelector } from '@src/redux/store';
 import { setPlayer, removePlayer, setStatusPlayer, setSoloGame } from '@src/redux/reducers/lobbyReducer';
 import {
   setIsGameStarted,
@@ -10,6 +10,7 @@ import {
   setIsReady,
   resetGame,
 } from '@src/redux/reducers/gameReducer';
+import { resetTools } from '@src/redux/reducers/toolReducer';
 import { API_URL } from '../api';
 import { IPlayer } from '@src/types';
 import { routes } from '@src/routes';
@@ -51,9 +52,10 @@ export interface IGame {
 }
 
 export default function useSocket() {
+  const { players } = useAppSelector((state) => state.lobby);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [, LobbyPage, WritePage, DrawPage, GuessPage, GameResultsPage] = routes;
+  const [LoginPage, LobbyPage, WritePage, DrawPage, GuessPage, GameResultsPage] = routes;
 
   return {
     connect: (roomId: string, selfId: string) => {
@@ -137,9 +139,20 @@ export default function useSocket() {
 
       socket.on('ROOM:RESET_GAME', (game: IGame) => {
         console.log('ROOM:RESET_GAME', game);
+        const isHostLeave = players.every((player) => player.main === false);
+        dispatch(resetTools(true));
+        dispatch(resetGame(true));
+
+        console.log('isHostLeave', isHostLeave);
+
         setTimeout(() => {
-          dispatch(resetGame(true));
-          navigate(LobbyPage.path);
+          if (isHostLeave) {
+            console.log('to login');
+            navigate(LoginPage.path);
+          } else {
+            console.log('to lobby');
+            navigate(LobbyPage.path);
+          }
         }, 500);
       });
     },

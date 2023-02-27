@@ -5,16 +5,23 @@ import { Pallete } from '@components/Draw/Pallete';
 import { Tablet, TabletTitles } from '@components/Tablet';
 import { DrawTools } from '@components/Draw/DrawTools';
 import { BottomPanel } from '@components/Draw/BottomPanel';
+import { useAppSelector } from '@src/redux/store';
+import { useNavigate } from 'react-router-dom';
+import { routes } from '@src/routes';
 
 import styles from './styles.module.css';
-import { useAppSelector } from '@src/redux/store';
 
 export const DrawPage: FC = () => {
   const { game } = useAppSelector((state) => state.game);
-  const { self } = useAppSelector((state) => state.lobby);
+  const { self, roomID } = useAppSelector((state) => state.lobby);
+  const navigate = useNavigate();
   const [word, setWord] = useState('');
 
   useEffect(() => {
+    const [LoginPage] = routes;
+
+    if (!roomID) navigate(LoginPage.path);
+
     setWord(() => {
       const words = game.words.filter((el) => el.painterId === self.userId);
       return words[0].word as string;

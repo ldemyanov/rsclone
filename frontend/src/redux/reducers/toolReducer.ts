@@ -46,9 +46,18 @@ export const toolSlice = createSlice({
         state.opacity = action.payload;
       }
     },
+    resetTools: (state, action) => {
+      if (state.tool && action.payload) {
+        state.tool = null;
+        state.triknesses = triknessesValues;
+        state.currentTrikness = triknessesValues[2];
+        state.currentColor = '#000000';
+        state.opacity = 'ff';
+      }
+    },
   },
 });
 
-export const { setTool, setStrokeStyle, setLineWidth, setOpacity } = toolSlice.actions;
+export const { setTool, setStrokeStyle, setLineWidth, setOpacity, resetTools } = toolSlice.actions;
 
 export default toolSlice.reducer;

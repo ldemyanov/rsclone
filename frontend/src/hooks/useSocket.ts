@@ -2,7 +2,15 @@ import io, { Socket } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@src/redux/store';
 import { setPlayer, removePlayer, setStatusPlayer, setSoloGame } from '@src/redux/reducers/lobbyReducer';
-import { setIsGameStarted, setGameStage, setWords, setGameWord, setIsReady } from '@src/redux/reducers/gameReducer';
+import {
+  setIsGameStarted,
+  setGameStage,
+  setWords,
+  setGameWord,
+  setIsReady,
+  resetGame,
+} from '@src/redux/reducers/gameReducer';
+import { resetTools } from '@src/redux/reducers/toolReducer';
 import { API_URL } from '../api';
 import { IPlayer } from '@src/types';
 import { routes } from '@src/routes';
@@ -43,10 +51,15 @@ export interface IGame {
   words: IWord[];
 }
 
+interface IresetGame {
+  game: IGame;
+  users: IPlayer[];
+}
+
 export default function useSocket() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [, , WritePage, DrawPage, GuessPage, GameResultsPage] = routes;
+  const [LoginPage, LobbyPage, WritePage, DrawPage, GuessPage, GameResultsPage] = routes;
 
   return {
     connect: (roomId: string, selfId: string) => {
@@ -128,9 +141,26 @@ export default function useSocket() {
         }, 500);
       });
 
-      socket.on('ROOM:RESET_GAME', (game: IGame) => {
+      socket.on('ROOM:RESET_GAME', ({ game, users }: IresetGame) => {
+        console.log('ROOM:RESET_GAME', users);
         console.log('ROOM:RESET_GAME', game);
-      })
+        const isHostLeave = users.every((user) => user.main === false);
+        console.log(users);
+        dispatch(resetTools(true));
+        dispatch(resetGame(true));
+
+        console.log('isHostLeave', isHostLeave);
+
+        setTimeout(() => {
+          if (isHostLeave) {
+            console.log('to login');
+            navigate(LoginPage.path);
+          } else {
+            console.log('to lobby');
+            navigate(LobbyPage.path);
+          }
+        }, 500);
+      });
     },
 
     excludeUser: (userId: string) => {
@@ -151,8 +181,15 @@ export default function useSocket() {
       }
     },
 
+    resetGame: () => {
+      if (socket) {
+        socket.emit('USER:RESET_GAME');
+      }
+    },
+
     sendWord: (wordObj: IWord) => {
       if (socket) {
+        console.log('sendWord');
         socket.emit('USER:SEND_WORD', wordObj);
       }
     },

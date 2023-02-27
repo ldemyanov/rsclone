@@ -51,16 +51,14 @@ export const gameSlice = createSlice({
     },
     resetGame: (state, action: PayloadAction<boolean>) => {
       if (action.payload) {
-        console.log('reset');
         state.searchGuess = '';
         state.searchWrite = '';
         state.isReady = false;
-        (state.game = {
+        state.game = {
           isGameStarted: false,
           gameStage: '',
           words: [],
-        }),
-          console.log('state', state);
+        };
       }
     },
   },

@@ -1,34 +1,34 @@
-import { TTools } from '@src/constants/Draw';
+import { ToolNames } from '@src/constants/Draw';
 
 interface IStyles {
   [prop: string]: string;
 }
 
-export default function getCursorStyle(styles: IStyles, triknesses: number, tool: TTools | null) {
+export default function getCursorStyle(styles: IStyles, triknesses: number, tool: ToolNames) {
   const style = ['cursor'];
 
-  switch (tool?.constructor.name) {
-    case 'Pencil':
+  switch (ToolNames[tool]) {
+    case ToolNames.pencil:
       style.push('Pencil');
       break;
-    case 'Eraser':
+    case ToolNames.eraser:
       style.push('Eraser');
       break;
-    case 'Rect':
+    case ToolNames.rect:
       style.push('Rectangle');
       break;
-    case 'Circle':
+    case ToolNames.circle:
       style.push('Circle');
       break;
-    case 'Line':
+    case ToolNames.line:
       style.push('Line');
       break;
-    case 'Pipette':
+    case ToolNames.pipette:
       style.push('Pipette');
       break;
   }
 
-  if (tool?.constructor.name !== 'Pipette') {
+  if (ToolNames[tool] !== ToolNames.pipette) {
     switch (triknesses) {
       case 4:
         style.push('4');

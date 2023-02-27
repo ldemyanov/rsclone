@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { triknessesValues, TTools } from '@src/constants/Draw';
+import { triknessesValues, TTools, ToolNames } from '@src/constants/Draw';
 import { palleteColors } from '@src/constants/Pallete';
 
 interface IToolsState {
   tool: TTools | null;
+  toolName: ToolNames;
   triknesses: number[];
   currentTrikness: number;
   colors: string[];
@@ -13,6 +14,7 @@ interface IToolsState {
 
 const initialState: IToolsState = {
   tool: null,
+  toolName: ToolNames.pencil,
   triknesses: triknessesValues,
   currentTrikness: triknessesValues[2],
   colors: palleteColors,
@@ -25,8 +27,9 @@ export const toolSlice = createSlice({
   initialState,
   reducers: {
     setTool: (state, action) => {
-      state.tool = action.payload;
+      state.tool = action.payload.tool;
       state.tool!.strokeStyle = state.currentColor + state.opacity;
+      state.toolName = action.payload.toolName;
     },
     setStrokeStyle: (state, action) => {
       if (state.tool) {

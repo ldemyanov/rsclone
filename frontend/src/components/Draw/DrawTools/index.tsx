@@ -44,7 +44,7 @@ export const DrawTools: FC = () => {
   return (
     <div className={styles.wrapper}>
       {drawToolsArray.map((DrowTool, index) => {
-        const handler = () => dispatch(setTool(new DrowTool.tool(canvas)));
+        const handler = () => dispatch(setTool({ tool: new DrowTool.tool(canvas), toolName: DrowTool.toolName }));
         return (
           <DrawToolButton key={index} isDisabled={isReady} handler={handler}>
             <DrowTool.toolImg />

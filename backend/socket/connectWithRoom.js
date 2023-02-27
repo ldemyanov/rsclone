@@ -19,7 +19,8 @@ async function connectWithRoom(socket) {
     // If the user closed the browser tab then "reason" equals "transport close"
     console.log(`${userId} disconnecting becouse: ${reason}`);
 
-    await room.users.pull({ userId });
+    let excUser = await room.users.find((user) => user.userId === userId);
+    await excUser.remove();
     await room.save();
 
     socket.to(roomId).emit("ROOM:LEFT", userId);
@@ -31,8 +32,8 @@ async function connectWithRoom(socket) {
       game.gameStage = "lobby";
 
       await game.save();
-      socket.emit("ROOM:RESET_GAME", game);
-      socket.to(roomId).emit("ROOM:RESET_GAME", game);
+      socket.emit("ROOM:RESET_GAME", { game, users: room.users });
+      socket.to(roomId).emit("ROOM:RESET_GAME", { game, users: room.users });
     }
 
     // to remove room if all users disconected
@@ -61,7 +62,6 @@ async function connectWithRoom(socket) {
       socket.emit("ROOM:RESET_GAME", game);
       socket.to(roomId).emit("ROOM:RESET_GAME", game);
     }
-
   });
 
   socket.on("USER:SET_STATUS", async (status) => {
@@ -114,7 +114,7 @@ async function connectWithRoom(socket) {
         return;
       }
 
-      const game =  await db.game.findOne({ roomId: roomId }).exec();
+      const game = await db.game.findOne({ roomId: roomId }).exec();
 
       if (game) {
         game.words = words;
@@ -134,6 +134,22 @@ async function connectWithRoom(socket) {
         socket.emit("ROOM:START_GAME", newGame);
         socket.to(roomId).emit("ROOM:START_GAME", newGame);
       }
+    }
+  });
+
+  socket.on("USER:RESET_GAME", async () => {
+    const game = await db.game.findOne({ roomId: roomId }).exec();
+    const room = await db.room.findOne({ roomId: roomId }).exec();
+    if (game) {
+      game.words = [];
+      game.isGameStarted = false;
+      game.gameStage = "lobby";
+      await game.save();
+      socket.emit("ROOM:RESET_GAME", { game, users: room.users });
+      socket.to(roomId).emit("ROOM:RESET_GAME", { game, users: room.users });
+    } else {
+      socket.emit("ROOM:RESET_GAME", null);
+      socket.to(roomId).emit("ROOM:RESET_GAME", null);
     }
   });
 

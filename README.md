@@ -8,6 +8,7 @@
   - [ldemyanov](https://github.com/ldemyanov) 
 
 ## Используется:
+    - Typescript
     - React (Для создания пользовательских интерфейсов)
     - Redux (Для управления состоянием)
     - Redux Toolkit
